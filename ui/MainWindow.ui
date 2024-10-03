@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>935</width>
+    <height>682</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>935</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuSistema">
+    <property name="title">
+     <string>Sistema</string>
+    </property>
+    <addaction name="actionEmpresa"/>
+   </widget>
+   <widget class="QMenu" name="menuCadastro">
+    <property name="title">
+     <string>Cadastro</string>
+    </property>
+    <widget class="QMenu" name="menuProdutos_Itens">
+     <property name="title">
+      <string>Produtos/Itens</string>
+     </property>
+     <addaction name="actionProdutos_itens"/>
+     <addaction name="actionCategoria_2"/>
+     <addaction name="actionClasse"/>
+    </widget>
+    <widget class="QMenu" name="menuAuxiliares">
+     <property name="title">
+      <string>Auxiliares</string>
+     </property>
+     <addaction name="actionBancos"/>
+     <addaction name="actionOrigens"/>
+    </widget>
+    <addaction name="menuProdutos_Itens"/>
+    <addaction name="actionUsu_rios"/>
+    <addaction name="separator"/>
+    <addaction name="menuAuxiliares"/>
+   </widget>
+   <widget class="QMenu" name="menuDespesa">
+    <property name="title">
+     <string>Despesas</string>
+    </property>
+    <widget class="QMenu" name="menuLan_amento">
+     <property name="title">
+      <string>Lançamento</string>
+     </property>
+     <addaction name="actionDespesa_Fixas_2"/>
+     <addaction name="actionDespesa_Corrente"/>
+    </widget>
+    <addaction name="menuLan_amento"/>
+    <addaction name="actionMovimenta_o"/>
+    <addaction name="separator"/>
+    <addaction name="actionRelat_rios"/>
+   </widget>
+   <widget class="QMenu" name="menuConfiguracoes">
+    <property name="title">
+     <string>Configurações</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuRelatorios">
+    <property name="title">
+     <string>Relatórios</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuReceitas">
+    <property name="title">
+     <string>Receitas</string>
+    </property>
+    <widget class="QMenu" name="menuLan_amentos">
+     <property name="title">
+      <string>Lançamentos</string>
+     </property>
+     <addaction name="actionReceitas_Fixas"/>
+     <addaction name="actionReceitas_Correntes"/>
+    </widget>
+    <addaction name="menuLan_amentos"/>
+    <addaction name="actionMovimenta_es"/>
+    <addaction name="separator"/>
+    <addaction name="actionRelat_rios_2"/>
+   </widget>
+   <widget class="QMenu" name="menuInvestimento">
+    <property name="title">
+     <string>Investimento</string>
+    </property>
+    <addaction name="actionLan_amento_2"/>
+    <addaction name="actionMovimenta_es_2"/>
+    <addaction name="separator"/>
+    <addaction name="actionRelat_rios_3"/>
+   </widget>
+   <widget class="QMenu" name="menuEstoque">
+    <property name="title">
+     <string>Estoque</string>
+    </property>
+    <widget class="QMenu" name="menuLan_amento_2">
+     <property name="title">
+      <string>Lançamento</string>
+     </property>
+     <addaction name="actionAdd_item"/>
+     <addaction name="actionBaixa_de_Estoque"/>
+    </widget>
+    <addaction name="menuLan_amento_2"/>
+    <addaction name="actionMovimenta_es_3"/>
+    <addaction name="actionInvent_rio"/>
+    <addaction name="separator"/>
+    <addaction name="actionRelat_rios_4"/>
+   </widget>
+   <widget class="QMenu" name="menuFinanceiro">
+    <property name="title">
+     <string>Financeiro</string>
+    </property>
+   </widget>
+   <addaction name="menuSistema"/>
+   <addaction name="menuCadastro"/>
+   <addaction name="menuDespesa"/>
+   <addaction name="menuReceitas"/>
+   <addaction name="menuFinanceiro"/>
+   <addaction name="menuInvestimento"/>
+   <addaction name="menuEstoque"/>
+   <addaction name="menuRelatorios"/>
+   <addaction name="menuConfiguracoes"/>
+  </widget>
+  <action name="actionReceitas">
+   <property name="text">
+    <string>Receitas</string>
+   </property>
+  </action>
+  <action name="actionInvestimentos">
+   <property name="text">
+    <string>Investimentos</string>
+   </property>
+  </action>
+  <action name="actionDespesa_Fixas">
+   <property name="text">
+    <string>Despesa Fixas</string>
+   </property>
+  </action>
+  <action name="actionDespesa_Correntes">
+   <property name="text">
+    <string>Despesa Correntes</string>
+   </property>
+  </action>
+  <action name="actionDespesas_Avulsas">
+   <property name="text">
+    <string>Despesas Avulsas</string>
+   </property>
+  </action>
+  <action name="actionMovimenta_o">
+   <property name="text">
+    <string>Movimentação</string>
+   </property>
+  </action>
+  <action name="actionRelat_rios">
+   <property name="text">
+    <string>Relatórios</string>
+   </property>
+  </action>
+  <action name="actionDespesa_Fixas_2">
+   <property name="text">
+    <string>Despesa Fixa</string>
+   </property>
+  </action>
+  <action name="actionDespesa_Corrente">
+   <property name="text">
+    <string>Despesa Corrente</string>
+   </property>
+  </action>
+  <action name="actionMovimenta_es">
+   <property name="text">
+    <string>Movimentações</string>
+   </property>
+  </action>
+  <action name="actionReceitas_Fixas">
+   <property name="text">
+    <string>Receitas Fixas</string>
+   </property>
+  </action>
+  <action name="actionReceitas_Correntes">
+   <property name="text">
+    <string>Receitas Correntes</string>
+   </property>
+  </action>
+  <action name="actionRelat_rios_2">
+   <property name="text">
+    <string>Relatórios</string>
+   </property>
+  </action>
+  <action name="actionLan_amento_2">
+   <property name="text">
+    <string>Lançamento</string>
+   </property>
+  </action>
+  <action name="actionMovimenta_es_2">
+   <property name="text">
+    <string>Movimentações</string>
+   </property>
+  </action>
+  <action name="actionRelat_rios_3">
+   <property name="text">
+    <string>Relatórios</string>
+   </property>
+  </action>
+  <action name="actionMovimenta_es_3">
+   <property name="text">
+    <string>Movimentações</string>
+   </property>
+  </action>
+  <action name="actionRelat_rios_4">
+   <property name="text">
+    <string>Relatórios</string>
+   </property>
+  </action>
+  <action name="actionInvent_rio">
+   <property name="text">
+    <string>Inventário</string>
+   </property>
+  </action>
+  <action name="actionAdd_item">
+   <property name="text">
+    <string>Add item </string>
+   </property>
+  </action>
+  <action name="actionBaixa_de_Estoque">
+   <property name="text">
+    <string>Baixa de Estoque</string>
+   </property>
+  </action>
+  <action name="actionBancos">
+   <property name="text">
+    <string>Bancos</string>
+   </property>
+  </action>
+  <action name="actionOrigens">
+   <property name="text">
+    <string>Origens</string>
+   </property>
+  </action>
+  <action name="actionProdutos_itens">
+   <property name="text">
+    <string>Produtos/itens</string>
+   </property>
+  </action>
+  <action name="actionCategoria">
+   <property name="text">
+    <string>Categoria</string>
+   </property>
+  </action>
+  <action name="actionCategoria_2">
+   <property name="text">
+    <string>Categoria</string>
+   </property>
+  </action>
+  <action name="actionClasse">
+   <property name="text">
+    <string>Classe </string>
+   </property>
+  </action>
+  <action name="actionEmpresa">
+   <property name="text">
+    <string>Empresa</string>
+   </property>
+  </action>
+  <action name="actionUsu_rios">
+   <property name="text">
+    <string>Usuários</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
