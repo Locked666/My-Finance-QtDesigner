@@ -45,11 +45,33 @@
      <property name="title">
       <string>Auxiliares</string>
      </property>
-     <addaction name="actionBancos"/>
-     <addaction name="actionOrigens"/>
+     <widget class="QMenu" name="menuBancos">
+      <property name="title">
+       <string>Bancos</string>
+      </property>
+      <addaction name="actionInstitui_es"/>
+      <addaction name="actionAg_ncia"/>
+     </widget>
+     <addaction name="menuBancos"/>
+    </widget>
+    <widget class="QMenu" name="menuConta_Corrente">
+     <property name="title">
+      <string>Conta Corrente</string>
+     </property>
+     <addaction name="actionAg_ncia_2"/>
+     <addaction name="actionConta"/>
+    </widget>
+    <widget class="QMenu" name="menuUsu_rios">
+     <property name="title">
+      <string>Usuários</string>
+     </property>
+     <addaction name="actionUsu_rio"/>
+     <addaction name="actionGrupo"/>
     </widget>
     <addaction name="menuProdutos_Itens"/>
-    <addaction name="actionUsu_rios"/>
+    <addaction name="actionFornecedor"/>
+    <addaction name="menuUsu_rios"/>
+    <addaction name="menuConta_Corrente"/>
     <addaction name="separator"/>
     <addaction name="menuAuxiliares"/>
    </widget>
@@ -241,11 +263,6 @@
     <string>Baixa de Estoque</string>
    </property>
   </action>
-  <action name="actionBancos">
-   <property name="text">
-    <string>Bancos</string>
-   </property>
-  </action>
   <action name="actionOrigens">
    <property name="text">
     <string>Origens</string>
@@ -276,9 +293,39 @@
     <string>Empresa</string>
    </property>
   </action>
-  <action name="actionUsu_rios">
+  <action name="actionInstitui_es">
    <property name="text">
-    <string>Usuários</string>
+    <string>Instituições</string>
+   </property>
+  </action>
+  <action name="actionAg_ncia">
+   <property name="text">
+    <string>Agência</string>
+   </property>
+  </action>
+  <action name="actionAg_ncia_2">
+   <property name="text">
+    <string>Agência</string>
+   </property>
+  </action>
+  <action name="actionConta">
+   <property name="text">
+    <string>Conta </string>
+   </property>
+  </action>
+  <action name="actionUsu_rio">
+   <property name="text">
+    <string>Usuário</string>
+   </property>
+  </action>
+  <action name="actionGrupo">
+   <property name="text">
+    <string>Grupo de usuários</string>
+   </property>
+  </action>
+  <action name="actionFornecedor">
+   <property name="text">
+    <string>Fornecedor</string>
    </property>
   </action>
  </widget>
