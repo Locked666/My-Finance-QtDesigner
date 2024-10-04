@@ -9,6 +9,8 @@ PATH_UI_QTDESIGNER = os.path.join(PATH, 'ui')
 PATH_UI_DEPLOY = os.path.join(PATH, 'src','ui')
 PATH_PY_BACKUP = os.path.join(PATH, 'src','ui','backup')
 
+NOT_EXECUTE = ['MainLogin.ui']
+
 def backup_py(file:str):
     py_backup_file = os.path.join(PATH_PY_BACKUP,file)
     py_deploy_file = os.path.join(PATH_UI_DEPLOY, file)
@@ -32,7 +34,8 @@ def func_list_ui_qt():
     temp = os.listdir(PATH_UI_QTDESIGNER)
     for i in temp:
         if i.endswith('.ui'):
-            list_ui_qt.append(i)
+            if i not in NOT_EXECUTE:
+                list_ui_qt.append(i)
     return list_ui_qt   
 
 def main():
