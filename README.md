@@ -61,7 +61,7 @@ My_Finance_QTDesigner/
 ```
 ## Informações Adicionais.
 
-* Foi criado um códido para realizar a conversão automáticas dos arquivos .ui para .py:
+* Foi criado um código para realizar a conversão automáticas dos arquivos .ui para .py:
 ```bash
     python func_deploy.py
 ```
