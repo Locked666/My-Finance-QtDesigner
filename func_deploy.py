@@ -43,10 +43,17 @@ def main():
         ui_path = os.path.join(PATH_UI_QTDESIGNER, ui)
         py_filename = os.path.splitext(ui)[0] + '.py'  # Remove a extensão .ui e adiciona .py
         py_path = os.path.join(PATH_UI_DEPLOY, py_filename)
+        py_filename_remove = os.path.splitext(ui)[0] +'_ui'+'.py'  # Remove a extensão .ui e adiciona .py
+
+        re =  os.path.join(PATH_UI_QTDESIGNER, py_filename_remove)
+        
 
         backup_py(py_filename)
         # Comando para converter .ui em .py
         command = f'pyside6-uic "{ui_path}" -o "{py_path}"'
+        if os.path.exists(re): 
+            os.remove(re)
+        
 
         try:
             # Executar o comando

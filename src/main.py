@@ -1,27 +1,20 @@
 import sys
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
-# from MainWindow import Ui_MainWindow  # Altere o nome conforme necessário
-# from MainLogin import Ui_MainLogin
-from ui.MainWindow import Ui_MainWindow
-from ui.MainLogin import Ui_MainLogin
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget
+from ui.MainLogin import Ui_Login
 
-class MainWindow(QMainWindow):
-    def __init__(self):
-        super(MainWindow, self).__init__()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
+class AppLogin(QWidget, Ui_Login):
+    def __init__(self) -> None:
+        super(AppLogin,self).__init__()
+        self.setupUi(self)
+        self.usuario = self.text_usuario.text()
+        self.senha = self.text_password.text()
+        
 
-class MainLogin(QMainWindow):
-    def __init__(self):
-        super(MainLogin, self).__init__()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     # window = MainLogin()
-    window = MainWindow()
+    window = AppLogin()
     window.show()
     sys.exit(app.exec_())

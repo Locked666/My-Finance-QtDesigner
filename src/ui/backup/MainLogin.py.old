@@ -74,8 +74,8 @@ class Ui_Login(object):
 "border-left: none;\n"
 "background-color: rgb(28, 28, 28);\n"
 "color: rgb(255, 255, 255);")
-        self.text_password.setInputMethodHints(Qt.ImhHiddenText|Qt.ImhNoAutoUppercase|Qt.ImhNoPredictiveText|Qt.ImhSensitiveData)
-        self.text_password.setEchoMode(QLineEdit.Password)
+        self.text_password.setInputMethodHints(Qt.ImhSensitiveData)
+        self.text_password.setEchoMode(QLineEdit.PasswordEchoOnEdit)
         self.label_user = QLabel(self.Mainframe)
         self.label_user.setObjectName(u"label_user")
         self.label_user.setGeometry(QRect(10, 150, 71, 16))
@@ -134,7 +134,7 @@ class Ui_Login(object):
 "\n"
 "color: rgb(255, 255, 255);\n"
 "")
-        Login.setCentralWidget(self.centralwidget)
+        # Login.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(Login)
 

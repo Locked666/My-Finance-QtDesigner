@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'CadFornecedor.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.7.2
+## Created by: Qt User Interface Compiler version 6.7.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -142,7 +142,7 @@ class Ui_Dialog(object):
         self.lineEdit_28.setCursorMoveStyle(Qt.VisualMoveStyle)
         self.plainTextEdit_2 = QPlainTextEdit(self.DdAdicionais)
         self.plainTextEdit_2.setObjectName(u"plainTextEdit_2")
-        self.plainTextEdit_2.setGeometry(QRect(390, 230, 321, 131))
+        self.plainTextEdit_2.setGeometry(QRect(370, 230, 271, 131))
         self.checkBox_5 = QCheckBox(self.DdAdicionais)
         self.checkBox_5.setObjectName(u"checkBox_5")
         self.checkBox_5.setGeometry(QRect(210, 180, 151, 17))
@@ -164,7 +164,7 @@ class Ui_Dialog(object):
         self.label_12.setGeometry(QRect(10, 10, 141, 21))
         self.label_32 = QLabel(self.DdAdicionais)
         self.label_32.setObjectName(u"label_32")
-        self.label_32.setGeometry(QRect(390, 210, 131, 16))
+        self.label_32.setGeometry(QRect(370, 210, 131, 16))
         self.lineEdit_30 = QLineEdit(self.DdAdicionais)
         self.lineEdit_30.setObjectName(u"lineEdit_30")
         self.lineEdit_30.setGeometry(QRect(490, 120, 151, 21))
@@ -214,7 +214,7 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Dialog)

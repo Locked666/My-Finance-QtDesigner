@@ -134,7 +134,7 @@ class Ui_Login(object):
 "\n"
 "color: rgb(255, 255, 255);\n"
 "")
-        Login.setCentralWidget(self.centralwidget)
+        Login.centralwidget(self.centralwidget)
 
         self.retranslateUi(Login)
 
