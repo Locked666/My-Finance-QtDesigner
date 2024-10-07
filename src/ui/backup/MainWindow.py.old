@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'MainWindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.7.2
+## Created by: Qt User Interface Compiler version 6.7.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -92,6 +92,14 @@ class Ui_MainWindow(object):
         self.actionGrupo.setObjectName(u"actionGrupo")
         self.actionFornecedor = QAction(MainWindow)
         self.actionFornecedor.setObjectName(u"actionFornecedor")
+        self.actionOrigem = QAction(MainWindow)
+        self.actionOrigem.setObjectName(u"actionOrigem")
+        self.actionCategoria_3 = QAction(MainWindow)
+        self.actionCategoria_3.setObjectName(u"actionCategoria_3")
+        self.actionOrigem_2 = QAction(MainWindow)
+        self.actionOrigem_2.setObjectName(u"actionOrigem_2")
+        self.actionCategoria_4 = QAction(MainWindow)
+        self.actionCategoria_4.setObjectName(u"actionCategoria_4")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         MainWindow.setCentralWidget(self.centralwidget)
@@ -108,6 +116,10 @@ class Ui_MainWindow(object):
         self.menuAuxiliares.setObjectName(u"menuAuxiliares")
         self.menuBancos = QMenu(self.menuAuxiliares)
         self.menuBancos.setObjectName(u"menuBancos")
+        self.menuDespesa_2 = QMenu(self.menuAuxiliares)
+        self.menuDespesa_2.setObjectName(u"menuDespesa_2")
+        self.menuReceita = QMenu(self.menuAuxiliares)
+        self.menuReceita.setObjectName(u"menuReceita")
         self.menuConta_Corrente = QMenu(self.menuCadastro)
         self.menuConta_Corrente.setObjectName(u"menuConta_Corrente")
         self.menuUsu_rios = QMenu(self.menuCadastro)
@@ -154,8 +166,14 @@ class Ui_MainWindow(object):
         self.menuProdutos_Itens.addAction(self.actionCategoria_2)
         self.menuProdutos_Itens.addAction(self.actionClasse)
         self.menuAuxiliares.addAction(self.menuBancos.menuAction())
+        self.menuAuxiliares.addAction(self.menuDespesa_2.menuAction())
+        self.menuAuxiliares.addAction(self.menuReceita.menuAction())
         self.menuBancos.addAction(self.actionInstitui_es)
         self.menuBancos.addAction(self.actionAg_ncia)
+        self.menuDespesa_2.addAction(self.actionOrigem)
+        self.menuDespesa_2.addAction(self.actionCategoria_3)
+        self.menuReceita.addAction(self.actionOrigem_2)
+        self.menuReceita.addAction(self.actionCategoria_4)
         self.menuConta_Corrente.addAction(self.actionAg_ncia_2)
         self.menuConta_Corrente.addAction(self.actionConta)
         self.menuUsu_rios.addAction(self.actionUsu_rio)
@@ -225,11 +243,17 @@ class Ui_MainWindow(object):
         self.actionUsu_rio.setText(QCoreApplication.translate("MainWindow", u"Usu\u00e1rio", None))
         self.actionGrupo.setText(QCoreApplication.translate("MainWindow", u"Grupo de usu\u00e1rios", None))
         self.actionFornecedor.setText(QCoreApplication.translate("MainWindow", u"Fornecedor", None))
+        self.actionOrigem.setText(QCoreApplication.translate("MainWindow", u"Origem ", None))
+        self.actionCategoria_3.setText(QCoreApplication.translate("MainWindow", u"Categoria ", None))
+        self.actionOrigem_2.setText(QCoreApplication.translate("MainWindow", u"Origem", None))
+        self.actionCategoria_4.setText(QCoreApplication.translate("MainWindow", u"Categoria", None))
         self.menuSistema.setTitle(QCoreApplication.translate("MainWindow", u"Sistema", None))
         self.menuCadastro.setTitle(QCoreApplication.translate("MainWindow", u"Cadastro", None))
         self.menuProdutos_Itens.setTitle(QCoreApplication.translate("MainWindow", u"Produtos/Itens", None))
         self.menuAuxiliares.setTitle(QCoreApplication.translate("MainWindow", u"Auxiliares", None))
         self.menuBancos.setTitle(QCoreApplication.translate("MainWindow", u"Bancos", None))
+        self.menuDespesa_2.setTitle(QCoreApplication.translate("MainWindow", u"Despesa", None))
+        self.menuReceita.setTitle(QCoreApplication.translate("MainWindow", u"Receita", None))
         self.menuConta_Corrente.setTitle(QCoreApplication.translate("MainWindow", u"Conta Corrente", None))
         self.menuUsu_rios.setTitle(QCoreApplication.translate("MainWindow", u"Usu\u00e1rios", None))
         self.menuDespesa.setTitle(QCoreApplication.translate("MainWindow", u"Despesas", None))

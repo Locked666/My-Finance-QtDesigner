@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'CadUser.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.7.2
+## Created by: Qt User Interface Compiler version 6.7.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -70,7 +70,7 @@ class Ui_Dialog(object):
         self.dateEdit.setSpecialValueText(u"")
         self.dateEdit.setCorrectionMode(QAbstractSpinBox.CorrectToNearestValue)
         self.dateEdit.setKeyboardTracking(False)
-        self.dateEdit.setProperty("showGroupSeparator", True)
+        self.dateEdit.setProperty(u"showGroupSeparator", True)
         self.dateEdit.setCalendarPopup(True)
         self.groupBox = QGroupBox(self.DdPrincipais)
         self.groupBox.setObjectName(u"groupBox")

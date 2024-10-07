@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'MainWindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.7.2
+## Created by: Qt User Interface Compiler version 6.7.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -16,14 +16,19 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QMainWindow, QMenu, QMenuBar,
-    QSizePolicy, QWidget)
+from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
+    QMainWindow, QMenu, QMenuBar, QPushButton,
+    QSizePolicy, QTabWidget, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(935, 682)
+        MainWindow.setWindowModality(Qt.NonModal)
+        MainWindow.resize(931, 683)
+        MainWindow.setToolButtonStyle(Qt.ToolButtonIconOnly)
+        MainWindow.setTabShape(QTabWidget.Rounded)
+        MainWindow.setUnifiedTitleAndToolBarOnMac(False)
         self.actionReceitas = QAction(MainWindow)
         self.actionReceitas.setObjectName(u"actionReceitas")
         self.actionInvestimentos = QAction(MainWindow)
@@ -92,12 +97,95 @@ class Ui_MainWindow(object):
         self.actionGrupo.setObjectName(u"actionGrupo")
         self.actionFornecedor = QAction(MainWindow)
         self.actionFornecedor.setObjectName(u"actionFornecedor")
+        self.actionOrigem = QAction(MainWindow)
+        self.actionOrigem.setObjectName(u"actionOrigem")
+        self.actionCategoria_3 = QAction(MainWindow)
+        self.actionCategoria_3.setObjectName(u"actionCategoria_3")
+        self.actionOrigem_2 = QAction(MainWindow)
+        self.actionOrigem_2.setObjectName(u"actionOrigem_2")
+        self.actionCategoria_4 = QAction(MainWindow)
+        self.actionCategoria_4.setObjectName(u"actionCategoria_4")
+        self.actionMovimenta_o_2 = QAction(MainWindow)
+        self.actionMovimenta_o_2.setObjectName(u"actionMovimenta_o_2")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
+        self.verticalLayout = QVBoxLayout(self.centralwidget)
+        self.verticalLayout.setSpacing(0)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.frmTop = QFrame(self.centralwidget)
+        self.frmTop.setObjectName(u"frmTop")
+        self.frmTop.setMinimumSize(QSize(931, 41))
+        self.frmTop.setMaximumSize(QSize(16777215, 41))
+        font = QFont()
+        font.setFamilies([u"Segoe UI Black"])
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        self.frmTop.setFont(font)
+        self.frmTop.setStyleSheet(u"font: 87 12pt \"Segoe UI Black\";")
+        self.frmTop.setFrameShape(QFrame.Panel)
+        self.frmTop.setFrameShadow(QFrame.Raised)
+        self.widget = QWidget(self.frmTop)
+        self.widget.setObjectName(u"widget")
+        self.widget.setGeometry(QRect(10, 10, 126, 23))
+        self.horizontalLayout = QHBoxLayout(self.widget)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.label = QLabel(self.widget)
+        self.label.setObjectName(u"label")
+
+        self.horizontalLayout.addWidget(self.label)
+
+        self.label_2 = QLabel(self.widget)
+        self.label_2.setObjectName(u"label_2")
+
+        self.horizontalLayout.addWidget(self.label_2)
+
+
+        self.verticalLayout.addWidget(self.frmTop)
+
+        self.frmLeft = QFrame(self.centralwidget)
+        self.frmLeft.setObjectName(u"frmLeft")
+        self.frmLeft.setMinimumSize(QSize(131, 621))
+        self.frmLeft.setMaximumSize(QSize(161, 16777215))
+        self.frmLeft.setStyleSheet(u"font: 87 12pt \"Segoe UI Black\";")
+        self.frmLeft.setFrameShape(QFrame.Panel)
+        self.frmLeft.setFrameShadow(QFrame.Raised)
+        self.widget1 = QWidget(self.frmLeft)
+        self.widget1.setObjectName(u"widget1")
+        self.widget1.setGeometry(QRect(10, 111, 103, 197))
+        self.verticalLayout_2 = QVBoxLayout(self.widget1)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.pushButton = QPushButton(self.widget1)
+        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setMinimumSize(QSize(101, 61))
+        self.pushButton.setMaximumSize(QSize(101, 61))
+
+        self.verticalLayout_2.addWidget(self.pushButton)
+
+        self.pushButton_2 = QPushButton(self.widget1)
+        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.pushButton_2.setMinimumSize(QSize(101, 61))
+        self.pushButton_2.setMaximumSize(QSize(101, 61))
+
+        self.verticalLayout_2.addWidget(self.pushButton_2)
+
+        self.pushButton_3 = QPushButton(self.widget1)
+        self.pushButton_3.setObjectName(u"pushButton_3")
+        self.pushButton_3.setMinimumSize(QSize(101, 61))
+        self.pushButton_3.setMaximumSize(QSize(101, 61))
+
+        self.verticalLayout_2.addWidget(self.pushButton_3)
+
+
+        self.verticalLayout.addWidget(self.frmLeft)
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 935, 21))
+        self.menubar.setGeometry(QRect(0, 0, 931, 21))
         self.menuSistema = QMenu(self.menubar)
         self.menuSistema.setObjectName(u"menuSistema")
         self.menuCadastro = QMenu(self.menubar)
@@ -108,6 +196,10 @@ class Ui_MainWindow(object):
         self.menuAuxiliares.setObjectName(u"menuAuxiliares")
         self.menuBancos = QMenu(self.menuAuxiliares)
         self.menuBancos.setObjectName(u"menuBancos")
+        self.menuDespesa_2 = QMenu(self.menuAuxiliares)
+        self.menuDespesa_2.setObjectName(u"menuDespesa_2")
+        self.menuReceita = QMenu(self.menuAuxiliares)
+        self.menuReceita.setObjectName(u"menuReceita")
         self.menuConta_Corrente = QMenu(self.menuCadastro)
         self.menuConta_Corrente.setObjectName(u"menuConta_Corrente")
         self.menuUsu_rios = QMenu(self.menuCadastro)
@@ -154,20 +246,24 @@ class Ui_MainWindow(object):
         self.menuProdutos_Itens.addAction(self.actionCategoria_2)
         self.menuProdutos_Itens.addAction(self.actionClasse)
         self.menuAuxiliares.addAction(self.menuBancos.menuAction())
+        self.menuAuxiliares.addAction(self.menuDespesa_2.menuAction())
+        self.menuAuxiliares.addAction(self.menuReceita.menuAction())
         self.menuBancos.addAction(self.actionInstitui_es)
         self.menuBancos.addAction(self.actionAg_ncia)
+        self.menuDespesa_2.addAction(self.actionOrigem)
+        self.menuDespesa_2.addAction(self.actionCategoria_3)
+        self.menuReceita.addAction(self.actionOrigem_2)
+        self.menuReceita.addAction(self.actionCategoria_4)
         self.menuConta_Corrente.addAction(self.actionAg_ncia_2)
         self.menuConta_Corrente.addAction(self.actionConta)
         self.menuUsu_rios.addAction(self.actionUsu_rio)
         self.menuUsu_rios.addAction(self.actionGrupo)
         self.menuDespesa.addAction(self.menuLan_amento.menuAction())
-        self.menuDespesa.addAction(self.actionMovimenta_o)
         self.menuDespesa.addSeparator()
         self.menuDespesa.addAction(self.actionRelat_rios)
         self.menuLan_amento.addAction(self.actionDespesa_Fixas_2)
         self.menuLan_amento.addAction(self.actionDespesa_Corrente)
         self.menuReceitas.addAction(self.menuLan_amentos.menuAction())
-        self.menuReceitas.addAction(self.actionMovimenta_es)
         self.menuReceitas.addSeparator()
         self.menuReceitas.addAction(self.actionRelat_rios_2)
         self.menuLan_amentos.addAction(self.actionReceitas_Fixas)
@@ -183,6 +279,7 @@ class Ui_MainWindow(object):
         self.menuEstoque.addAction(self.actionRelat_rios_4)
         self.menuLan_amento_2.addAction(self.actionAdd_item)
         self.menuLan_amento_2.addAction(self.actionBaixa_de_Estoque)
+        self.menuFinanceiro.addAction(self.actionMovimenta_o_2)
 
         self.retranslateUi(MainWindow)
 
@@ -225,11 +322,23 @@ class Ui_MainWindow(object):
         self.actionUsu_rio.setText(QCoreApplication.translate("MainWindow", u"Usu\u00e1rio", None))
         self.actionGrupo.setText(QCoreApplication.translate("MainWindow", u"Grupo de usu\u00e1rios", None))
         self.actionFornecedor.setText(QCoreApplication.translate("MainWindow", u"Fornecedor", None))
+        self.actionOrigem.setText(QCoreApplication.translate("MainWindow", u"Origem ", None))
+        self.actionCategoria_3.setText(QCoreApplication.translate("MainWindow", u"Categoria ", None))
+        self.actionOrigem_2.setText(QCoreApplication.translate("MainWindow", u"Origem", None))
+        self.actionCategoria_4.setText(QCoreApplication.translate("MainWindow", u"Categoria", None))
+        self.actionMovimenta_o_2.setText(QCoreApplication.translate("MainWindow", u"Movimenta\u00e7\u00e3o", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Usu\u00e1rio:", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Admin", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Receitas", None))
+        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Despesas", None))
+        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"Estoque", None))
         self.menuSistema.setTitle(QCoreApplication.translate("MainWindow", u"Sistema", None))
         self.menuCadastro.setTitle(QCoreApplication.translate("MainWindow", u"Cadastro", None))
         self.menuProdutos_Itens.setTitle(QCoreApplication.translate("MainWindow", u"Produtos/Itens", None))
         self.menuAuxiliares.setTitle(QCoreApplication.translate("MainWindow", u"Auxiliares", None))
         self.menuBancos.setTitle(QCoreApplication.translate("MainWindow", u"Bancos", None))
+        self.menuDespesa_2.setTitle(QCoreApplication.translate("MainWindow", u"Despesa", None))
+        self.menuReceita.setTitle(QCoreApplication.translate("MainWindow", u"Receita", None))
         self.menuConta_Corrente.setTitle(QCoreApplication.translate("MainWindow", u"Conta Corrente", None))
         self.menuUsu_rios.setTitle(QCoreApplication.translate("MainWindow", u"Usu\u00e1rios", None))
         self.menuDespesa.setTitle(QCoreApplication.translate("MainWindow", u"Despesas", None))

@@ -2,24 +2,208 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>935</width>
-    <height>682</height>
+    <width>931</width>
+    <height>683</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <property name="toolButtonStyle">
+   <enum>Qt::ToolButtonIconOnly</enum>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QFrame" name="frmTop">
+      <property name="minimumSize">
+       <size>
+        <width>931</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Black</family>
+        <pointsize>12</pointsize>
+        <weight>10</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 87 12pt &quot;Segoe UI Black&quot;;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Panel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>126</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Usuário:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Admin</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frmLeft">
+      <property name="minimumSize">
+       <size>
+        <width>131</width>
+        <height>621</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>161</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 87 12pt &quot;Segoe UI Black&quot;;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Panel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>111</y>
+         <width>103</width>
+         <height>197</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QPushButton" name="pushButton">
+          <property name="minimumSize">
+           <size>
+            <width>101</width>
+            <height>61</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>101</width>
+            <height>61</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Receitas</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="minimumSize">
+           <size>
+            <width>101</width>
+            <height>61</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>101</width>
+            <height>61</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Despesas</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_3">
+          <property name="minimumSize">
+           <size>
+            <width>101</width>
+            <height>61</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>101</width>
+            <height>61</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Estoque</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>935</width>
+     <width>931</width>
      <height>21</height>
     </rect>
    </property>
@@ -52,7 +236,23 @@
       <addaction name="actionInstitui_es"/>
       <addaction name="actionAg_ncia"/>
      </widget>
+     <widget class="QMenu" name="menuDespesa_2">
+      <property name="title">
+       <string>Despesa</string>
+      </property>
+      <addaction name="actionOrigem"/>
+      <addaction name="actionCategoria_3"/>
+     </widget>
+     <widget class="QMenu" name="menuReceita">
+      <property name="title">
+       <string>Receita</string>
+      </property>
+      <addaction name="actionOrigem_2"/>
+      <addaction name="actionCategoria_4"/>
+     </widget>
      <addaction name="menuBancos"/>
+     <addaction name="menuDespesa_2"/>
+     <addaction name="menuReceita"/>
     </widget>
     <widget class="QMenu" name="menuConta_Corrente">
      <property name="title">
@@ -87,7 +287,6 @@
      <addaction name="actionDespesa_Corrente"/>
     </widget>
     <addaction name="menuLan_amento"/>
-    <addaction name="actionMovimenta_o"/>
     <addaction name="separator"/>
     <addaction name="actionRelat_rios"/>
    </widget>
@@ -113,7 +312,6 @@
      <addaction name="actionReceitas_Correntes"/>
     </widget>
     <addaction name="menuLan_amentos"/>
-    <addaction name="actionMovimenta_es"/>
     <addaction name="separator"/>
     <addaction name="actionRelat_rios_2"/>
    </widget>
@@ -147,6 +345,7 @@
     <property name="title">
      <string>Financeiro</string>
     </property>
+    <addaction name="actionMovimenta_o_2"/>
    </widget>
    <addaction name="menuSistema"/>
    <addaction name="menuCadastro"/>
@@ -326,6 +525,31 @@
   <action name="actionFornecedor">
    <property name="text">
     <string>Fornecedor</string>
+   </property>
+  </action>
+  <action name="actionOrigem">
+   <property name="text">
+    <string>Origem </string>
+   </property>
+  </action>
+  <action name="actionCategoria_3">
+   <property name="text">
+    <string>Categoria </string>
+   </property>
+  </action>
+  <action name="actionOrigem_2">
+   <property name="text">
+    <string>Origem</string>
+   </property>
+  </action>
+  <action name="actionCategoria_4">
+   <property name="text">
+    <string>Categoria</string>
+   </property>
+  </action>
+  <action name="actionMovimenta_o_2">
+   <property name="text">
+    <string>Movimentação</string>
    </property>
   </action>
  </widget>
