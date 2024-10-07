@@ -1,1 +1,3 @@
 pyuic5 .\MainWindow.ui -o MainWindow.py 
+qtTreeviewer widget tem como usar colocando os nomes
+Existe no pyside a função qsql qmodel 
