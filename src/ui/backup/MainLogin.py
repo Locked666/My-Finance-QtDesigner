@@ -18,12 +18,12 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QLabel,
     QLineEdit, QPushButton, QSizePolicy, QWidget)
 
-class Ui_Login(object):
-    def setupUi(self, Login):
-        if not Login.objectName():
-            Login.setObjectName(u"Login")
-        Login.resize(350, 448)
-        self.Mainframe = QFrame(Login)
+class Ui_Dialog(object):
+    def setupUi(self, Dialog):
+        if not Dialog.objectName():
+            Dialog.setObjectName(u"Dialog")
+        Dialog.resize(350, 448)
+        self.Mainframe = QFrame(Dialog)
         self.Mainframe.setObjectName(u"Mainframe")
         self.Mainframe.setGeometry(QRect(0, 0, 350, 448))
         self.Mainframe.setAutoFillBackground(False)
@@ -130,28 +130,28 @@ class Ui_Login(object):
         self.label_version.setFont(font1)
         self.label_version.setStyleSheet(u"color: rgb(255, 255, 255);")
 
-        self.retranslateUi(Login)
+        self.retranslateUi(Dialog)
 
-        QMetaObject.connectSlotsByName(Login)
+        QMetaObject.connectSlotsByName(Dialog)
     # setupUi
 
-    def retranslateUi(self, Login):
-        Login.setWindowTitle(QCoreApplication.translate("Login", u"Dialog", None))
+    def retranslateUi(self, Dialog):
+        Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
 #if QT_CONFIG(tooltip)
         self.Mainframe.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.text_usuario.setText("")
 #if QT_CONFIG(statustip)
-        self.text_password.setStatusTip(QCoreApplication.translate("Login", u"ts", None))
+        self.text_password.setStatusTip(QCoreApplication.translate("Dialog", u"ts", None))
 #endif // QT_CONFIG(statustip)
         self.text_password.setText("")
-        self.label_user.setText(QCoreApplication.translate("Login", u"Usu\u00e1rio:", None))
-        self.label_password.setText(QCoreApplication.translate("Login", u"Senha:", None))
+        self.label_user.setText(QCoreApplication.translate("Dialog", u"Usu\u00e1rio:", None))
+        self.label_password.setText(QCoreApplication.translate("Dialog", u"Senha:", None))
 #if QT_CONFIG(tooltip)
-        self.bnt_entrar.setToolTip(QCoreApplication.translate("Login", u"<html><head/><body><p>Acessar o sistema.</p></body></html>", None))
+        self.bnt_entrar.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p>Acessar o sistema.</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.bnt_entrar.setText(QCoreApplication.translate("Login", u"Entrar", None))
-        self.bnt_reset_password.setText(QCoreApplication.translate("Login", u"Esqueci senha", None))
+        self.bnt_entrar.setText(QCoreApplication.translate("Dialog", u"Entrar", None))
+        self.bnt_reset_password.setText(QCoreApplication.translate("Dialog", u"Esqueci senha", None))
         self.label_version.setText("")
     # retranslateUi
 

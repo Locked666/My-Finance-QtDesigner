@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'MainLogin.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.7.3
+## Created by: Qt User Interface Compiler version 6.7.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -11,19 +11,31 @@
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QLabel,
-    QLineEdit, QPushButton, QSizePolicy, QWidget)
+from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
+    QCursor, QFont, QFontDatabase, QGradient,
+    QIcon, QImage, QKeySequence, QLinearGradient,
+    QPainter, QPalette, QPixmap, QRadialGradient,
+    QTransform)
+from PySide6.QtWidgets import (QApplication, QFrame, QLabel, QLineEdit,
+    QMainWindow, QPushButton, QSizePolicy, QWidget)
 
 class Ui_Login(object):
     def setupUi(self, Login):
         if not Login.objectName():
             Login.setObjectName(u"Login")
         Login.resize(350, 448)
-        self.Mainframe = QFrame(Login)
+        Login.setMinimumSize(QSize(350, 448))
+        Login.setMaximumSize(QSize(350, 448))
+        Login.setAutoFillBackground(False)
+        Login.setStyleSheet(u" border-top: none;")
+        self.actionteste = QAction(Login)
+        self.actionteste.setObjectName(u"actionteste")
+        self.actionteste.setCheckable(True)
+        self.centralwidget = QWidget(Login)
+        self.centralwidget.setObjectName(u"centralwidget")
+        self.centralwidget.setAutoFillBackground(False)
+        self.centralwidget.setStyleSheet(u"alternate-background-color: rgb(28, 28, 28);")
+        self.Mainframe = QFrame(self.centralwidget)
         self.Mainframe.setObjectName(u"Mainframe")
         self.Mainframe.setGeometry(QRect(0, 0, 350, 448))
         self.Mainframe.setAutoFillBackground(False)
@@ -89,10 +101,8 @@ class Ui_Login(object):
 "border-radius: 10px;\n"
 "color: rgb(255, 255, 255);\n"
 "border: 2px;\n"
-"hover{\n"
-"background-color: rgb(0, 0, 115);\n"
-"};\n"
-"selection-color: rgb(0, 0, 126);a")
+"\n"
+"selection-background-color: rgb(0, 0, 212);")
         self.bnt_entrar.setCheckable(False)
         self.bnt_entrar.setChecked(False)
         self.bnt_entrar.setAutoDefault(False)
@@ -124,11 +134,7 @@ class Ui_Login(object):
 "\n"
 "color: rgb(255, 255, 255);\n"
 "")
-        self.label_version = QLabel(self.Mainframe)
-        self.label_version.setObjectName(u"label_version")
-        self.label_version.setGeometry(QRect(10, 10, 211, 16))
-        self.label_version.setFont(font1)
-        self.label_version.setStyleSheet(u"color: rgb(255, 255, 255);")
+        # Login.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(Login)
 
@@ -136,9 +142,13 @@ class Ui_Login(object):
     # setupUi
 
     def retranslateUi(self, Login):
-        Login.setWindowTitle(QCoreApplication.translate("Login", u"Dialog", None))
+        Login.setWindowTitle(QCoreApplication.translate("Login", u"My Finance - Login", None))
+        self.actionteste.setText(QCoreApplication.translate("Login", u"teste", None))
 #if QT_CONFIG(tooltip)
-        self.Mainframe.setToolTip("")
+        self.actionteste.setToolTip(QCoreApplication.translate("Login", u"<html><head/><body><p>Login</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.Mainframe.setToolTip(QCoreApplication.translate("Login", u"<html><head/><body><p>teste</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.text_usuario.setText("")
 #if QT_CONFIG(statustip)
@@ -152,6 +162,5 @@ class Ui_Login(object):
 #endif // QT_CONFIG(tooltip)
         self.bnt_entrar.setText(QCoreApplication.translate("Login", u"Entrar", None))
         self.bnt_reset_password.setText(QCoreApplication.translate("Login", u"Esqueci senha", None))
-        self.label_version.setText("")
     # retranslateUi
 

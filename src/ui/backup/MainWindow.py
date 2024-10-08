@@ -18,13 +18,17 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
     QMainWindow, QMenu, QMenuBar, QPushButton,
-    QSizePolicy, QVBoxLayout, QWidget)
+    QSizePolicy, QTabWidget, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(935, 682)
+        MainWindow.setWindowModality(Qt.NonModal)
+        MainWindow.resize(931, 683)
+        MainWindow.setToolButtonStyle(Qt.ToolButtonIconOnly)
+        MainWindow.setTabShape(QTabWidget.Rounded)
+        MainWindow.setUnifiedTitleAndToolBarOnMac(False)
         self.actionReceitas = QAction(MainWindow)
         self.actionReceitas.setObjectName(u"actionReceitas")
         self.actionInvestimentos = QAction(MainWindow)
@@ -101,6 +105,8 @@ class Ui_MainWindow(object):
         self.actionOrigem_2.setObjectName(u"actionOrigem_2")
         self.actionCategoria_4 = QAction(MainWindow)
         self.actionCategoria_4.setObjectName(u"actionCategoria_4")
+        self.actionMovimenta_o_2 = QAction(MainWindow)
+        self.actionMovimenta_o_2.setObjectName(u"actionMovimenta_o_2")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout = QVBoxLayout(self.centralwidget)
@@ -179,7 +185,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 935, 21))
+        self.menubar.setGeometry(QRect(0, 0, 931, 21))
         self.menuSistema = QMenu(self.menubar)
         self.menuSistema.setObjectName(u"menuSistema")
         self.menuCadastro = QMenu(self.menubar)
@@ -253,13 +259,11 @@ class Ui_MainWindow(object):
         self.menuUsu_rios.addAction(self.actionUsu_rio)
         self.menuUsu_rios.addAction(self.actionGrupo)
         self.menuDespesa.addAction(self.menuLan_amento.menuAction())
-        self.menuDespesa.addAction(self.actionMovimenta_o)
         self.menuDespesa.addSeparator()
         self.menuDespesa.addAction(self.actionRelat_rios)
         self.menuLan_amento.addAction(self.actionDespesa_Fixas_2)
         self.menuLan_amento.addAction(self.actionDespesa_Corrente)
         self.menuReceitas.addAction(self.menuLan_amentos.menuAction())
-        self.menuReceitas.addAction(self.actionMovimenta_es)
         self.menuReceitas.addSeparator()
         self.menuReceitas.addAction(self.actionRelat_rios_2)
         self.menuLan_amentos.addAction(self.actionReceitas_Fixas)
@@ -275,6 +279,7 @@ class Ui_MainWindow(object):
         self.menuEstoque.addAction(self.actionRelat_rios_4)
         self.menuLan_amento_2.addAction(self.actionAdd_item)
         self.menuLan_amento_2.addAction(self.actionBaixa_de_Estoque)
+        self.menuFinanceiro.addAction(self.actionMovimenta_o_2)
 
         self.retranslateUi(MainWindow)
 
@@ -321,6 +326,7 @@ class Ui_MainWindow(object):
         self.actionCategoria_3.setText(QCoreApplication.translate("MainWindow", u"Categoria ", None))
         self.actionOrigem_2.setText(QCoreApplication.translate("MainWindow", u"Origem", None))
         self.actionCategoria_4.setText(QCoreApplication.translate("MainWindow", u"Categoria", None))
+        self.actionMovimenta_o_2.setText(QCoreApplication.translate("MainWindow", u"Movimenta\u00e7\u00e3o", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Usu\u00e1rio:", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Admin", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Receitas", None))
