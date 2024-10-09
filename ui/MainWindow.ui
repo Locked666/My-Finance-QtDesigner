@@ -74,7 +74,7 @@
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -125,7 +125,7 @@
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -253,6 +253,7 @@
      <addaction name="menuBancos"/>
      <addaction name="menuDespesa_2"/>
      <addaction name="menuReceita"/>
+     <addaction name="actionRamo_Atividade"/>
     </widget>
     <widget class="QMenu" name="menuConta_Corrente">
      <property name="title">
@@ -550,6 +551,11 @@
   <action name="actionMovimenta_o_2">
    <property name="text">
     <string>Movimentação</string>
+   </property>
+  </action>
+  <action name="actionRamo_Atividade">
+   <property name="text">
+    <string>Ramo Atividade</string>
    </property>
   </action>
  </widget>

@@ -141,6 +141,23 @@ class Ui_CadReceita(object):
 
         self.verticalLayout_8.addLayout(self.horizontalLayout_19)
 
+        self.horizontalLayout_22 = QHBoxLayout()
+        self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
+        self.label_22 = QLabel(self.frame)
+        self.label_22.setObjectName(u"label_22")
+
+        self.horizontalLayout_22.addWidget(self.label_22)
+
+        self.dateEdit_4 = QDateEdit(self.frame)
+        self.dateEdit_4.setObjectName(u"dateEdit_4")
+        self.dateEdit_4.setCalendarPopup(True)
+        self.dateEdit_4.setDate(QDate(2000, 1, 2))
+
+        self.horizontalLayout_22.addWidget(self.dateEdit_4)
+
+
+        self.verticalLayout_8.addLayout(self.horizontalLayout_22)
+
         self.horizontalLayout_18 = QHBoxLayout()
         self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
         self.label_19 = QLabel(self.frame)
@@ -269,6 +286,7 @@ class Ui_CadReceita(object):
         self.lineEdit_8.setInputMask("")
         self.lineEdit_8.setText("")
         self.checkBox_6.setText(QCoreApplication.translate("CadReceita", u"Efetivar ?", None))
+        self.label_22.setText(QCoreApplication.translate("CadReceita", u"Data do Vencimento :", None))
         self.label_19.setText(QCoreApplication.translate("CadReceita", u"Data do Recebimento:", None))
         self.label_16.setText(QCoreApplication.translate("CadReceita", u"Data do Lan\u00e7amento", None))
         self.checkBox_5.setText(QCoreApplication.translate("CadReceita", u"Repetir ?", None))
