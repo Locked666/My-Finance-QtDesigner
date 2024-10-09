@@ -9,6 +9,11 @@ def consulta_cnpj(cnpj):
 
     resp = json.loads(response.text)
 
+    print(resp)
+    return resp['nome'], resp['fantasia'],resp['abertura'],resp['natureza'],resp['logradouro'], resp['numero'], resp['complemento'], resp['bairro'], resp['municipio'], resp['uf'], resp['cep'],  resp['email'],resp['telefone']
 
-    return resp['nome'], resp['logradouro'], resp['numero'], resp['complemento'], resp['bairro'], resp['municipio'], resp['uf'], resp['cep'], resp['telefone'], resp['email']
 
+if __name__=='__main__':
+    c = consulta_cnpj(41794502000119)
+    print(c)
+    pass

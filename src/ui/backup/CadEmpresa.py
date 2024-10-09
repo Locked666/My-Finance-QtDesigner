@@ -16,10 +16,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QDateEdit, QDialog,
-    QGroupBox, QHBoxLayout, QLCDNumber, QLabel,
-    QLineEdit, QPlainTextEdit, QPushButton, QRadioButton,
-    QSizePolicy, QSpacerItem, QTabWidget, QVBoxLayout,
-    QWidget)
+    QFrame, QGroupBox, QHBoxLayout, QLCDNumber,
+    QLabel, QLineEdit, QPlainTextEdit, QPushButton,
+    QRadioButton, QSizePolicy, QSpacerItem, QTabWidget,
+    QVBoxLayout, QWidget)
 
 class Ui_CadEmpresa(object):
     def setupUi(self, CadEmpresa):
@@ -47,6 +47,11 @@ class Ui_CadEmpresa(object):
         self.lcd_id = QLCDNumber(self.DdPrincipais)
         self.lcd_id.setObjectName(u"lcd_id")
         self.lcd_id.setGeometry(QRect(20, 10, 91, 23))
+        self.lcd_id.setFrameShape(QFrame.Box)
+        self.lcd_id.setLineWidth(1)
+        self.lcd_id.setSegmentStyle(QLCDNumber.Flat)
+        self.lcd_id.setProperty(u"value", 0.000000000000000)
+        self.lcd_id.setProperty(u"intValue", 0)
         self.label_10 = QLabel(self.DdPrincipais)
         self.label_10.setObjectName(u"label_10")
         self.label_10.setGeometry(QRect(20, 140, 121, 16))
@@ -123,19 +128,19 @@ class Ui_CadEmpresa(object):
         self.label_16 = QLabel(self.DdPrincipais)
         self.label_16.setObjectName(u"label_16")
         self.label_16.setGeometry(QRect(270, 190, 141, 21))
-        self.widget = QWidget(self.DdPrincipais)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(460, 10, 245, 27))
-        self.horizontalLayout_2 = QHBoxLayout(self.widget)
+        self.layoutWidget = QWidget(self.DdPrincipais)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(460, 10, 245, 27))
+        self.horizontalLayout_2 = QHBoxLayout(self.layoutWidget)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.radio_fisica = QRadioButton(self.widget)
+        self.radio_fisica = QRadioButton(self.layoutWidget)
         self.radio_fisica.setObjectName(u"radio_fisica")
         self.radio_fisica.setEnabled(False)
 
         self.horizontalLayout_2.addWidget(self.radio_fisica)
 
-        self.radio_juridirica = QRadioButton(self.widget)
+        self.radio_juridirica = QRadioButton(self.layoutWidget)
         self.radio_juridirica.setObjectName(u"radio_juridirica")
         self.radio_juridirica.setEnabled(False)
         self.radio_juridirica.setChecked(True)
@@ -288,7 +293,7 @@ class Ui_CadEmpresa(object):
     # setupUi
 
     def retranslateUi(self, CadEmpresa):
-        CadEmpresa.setWindowTitle(QCoreApplication.translate("CadEmpresa", u"Dialog", None))
+        CadEmpresa.setWindowTitle(QCoreApplication.translate("CadEmpresa", u"Cadastro da Empresa", None))
         self.label_10.setText(QCoreApplication.translate("CadEmpresa", u"Nome Fantasia:", None))
         self.text_nome_fantasia.setText("")
         self.label.setText(QCoreApplication.translate("CadEmpresa", u"Raz\u00e3o Social:", None))
