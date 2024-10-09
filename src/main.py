@@ -143,9 +143,11 @@ class CadastroEmpresa(QDialog,Ui_CadEmpresa):
     def callback_bnt_save(self):
 
         valores = self.get_value()
+        print(valores)
         
         # Pega apenas os valores preenchidos para 'text_ramo'
-        ramo_values = [i.get('text_ramo') for i in valores if i.get('text_ramo')][0]
+        ramo_values = [i.get('text_ramo') for i in valores if i.get('text_ramo')]
+        print(ramo_values)
         
         # # Se você quiser pegar valores de várias chaves e filtrá-los, pode usar:
         # chaves = ['text_cnpj', 'Dt_abertura', 'text_ramo', 'text_nome_fantasia']  # Adicione outras chaves conforme necessário

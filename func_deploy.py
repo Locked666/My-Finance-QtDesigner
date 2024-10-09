@@ -9,7 +9,7 @@ PATH_UI_QTDESIGNER = os.path.join(PATH, 'ui')
 PATH_UI_DEPLOY = os.path.join(PATH, 'src','ui')
 PATH_PY_BACKUP = os.path.join(PATH, 'src','ui','backup')
 
-NOT_EXECUTE = ['CadEmpresa.ui']
+NOT_EXECUTE =[] # ['MainLogin.ui']
 
 def backup_py(file:str):
     py_backup_file = os.path.join(PATH_PY_BACKUP,file)
@@ -25,7 +25,6 @@ def backup_py(file:str):
             shutil.move(py_deploy_file,py_backup_file)
 
     print(f"Arquivo {file} movido")           
-
 
 # Listar arquivos de .iu que está salvos no diretorio do qtdesigner
 
