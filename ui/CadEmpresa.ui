@@ -25,6 +25,32 @@
   <property name="windowTitle">
    <string>Cadastro da Empresa</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QPushButton{
+background-color: rgb(0, 85, 255);
+color: rgb(255, 255, 255);
+border-radius:10px
+}
+QPushButton:hover{
+background-color: rgb(255, 255, 255);
+	color: rgb(0, 0, 0);
+}
+
+QLineEdit{
+border:1px solid rgb(0, 0, 0);
+border-radius:10px
+}
+QPlainTextEdit{
+border:1px solid rgb(0, 0, 0);
+border-radius:10px
+}
+
+QLineEdit:hover{
+border:1px solid rgb(0, 0, 255);
+
+}
+</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTabWidget" name="tabWidget">
@@ -59,7 +85,7 @@
       <string notr="true">font: 12pt &quot;Segoe UI&quot;;</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="DdPrincipais">
       <attribute name="title">

@@ -141,23 +141,6 @@ class Ui_CadDespesa(object):
 
         self.verticalLayout_8.addLayout(self.horizontalLayout_19)
 
-        self.horizontalLayout_18 = QHBoxLayout()
-        self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
-        self.label_19 = QLabel(self.frame)
-        self.label_19.setObjectName(u"label_19")
-
-        self.horizontalLayout_18.addWidget(self.label_19)
-
-        self.dateEdit_3 = QDateEdit(self.frame)
-        self.dateEdit_3.setObjectName(u"dateEdit_3")
-        self.dateEdit_3.setCalendarPopup(True)
-        self.dateEdit_3.setDate(QDate(2000, 1, 2))
-
-        self.horizontalLayout_18.addWidget(self.dateEdit_3)
-
-
-        self.verticalLayout_8.addLayout(self.horizontalLayout_18)
-
         self.horizontalLayout_22 = QHBoxLayout()
         self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
         self.label_22 = QLabel(self.frame)
@@ -267,21 +250,21 @@ class Ui_CadDespesa(object):
         self.groupBox = QGroupBox(self.frame_4)
         self.groupBox.setObjectName(u"groupBox")
         self.groupBox.setGeometry(QRect(0, 0, 401, 151))
-        self.widget = QWidget(self.groupBox)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(10, 20, 391, 60))
-        self.verticalLayout = QVBoxLayout(self.widget)
+        self.layoutWidget = QWidget(self.groupBox)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(10, 20, 391, 60))
+        self.verticalLayout = QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.label = QLabel(self.widget)
+        self.label = QLabel(self.layoutWidget)
         self.label.setObjectName(u"label")
         self.label.setMaximumSize(QSize(62, 16777215))
 
         self.horizontalLayout_2.addWidget(self.label)
 
-        self.label_2 = QLabel(self.widget)
+        self.label_2 = QLabel(self.layoutWidget)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setLayoutDirection(Qt.LeftToRight)
         self.label_2.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
@@ -293,18 +276,18 @@ class Ui_CadDespesa(object):
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.lineEdit = QLineEdit(self.widget)
+        self.lineEdit = QLineEdit(self.layoutWidget)
         self.lineEdit.setObjectName(u"lineEdit")
         self.lineEdit.setMaximumSize(QSize(60, 27))
 
         self.horizontalLayout.addWidget(self.lineEdit)
 
-        self.lineEdit_2 = QLineEdit(self.widget)
+        self.lineEdit_2 = QLineEdit(self.layoutWidget)
         self.lineEdit_2.setObjectName(u"lineEdit_2")
 
         self.horizontalLayout.addWidget(self.lineEdit_2)
 
-        self.pushButton_5 = QPushButton(self.widget)
+        self.pushButton_5 = QPushButton(self.layoutWidget)
         self.pushButton_5.setObjectName(u"pushButton_5")
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Ignored)
         sizePolicy.setHorizontalStretch(0)
@@ -322,7 +305,7 @@ class Ui_CadDespesa(object):
 
         self.retranslateUi(CadDespesa)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(CadDespesa)
@@ -340,7 +323,6 @@ class Ui_CadDespesa(object):
         self.lineEdit_8.setInputMask("")
         self.lineEdit_8.setText("")
         self.checkBox_6.setText(QCoreApplication.translate("CadDespesa", u"Efetivar ?", None))
-        self.label_19.setText(QCoreApplication.translate("CadDespesa", u"Data do Vencimento :", None))
         self.label_22.setText(QCoreApplication.translate("CadDespesa", u"Data do Pagamento :", None))
         self.label_16.setText(QCoreApplication.translate("CadDespesa", u"Data do Lan\u00e7amento", None))
         self.checkBox_5.setText(QCoreApplication.translate("CadDespesa", u"Repetir ?", None))

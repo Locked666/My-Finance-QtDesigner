@@ -69,6 +69,14 @@ class Fornecedor(Base):
     log_inclusao = Column(DateTime, default=datetime.now()) 
 
 
+class RamoAtividade(Base):
+    __tablename__='ramo_atividade'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    codigo=Column(String)
+    descricao=Column(String)
+        
+
+
 if not os.path.exists(PATH_DATABASE):
     Base.metadata.create_all(bind=engine) 
 

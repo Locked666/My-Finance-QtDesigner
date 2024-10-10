@@ -17,15 +17,15 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QDateEdit, QDialog,
     QFrame, QGroupBox, QHBoxLayout, QLCDNumber,
-    QLabel, QLineEdit, QPlainTextEdit, QPushButton,
-    QRadioButton, QSizePolicy, QSpacerItem, QTabWidget,
-    QVBoxLayout, QWidget)
+    QLabel, QLayout, QLineEdit, QPlainTextEdit,
+    QPushButton, QRadioButton, QSizePolicy, QSpacerItem,
+    QTabWidget, QVBoxLayout, QWidget)
 
 class Ui_CadFornecedor(object):
     def setupUi(self, CadFornecedor):
         if not CadFornecedor.objectName():
             CadFornecedor.setObjectName(u"CadFornecedor")
-        CadFornecedor.resize(739, 558)
+        CadFornecedor.resize(739, 594)
         CadFornecedor.setMinimumSize(QSize(726, 0))
         CadFornecedor.setMaximumSize(QSize(739, 601))
         self.verticalLayout = QVBoxLayout(CadFornecedor)
@@ -74,23 +74,6 @@ class Ui_CadFornecedor(object):
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(20, 90, 91, 16))
         self.label.setFont(font)
-        self.Dt_abertura = QDateEdit(self.DdPrincipais)
-        self.Dt_abertura.setObjectName(u"Dt_abertura")
-        self.Dt_abertura.setGeometry(QRect(290, 60, 131, 22))
-        self.Dt_abertura.setReadOnly(True)
-        self.Dt_abertura.setCalendarPopup(True)
-        self.label_15 = QLabel(self.DdPrincipais)
-        self.label_15.setObjectName(u"label_15")
-        self.label_15.setGeometry(QRect(290, 40, 121, 16))
-        self.label_15.setFont(font)
-        self.label_13 = QLabel(self.DdPrincipais)
-        self.label_13.setObjectName(u"label_13")
-        self.label_13.setGeometry(QRect(20, 40, 141, 21))
-        self.text_cnpj = QLineEdit(self.DdPrincipais)
-        self.text_cnpj.setObjectName(u"text_cnpj")
-        self.text_cnpj.setGeometry(QRect(20, 60, 241, 21))
-        self.text_cnpj.setCursorPosition(0)
-        self.text_cnpj.setReadOnly(True)
         self.groupBox = QGroupBox(self.DdPrincipais)
         self.groupBox.setObjectName(u"groupBox")
         self.groupBox.setGeometry(QRect(20, 270, 591, 171))
@@ -128,24 +111,86 @@ class Ui_CadFornecedor(object):
         self.label_16 = QLabel(self.DdPrincipais)
         self.label_16.setObjectName(u"label_16")
         self.label_16.setGeometry(QRect(270, 190, 141, 21))
-        self.layoutWidget = QWidget(self.DdPrincipais)
-        self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(460, 10, 245, 27))
-        self.horizontalLayout_2 = QHBoxLayout(self.layoutWidget)
+        self.bnt_consulta_cnpj = QPushButton(self.DdPrincipais)
+        self.bnt_consulta_cnpj.setObjectName(u"bnt_consulta_cnpj")
+        self.bnt_consulta_cnpj.setGeometry(QRect(270, 55, 30, 30))
+        self.bnt_consulta_cnpj.setMaximumSize(QSize(30, 30))
+        self.bnt_consulta_cnpj.setStyleSheet(u"border: 1px solid #000000;\n"
+"border-radius: 10px;\n"
+"QPushButton:hover#bnt_consulta_cnpj{\n"
+"   background-color:bluw;\n"
+"}:")
+        self.widget = QWidget(self.DdPrincipais)
+        self.widget.setObjectName(u"widget")
+        self.widget.setGeometry(QRect(380, 10, 312, 29))
+        self.horizontalLayout_5 = QHBoxLayout(self.widget)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.checkBox = QCheckBox(self.widget)
+        self.checkBox.setObjectName(u"checkBox")
+
+        self.horizontalLayout_5.addWidget(self.checkBox)
+
+        self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.radio_fisica = QRadioButton(self.layoutWidget)
+        self.radio_fisica = QRadioButton(self.widget)
         self.radio_fisica.setObjectName(u"radio_fisica")
         self.radio_fisica.setEnabled(False)
 
         self.horizontalLayout_2.addWidget(self.radio_fisica)
 
-        self.radio_juridirica = QRadioButton(self.layoutWidget)
+        self.radio_juridirica = QRadioButton(self.widget)
         self.radio_juridirica.setObjectName(u"radio_juridirica")
         self.radio_juridirica.setEnabled(False)
         self.radio_juridirica.setChecked(True)
 
         self.horizontalLayout_2.addWidget(self.radio_juridirica)
+
+
+        self.horizontalLayout_5.addLayout(self.horizontalLayout_2)
+
+        self.widget1 = QWidget(self.DdPrincipais)
+        self.widget1.setObjectName(u"widget1")
+        self.widget1.setGeometry(QRect(21, 41, 243, 44))
+        self.verticalLayout_2 = QVBoxLayout(self.widget1)
+        self.verticalLayout_2.setSpacing(0)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.label_13 = QLabel(self.widget1)
+        self.label_13.setObjectName(u"label_13")
+
+        self.verticalLayout_2.addWidget(self.label_13)
+
+        self.text_cnpj = QLineEdit(self.widget1)
+        self.text_cnpj.setObjectName(u"text_cnpj")
+        self.text_cnpj.setMinimumSize(QSize(241, 21))
+        self.text_cnpj.setMaximumSize(QSize(241, 21))
+        self.text_cnpj.setCursorPosition(0)
+        self.text_cnpj.setReadOnly(True)
+
+        self.verticalLayout_2.addWidget(self.text_cnpj)
+
+        self.widget2 = QWidget(self.DdPrincipais)
+        self.widget2.setObjectName(u"widget2")
+        self.widget2.setGeometry(QRect(310, 40, 133, 45))
+        self.verticalLayout_3 = QVBoxLayout(self.widget2)
+        self.verticalLayout_3.setSpacing(0)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.label_15 = QLabel(self.widget2)
+        self.label_15.setObjectName(u"label_15")
+        self.label_15.setFont(font)
+
+        self.verticalLayout_3.addWidget(self.label_15)
+
+        self.Dt_abertura = QDateEdit(self.widget2)
+        self.Dt_abertura.setObjectName(u"Dt_abertura")
+        self.Dt_abertura.setMinimumSize(QSize(131, 22))
+        self.Dt_abertura.setMaximumSize(QSize(131, 22))
+        self.Dt_abertura.setReadOnly(True)
+        self.Dt_abertura.setCalendarPopup(True)
+
+        self.verticalLayout_3.addWidget(self.Dt_abertura)
 
         self.tabWidget.addTab(self.DdPrincipais, "")
         self.DdAdicionais = QWidget()
@@ -241,38 +286,98 @@ class Ui_CadFornecedor(object):
 
         self.verticalLayout.addWidget(self.tabWidget)
 
+        self.frame = QFrame(CadFornecedor)
+        self.frame.setObjectName(u"frame")
+        self.frame.setFrameShape(QFrame.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Raised)
+        self.widget3 = QWidget(self.frame)
+        self.widget3.setObjectName(u"widget3")
+        self.widget3.setGeometry(QRect(350, 0, 366, 25))
+        self.horizontalLayout_3 = QHBoxLayout(self.widget3)
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.back_full = QPushButton(self.widget3)
+        self.back_full.setObjectName(u"back_full")
+
+        self.horizontalLayout_3.addWidget(self.back_full)
+
+        self.back = QPushButton(self.widget3)
+        self.back.setObjectName(u"back")
+
+        self.horizontalLayout_3.addWidget(self.back)
+
+        self.horizontalSpacer_2 = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_3.addItem(self.horizontalSpacer_2)
+
+        self.next = QPushButton(self.widget3)
+        self.next.setObjectName(u"next")
+
+        self.horizontalLayout_3.addWidget(self.next)
+
+        self.next_full = QPushButton(self.widget3)
+        self.next_full.setObjectName(u"next_full")
+
+        self.horizontalLayout_3.addWidget(self.next_full)
+
+
+        self.verticalLayout.addWidget(self.frame)
+
         self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setSizeConstraint(QLayout.SetDefaultConstraint)
+        self.horizontalLayout.setContentsMargins(0, -1, -1, -1)
         self.bnt_alterar = QPushButton(CadFornecedor)
         self.bnt_alterar.setObjectName(u"bnt_alterar")
-        self.bnt_alterar.setMinimumSize(QSize(131, 41))
+        self.bnt_alterar.setMinimumSize(QSize(100, 30))
         self.bnt_alterar.setMaximumSize(QSize(131, 41))
 
         self.horizontalLayout.addWidget(self.bnt_alterar)
 
-        self.horizontalSpacer = QSpacerItem(148, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer = QSpacerItem(58, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
-
-        self.bnt_salvar = QPushButton(CadFornecedor)
-        self.bnt_salvar.setObjectName(u"bnt_salvar")
-        self.bnt_salvar.setEnabled(False)
-        self.bnt_salvar.setMinimumSize(QSize(131, 41))
-        self.bnt_salvar.setMaximumSize(QSize(131, 41))
-
-        self.horizontalLayout.addWidget(self.bnt_salvar)
 
         self.bnt_adicionar = QPushButton(CadFornecedor)
         self.bnt_adicionar.setObjectName(u"bnt_adicionar")
         self.bnt_adicionar.setEnabled(True)
-        self.bnt_adicionar.setMinimumSize(QSize(131, 41))
+        self.bnt_adicionar.setMinimumSize(QSize(100, 0))
         self.bnt_adicionar.setMaximumSize(QSize(131, 41))
 
         self.horizontalLayout.addWidget(self.bnt_adicionar)
 
+        self.bnt_salvar = QPushButton(CadFornecedor)
+        self.bnt_salvar.setObjectName(u"bnt_salvar")
+        self.bnt_salvar.setEnabled(False)
+        self.bnt_salvar.setMinimumSize(QSize(100, 0))
+        self.bnt_salvar.setMaximumSize(QSize(131, 41))
+
+        self.horizontalLayout.addWidget(self.bnt_salvar)
+
+        self.bnt_search = QPushButton(CadFornecedor)
+        self.bnt_search.setObjectName(u"bnt_search")
+        self.bnt_search.setMinimumSize(QSize(100, 0))
+        self.bnt_search.setMaximumSize(QSize(131, 41))
+        self.bnt_search.setCheckable(False)
+        self.bnt_search.setChecked(False)
+        self.bnt_search.setAutoRepeat(False)
+
+        self.horizontalLayout.addWidget(self.bnt_search)
+
+        self.bnt_excluir = QPushButton(CadFornecedor)
+        self.bnt_excluir.setObjectName(u"bnt_excluir")
+        self.bnt_excluir.setMinimumSize(QSize(100, 0))
+        self.bnt_excluir.setMaximumSize(QSize(131, 41))
+        self.bnt_excluir.setCheckable(False)
+        self.bnt_excluir.setChecked(False)
+        self.bnt_excluir.setAutoRepeat(False)
+
+        self.horizontalLayout.addWidget(self.bnt_excluir)
+
         self.bnt_cancelar = QPushButton(CadFornecedor)
         self.bnt_cancelar.setObjectName(u"bnt_cancelar")
-        self.bnt_cancelar.setMinimumSize(QSize(131, 41))
+        self.bnt_cancelar.setMinimumSize(QSize(100, 0))
         self.bnt_cancelar.setMaximumSize(QSize(131, 41))
         self.bnt_cancelar.setCheckable(False)
         self.bnt_cancelar.setChecked(False)
@@ -297,10 +402,6 @@ class Ui_CadFornecedor(object):
         self.label_10.setText(QCoreApplication.translate("CadFornecedor", u"Nome Fantasia:", None))
         self.text_nome_fantasia.setText("")
         self.label.setText(QCoreApplication.translate("CadFornecedor", u"Raz\u00e3o Social:", None))
-        self.label_15.setText(QCoreApplication.translate("CadFornecedor", u"Data de Abertura:", None))
-        self.label_13.setText(QCoreApplication.translate("CadFornecedor", u"CNPJ / CPF :", None))
-        self.text_cnpj.setInputMask("")
-        self.text_cnpj.setText("")
         self.groupBox.setTitle(QCoreApplication.translate("CadFornecedor", u"Outras Informa\u00e7\u00f5es", None))
         self.check_contribuinte.setText(QCoreApplication.translate("CadFornecedor", u"Contribuinte ?", None))
         self.check_optante.setText(QCoreApplication.translate("CadFornecedor", u"Optante Pelo Simples Nacional ?", None))
@@ -313,8 +414,14 @@ class Ui_CadFornecedor(object):
         self.text_IM.setInputMask("")
         self.text_IM.setText("")
         self.label_16.setText(QCoreApplication.translate("CadFornecedor", u"Inscri\u00e7\u00e3o Municipal :", None))
+        self.bnt_consulta_cnpj.setText(QCoreApplication.translate("CadFornecedor", u"P", None))
+        self.checkBox.setText(QCoreApplication.translate("CadFornecedor", u"Ativo", None))
         self.radio_fisica.setText(QCoreApplication.translate("CadFornecedor", u"Pessoa Fis\u00edca", None))
         self.radio_juridirica.setText(QCoreApplication.translate("CadFornecedor", u"Pessoa juridica", None))
+        self.label_13.setText(QCoreApplication.translate("CadFornecedor", u"CNPJ / CPF :", None))
+        self.text_cnpj.setInputMask("")
+        self.text_cnpj.setText("")
+        self.label_15.setText(QCoreApplication.translate("CadFornecedor", u"Data de Abertura:", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.DdPrincipais), QCoreApplication.translate("CadFornecedor", u"Dados Principais", None))
         self.label_28.setText(QCoreApplication.translate("CadFornecedor", u"Dados Complementares :", None))
         self.text_cep.setInputMask(QCoreApplication.translate("CadFornecedor", u"#####-###", None))
@@ -335,14 +442,38 @@ class Ui_CadFornecedor(object):
         self.label_36.setText(QCoreApplication.translate("CadFornecedor", u"Telefone :", None))
         self.label_37.setText(QCoreApplication.translate("CadFornecedor", u"Cidade:", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.DdAdicionais), QCoreApplication.translate("CadFornecedor", u"Dados Adicionais", None))
+#if QT_CONFIG(tooltip)
+        self.back_full.setToolTip(QCoreApplication.translate("CadFornecedor", u"<html><head/><body><p>Ir para o primeiro...</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.back_full.setText(QCoreApplication.translate("CadFornecedor", u"<<", None))
+#if QT_CONFIG(tooltip)
+        self.back.setToolTip(QCoreApplication.translate("CadFornecedor", u"<html><head/><body><p>Voltar...</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.back.setText(QCoreApplication.translate("CadFornecedor", u"<", None))
+#if QT_CONFIG(tooltip)
+        self.next.setToolTip(QCoreApplication.translate("CadFornecedor", u"<html><head/><body><p>Pr\u00f3ximo...</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.next.setText(QCoreApplication.translate("CadFornecedor", u">", None))
+#if QT_CONFIG(tooltip)
+        self.next_full.setToolTip(QCoreApplication.translate("CadFornecedor", u"<html><head/><body><p><span style=\" font-weight:600;\">Ir para o fim.</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.next_full.setText(QCoreApplication.translate("CadFornecedor", u">>", None))
         self.bnt_alterar.setText(QCoreApplication.translate("CadFornecedor", u"&Alterar", None))
+        self.bnt_adicionar.setText(QCoreApplication.translate("CadFornecedor", u"&Incluir", None))
+#if QT_CONFIG(shortcut)
+        self.bnt_adicionar.setShortcut(QCoreApplication.translate("CadFornecedor", u"Alt+I", None))
+#endif // QT_CONFIG(shortcut)
         self.bnt_salvar.setText(QCoreApplication.translate("CadFornecedor", u"&Salvar", None))
 #if QT_CONFIG(shortcut)
         self.bnt_salvar.setShortcut("")
 #endif // QT_CONFIG(shortcut)
-        self.bnt_adicionar.setText(QCoreApplication.translate("CadFornecedor", u"&Incluir", None))
+        self.bnt_search.setText(QCoreApplication.translate("CadFornecedor", u"&Pesquisar", None))
 #if QT_CONFIG(shortcut)
-        self.bnt_adicionar.setShortcut(QCoreApplication.translate("CadFornecedor", u"Alt+I", None))
+        self.bnt_search.setShortcut(QCoreApplication.translate("CadFornecedor", u"Alt+P", None))
+#endif // QT_CONFIG(shortcut)
+        self.bnt_excluir.setText(QCoreApplication.translate("CadFornecedor", u"&Excluir", None))
+#if QT_CONFIG(shortcut)
+        self.bnt_excluir.setShortcut(QCoreApplication.translate("CadFornecedor", u"Alt+E", None))
 #endif // QT_CONFIG(shortcut)
         self.bnt_cancelar.setText(QCoreApplication.translate("CadFornecedor", u"&Cancelar", None))
 #if QT_CONFIG(shortcut)

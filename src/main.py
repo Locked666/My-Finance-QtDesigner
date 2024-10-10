@@ -8,6 +8,7 @@ from ui.MainWindow import Ui_MainWindow
 from ui.CadEmpresa import Ui_CadEmpresa
 from ui.CadFornecedor import Ui_CadFornecedor
 from ui.dialogMensagem import Ui_InfMensagem
+from ui.CadRamoAtividade import Ui_dialogRamoAtividade
 
 
 from ConfigApp import __version__
@@ -307,8 +308,8 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
         self.setWindowTitle(f"Cadastro de Fornecedor - My Finance {__version__}")
         self.setupUi(self)
         self.text_cnpj.editingFinished.connect(lambda c=True:self.on_cnpj_changed())
-        self.text_cnpj.returnPressed.connect(lambda c=True:self.on_cnpj_changed())
-        self.populate_field()
+        # self.text_cnpj.returnPressed.connect(lambda c=True:self.on_cnpj_changed())
+        # self.populate_field()
 
         self.field_text =  [
             self.text_cnpj,
@@ -469,7 +470,7 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
                 self.bnt_salvar.setEnabled(False)
                 self.bnt_alterar.setEnabled(True)
                 self.bnt_adicionar.setEnabled(True)
-                infmensagem = InfMensagem(mensagem=f"Empresa Adicionada com sucesso\n empresa código {insert_fornecedor[1]}")
+                infmensagem = InfMensagem(mensagem=f"Fornecedor Adicionada com sucesso\n empresa código {insert_fornecedor[1]}")
                 infmensagem.exec()
 
             else:
@@ -520,18 +521,6 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
 
 
 
-        
-        # Pega apenas os valores preenchidos para 'text_ramo'
-        
-        
-        
-        # # Se você quiser pegar valores de várias chaves e filtrá-los, pode usar:
-        # chaves = ['text_cnpj', 'Dt_abertura', 'text_ramo', 'text_nome_fantasia']  # Adicione outras chaves conforme necessário
-        # valores_extraidos = {chave: [d.get(chave) for d in valores if d.get(chave)] for chave in chaves}
-        
-        # print("Valores de 'text_ramo' preenchidos:", ramo_values)
-        # print("Valores extraídos (preenchidos):", valores_extraidos)
-
     def populate_field(self):
         info = Database.get_table_fornecedor()
 
@@ -568,7 +557,7 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
             else:       
                 self.radio_fisica.setChecked(True)
 
-    def populate_field_consulta(self,nome:str, fantasia:str,abertura:str,natureza:str, logradouro:str, numero:str,complemento:str, municipio:str, bairro:str, uf:str, cep:str, email:str,telefone):
+    def populate_field_consulta(self,nome:str, fantasia:str,abertura:str,natureza:str, logradouro:str, numero:str,complemento:str, municipio:str, bairro:str, uf:str, cep:str, email:str,telefone:str):
         self.text_razao_social.insert(nome.strip())
         self.text_nome_fantasia.insert(fantasia.strip())
         # self.Dt_abertura.
@@ -579,8 +568,9 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
         self.text_cidade.insert(municipio.strip())
         self.text_bairro.insert(bairro.strip())
         self.text_uf.insert(uf.strip())
-        self.text_cep.setText(cep.strip())
+        self.text_cep.setText(cep.strip().replace('-','').replace('.','').replace('/',''))
         self.text_email.insert(email.strip())
+        self.text_telefone.setText(telefone.strip().replace('-','').replace('.','').replace('(','').replace(')',''))
         
 
 
@@ -590,17 +580,68 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
             if id == 0:
                 if self.radio_juridirica.isChecked():
                     if len(self.text_cnpj.text().strip().replace('-','').replace('.','').replace('/','')) == 14:
-                        contulta = consulta_cnpj(self.text_cnpj.text().strip().replace('-','').replace('.','').replace('/',''))
+                        consulta = consulta_cnpj(self.text_cnpj.text().strip().replace('-','').replace('.','').replace('/',''))
+                        self.populate_field_consulta(
+                            nome=consulta[0],
+                            fantasia=consulta[1],
+                            abertura=consulta[2],
+                            natureza=consulta[3],
+                            logradouro=consulta[4],
+                            numero=consulta[5],
+                            complemento=consulta[6],
+                            bairro=consulta[7],
+                            municipio=consulta[8],
+                            uf=consulta[9],
+                            cep=consulta[10],
+                            email=consulta[11],
+                            telefone=consulta[12]
+
+                        )
+                        
                     else:
                         infmensagem = InfMensagem(mensagem=f"Quantidade de Caracteres invalida\n cnpj:{self.text_cnpj.text().strip().replace('-','').replace('.','').replace('/','')}").exec()
+                        
+                        
                         return
                 else:
                     infmensagem = InfMensagem(mensagem=f"Para Consulta de Cnpj, teve ser marcado como juridico ").exec()
                                             
     
         pass
- 
+
+class CadastroRamoAtividade(QDialog,Ui_dialogRamoAtividade):
+    def __init__(self) -> None:
+        super().__init__(parent=None)
+        self.setWindowTitle(f"Cadastro de Ramo de Atividade- My Finance {__version__}")
+        self.setupUi(self)
         
+        self.bnt_alterar.clicked.connect(self.callback_bnt_alterar)
+        self.bnt_incluir.clicked.connect(self.callback_bnt_incluir)
+        
+    
+    def callback_bnt_alterar(self):
+        lbl = self.lcd_id.value()
+        if lbl == 0 :
+            self.text_codigo.setReadOnly(False)
+            self.plain_descricao.setReadOnly(False)      
+            self.bnt_alterar.setEnabled(False)
+            self.bnt_incluir.setEnabled(False)
+            self.bnt_salvar.setEnabled(True)
+            self.bnt_pesquisar.setEnabled(False)
+        
+        
+    def callback_bnt_incluir(self):
+        self.text_codigo.clear()
+        self.plain_descricao.clear()
+        self.lcd_id.setProperty(u"intValue", 0)
+        self.text_codigo.setReadOnly(False)
+        self.plain_descricao.setReadOnly(False) 
+        self.bnt_alterar.setEnabled(False)
+        self.bnt_incluir.setEnabled(False)
+        self.bnt_salvar.setEnabled(True)
+        self.bnt_pesquisar.setEnabled(False)          
+
+
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self) -> None:
@@ -611,6 +652,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
         self.actionEmpresa.triggered.connect(lambda: CadastroEmpresa().exec())
         self.actionFornecedor.triggered.connect(lambda: CadastroFornecedor().exec())
+        self.actionRamo_Atividade.triggered.connect(lambda: CadastroRamoAtividade().exec())
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
