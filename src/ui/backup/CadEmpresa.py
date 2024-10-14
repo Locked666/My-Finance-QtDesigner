@@ -28,6 +28,30 @@ class Ui_CadEmpresa(object):
         CadEmpresa.resize(739, 558)
         CadEmpresa.setMinimumSize(QSize(726, 0))
         CadEmpresa.setMaximumSize(QSize(739, 601))
+        CadEmpresa.setStyleSheet(u"QPushButton{\n"
+"background-color: rgb(0, 85, 255);\n"
+"color: rgb(255, 255, 255);\n"
+"border-radius:10px\n"
+"}\n"
+"QPushButton:hover{\n"
+"background-color: rgb(255, 255, 255);\n"
+"	color: rgb(0, 0, 0);\n"
+"}\n"
+"\n"
+"QLineEdit{\n"
+"border:1px solid rgb(0, 0, 0);\n"
+"border-radius:10px\n"
+"}\n"
+"QPlainTextEdit{\n"
+"border:1px solid rgb(0, 0, 0);\n"
+"border-radius:10px\n"
+"}\n"
+"\n"
+"QLineEdit:hover{\n"
+"border:1px solid rgb(0, 0, 255);\n"
+"\n"
+"}\n"
+"")
         self.verticalLayout = QVBoxLayout(CadEmpresa)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.tabWidget = QTabWidget(CadEmpresa)
@@ -286,7 +310,7 @@ class Ui_CadEmpresa(object):
 
         self.retranslateUi(CadEmpresa)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(CadEmpresa)

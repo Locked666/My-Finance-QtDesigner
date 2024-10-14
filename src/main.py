@@ -2,16 +2,10 @@ import sys
 from PySide6.QtCore import Qt,QCoreApplication
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget,QDialog,QVBoxLayout,QWidgetAction
 from ui_functions import consulta_cnpj
+from func_crypt import decrypt,encrypt
 from database import Database
-from ui.MainLogin import Ui_Login
-from ui.MainWindow import Ui_MainWindow
-from ui.CadEmpresa import Ui_CadEmpresa
-from ui.CadFornecedor import Ui_CadFornecedor
-from ui.dialogMensagem import Ui_InfMensagem
-from ui.CadRamoAtividade import Ui_dialogRamoAtividade
-
-
-from ConfigApp import __version__
+from import_display import *
+from ConfigApp import __version__,MODE_DEBUG
 
 class InfMensagem(QDialog,Ui_InfMensagem):
     def __init__(self,mensagem) -> None:
@@ -26,18 +20,270 @@ class AppLogin(QWidget, Ui_Login):
         super(AppLogin,self).__init__()
         self.setupUi(self)
         self.setWindowTitle(f"Login - My Finance {__version__}")
+        self.key = Database.get_table_sys_config()
+
+
+
 
         self.label_version.setText(QCoreApplication.translate("AppLogin", __version__, None))
 
         self.bnt_entrar.clicked.connect(self.open_system)
 
 
+    def _get_user(self,usuario):
+        user = Database.get_table_user(type='user', usuario=user)
+
+
+        pass
 
     def open_system(self):
         if self.text_password.text() == '123':
             self.w = MainWindow()
             self.w.show()
             self.close()    
+
+class CadatroUsuario(QDialog, Ui_CadUser):
+    def __init__(self) -> None:
+        super().__init__(parent=None)
+        self.setWindowTitle(f"Cadastro de Usuário - My Finance {__version__}")
+        self.setupUi(self)
+
+        self.bnt_alterar.clicked.connect( self.callback_bnt_alterar)
+        self.bnt_cancelar.clicked.connect(self.callback_bnt_cancela)
+        self.bnt_adicionar.clicked.connect(self.callback_bnt_incluir)
+        self.bnt_excluir.clicked.connect(self.callback_bnt_delete)
+        self.bnt_salvar.clicked.connect(self.callback_bnt_save)
+        self.bnt_next.clicked.connect(lambda: self.callback_bnt_seq_info(tipo="next"))
+        self.bnt_next_full.clicked.connect(lambda: self.callback_bnt_seq_info(tipo="next_full"))
+        self.bnt_back_full.clicked.connect(lambda: self.callback_bnt_seq_info(tipo="back_full"))
+        self.bnt_back.clicked.connect(lambda: self.callback_bnt_seq_info(tipo="back"))
+        
+        
+        self.field_text = [
+            self.text_nome,
+            self.text_email,
+            self.text_phone,
+            self.text_cpf, 
+            self.text_user, 
+            self.text_password, 
+            self.dt_nascimento, 
+            self.plain_obs,
+            self.plain_obs_adicionais,
+            self.text_rua,
+            self.text_numero,
+            self.text_bairro,
+            self.text_complementar,
+            self.text_cep,
+            self.text_cidade,
+            self.text_uf,
+            self.text_celular
+        ]
+
+        self.field_check = [
+            self.check_add_cliente, 
+            self.check_add_fornecedor, 
+            self.check_first_acesso, 
+            self.check_bloqueado, 
+            self.check_reset_senha, 
+            self.check_whats,
+            self.check_ativo, 
+
+        ]
+
+        self.verify_field()
+    def verify_field(self, read_text:bool = True, enabled_check:bool = False):
+
+        for i in self.field_text:
+            if i.isReadOnly() != read_text:
+                i.setReadOnly(read_text)
+
+        for e in self.field_check:
+            if e.isEnabled() != enabled_check:
+                e.setEnabled(enabled_check)
+
+    def clear_field(self):
+        for i in self.field_text:
+            i.clear()
+        pass
+
+    def callback_bnt_cancela(self):
+        label_id = self.lcd_id.value()
+        if label_id == 0:
+            self.verify_field()
+            self.bnt_alterar.setEnabled(True)
+            self.bnt_salvar.setEnabled(False)
+            self.bnt_adicionar.setEnabled(True)
+            self.bnt_search.setEnabled(True)
+            self.bnt_excluir.setEnabled(True)
+            self.clear_field()
+            self.populate_field()
+            self.modal_seq_info(True)
+        else:    
+            self.verify_field()
+            self.bnt_alterar.setEnabled(True)
+            self.bnt_salvar.setEnabled(False)
+            self.bnt_adicionar.setEnabled(True)
+            self.bnt_search.setEnabled(True)
+            self.bnt_excluir.setEnabled(True)
+            self.modal_seq_info(True)
+
+
+        pass    
+
+    def callback_bnt_alterar(self):
+        
+        label_id = self.lcd_id.value()
+        if label_id != 0:
+            self.verify_field(False,True)
+            self.bnt_alterar.setEnabled(False)
+            self.bnt_salvar.setEnabled(True)
+            self.bnt_adicionar.setEnabled(False)
+            self.bnt_search.setEnabled(False)
+            self.bnt_excluir.setEnabled(False)
+            self.modal_seq_info()
+            
+        else:
+            infmensagem = InfMensagem(mensagem="Nenhuma Empresa Foi selecionada")
+            infmensagem.exec()
+            if infmensagem.accepted:
+                self.verify_field(True,False)
+
+    def modal_seq_info(self, form:bool = False):
+        self.bnt_back.setEnabled(form)
+        self.bnt_back_full.setEnabled(form)
+        self.bnt_next.setEnabled(form)
+        self.bnt_next_full.setEnabled(form)    
+
+    def callback_bnt_incluir(self):
+        if self.bnt_alterar.isEnabled() == True:
+            self.clear_field()
+            self.verify_field(False,True)
+            self.lcd_id.setProperty(u"intValue", 0)
+            self.bnt_alterar.setEnabled(False)
+            self.bnt_adicionar.setEnabled(False)
+            self.bnt_salvar.setEnabled(True)
+            self.bnt_search.setEnabled(False)
+            self.bnt_excluir.setEnabled(False)
+            self.modal_seq_info()
+
+    def callback_bnt_delete(self):
+        value_id = self.lcd_id.value()
+        if value_id != 0:
+            delete = Database.delete_table_user(int(value_id))
+            if delete:
+                infmensagem = InfMensagem(mensagem=f"Fornecedor: {int(value_id)} excluido com sucesso !").exec()
+                self.clear_field()
+                self.lcd_id.setProperty(u"intValue", 0)
+                self.callback_bnt_seq_info(tipo='next')
+            else:
+                infmensagem = InfMensagem(mensagem=f"Errp ao excluir fornecedor: {value_id} \n Erro: {delete[1]} !").exec()    
+            
+    def callback_bnt_seq_info(self, tipo):
+        value_in_db =  Database.get_table_user("list_id")
+        value_id = self.lcd_id.value()
+        self.lbl_total.setText(str(len(value_in_db)))
+
+        match tipo:
+            case "back":
+                if value_id == 0:
+                    return
+                else:
+                    if value_id == 0:
+                        for i in value_in_db:
+                            self.populate_field(id=i)
+                            return
+                    else:
+                        if len(value_in_db) > 1: 
+
+                            a = value_in_db.index(value_id)
+                            a -= 1
+                            try:
+                                b = value_in_db[a]
+                                self.populate_field(id=b)
+                            except:
+                                return   
+            
+            case "back_full":
+                if value_id == 0:
+                    return
+                else:
+                    self.populate_field(id=min(value_in_db))
+            
+            case "next":
+                if value_id == 0:
+                    for i in value_in_db:
+                        self.populate_field(id=i)
+                        return
+                else:
+                    if len(value_in_db) > 1: 
+
+                        a = value_in_db.index(value_id)
+                        a += 1
+                        try:
+                            b = value_in_db[a]
+                            self.populate_field(id=b)
+                        except:
+                            return    
+
+
+            case "next_full":
+                if value_id == max(value_in_db):
+                    return
+                else:
+                    self.populate_field(id=max(value_in_db))
+
+
+        pass
+
+
+    def callback_bnt_save(self):
+        pass
+
+    def populate_field(self, id:int =  None):
+        if id == None:
+            info = Database.get_table_user()
+        else:
+            print(f"Valor id =  {id}")
+            self.clear_field()
+            info = Database.get_table_user(type='id',id=id)   
+        if len(info) > 0 :
+            info = info[0]
+            self.lcd_id.setProperty(u"intValue", info[0])
+            self.text_nome.setText(info[1])
+            self.text_cpf.setText(info[2])
+            self.text_user.setText(info[3])
+            self.text_password.insert('*****')
+            self.text_rua.setText(info[8])
+            self.text_numero.setText(info[9])
+            self.text_bairro.setText(info[10])
+            self.text_complementar.setText(info[11])
+            self.text_cep.setText(info[12])
+            self.text_cidade.setText(info[13])
+            self.text_uf.setText(info[14])
+            self.text_celular.setText(info[15])
+            self.text_phone.setText(info[17])
+            self.text_email.setText(info[18])
+            self.plain_obs.insertPlainText(info[19])
+
+            if info[6] == 'S':
+                self.check_bloqueado.setChecked(True)
+            else:     
+                self.check_bloqueado.setChecked(False)
+
+            if info[5] == 'S':
+                self.check_first_acesso.setChecked(True)
+            else:     
+                self.check_first_acesso.setChecked(False)
+
+            if info[4] == 'S':
+                self.check_reset_senha.setChecked(True)
+            else:     
+                self.check_reset_senha.setChecked(False)
+
+            if info[3] == 'S':
+                self.check_ativo.setChecked(True)
+            else:     
+                self.check_ativo.setChecked(False)
 
 
 class CadastroEmpresa(QDialog,Ui_CadEmpresa):
@@ -70,7 +316,6 @@ class CadastroEmpresa(QDialog,Ui_CadEmpresa):
         
         self.field_check = [
             self.check_contribuinte,
-            self.check_optante,
             self.check_p_whats,
             self.radio_fisica,
             self.radio_juridirica
@@ -308,8 +553,7 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
         self.setWindowTitle(f"Cadastro de Fornecedor - My Finance {__version__}")
         self.setupUi(self)
         self.text_cnpj.editingFinished.connect(lambda c=True:self.on_cnpj_changed())
-        # self.text_cnpj.returnPressed.connect(lambda c=True:self.on_cnpj_changed())
-        # self.populate_field()
+
 
         self.field_text =  [
             self.text_cnpj,
@@ -336,6 +580,7 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
             self.check_contribuinte,
             self.check_optante,
             self.check_p_whats,
+            self.check_ativo,
             self.radio_fisica,
             self.radio_juridirica
         ]
@@ -343,7 +588,14 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
         self.bnt_alterar.clicked.connect( self.callback_bnt_alterar)
         self.bnt_cancelar.clicked.connect(self.callback_bnt_cancela)
         self.bnt_adicionar.clicked.connect(self.callback_bnt_incluir)
+        self.bnt_excluir.clicked.connect(self.callback_bnt_delete)
         self.bnt_salvar.clicked.connect(self.callback_bnt_save)
+        self.bnt_consulta_cnpj.clicked.connect(lambda c=True: self.on_cnpj_changed(return_bnt=True))
+        self.bnt_next.clicked.connect(lambda: self.callback_bnt_seq_info(tipo="next"))
+        self.bnt_next_full.clicked.connect(lambda: self.callback_bnt_seq_info(tipo="next_full"))
+        self.bnt_back_full.clicked.connect(lambda: self.callback_bnt_seq_info(tipo="back_full"))
+        self.bnt_back.clicked.connect(lambda: self.callback_bnt_seq_info(tipo="back"))
+        
 
     def get_value(self):
         value = []
@@ -386,13 +638,23 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
             self.bnt_alterar.setEnabled(False)
             self.bnt_salvar.setEnabled(True)
             self.bnt_adicionar.setEnabled(False)
+            self.bnt_search.setEnabled(False)
+            self.bnt_excluir.setEnabled(False)
+            self.modal_seq_info()
             
         else:
             infmensagem = InfMensagem(mensagem="Nenhuma Empresa Foi selecionada")
             infmensagem.exec()
             if infmensagem.accepted:
                 self.verify_field(True,False)
-            
+
+    def modal_seq_info(self, form:bool = False):
+        self.bnt_back.setEnabled(form)
+        self.bnt_back_full.setEnabled(form)
+        self.bnt_next.setEnabled(form)
+        self.bnt_next_full.setEnabled(form)
+    
+
     def callback_bnt_incluir(self):
         if self.bnt_alterar.isEnabled() == True:
             self.clear_field()
@@ -401,6 +663,9 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
             self.bnt_alterar.setEnabled(False)
             self.bnt_adicionar.setEnabled(False)
             self.bnt_salvar.setEnabled(True)
+            self.bnt_search.setEnabled(False)
+            self.bnt_excluir.setEnabled(False)
+            self.modal_seq_info()
 
     def callback_bnt_cancela(self):
         label_id = self.lcd_id.value()
@@ -409,13 +674,19 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
             self.bnt_alterar.setEnabled(True)
             self.bnt_salvar.setEnabled(False)
             self.bnt_adicionar.setEnabled(True)
+            self.bnt_search.setEnabled(True)
+            self.bnt_excluir.setEnabled(True)
             self.clear_field()
             self.populate_field()
+            self.modal_seq_info(True)
         else:    
             self.verify_field()
             self.bnt_alterar.setEnabled(True)
             self.bnt_salvar.setEnabled(False)
             self.bnt_adicionar.setEnabled(True)
+            self.bnt_search.setEnabled(True)
+            self.bnt_excluir.setEnabled(True)
+            self.modal_seq_info(True)
 
 
         pass
@@ -437,45 +708,55 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
             return
 
         if self.lcd_id.value() == 0:
-            insert_fornecedor = Database.insert_table_fornecedor(
-                cnpj=self.text_cnpj.text().replace('.','').replace('-','').strip(),
-                razao = self.text_razao_social.text().strip().upper() ,
-                nome_fantasia=self.text_nome_fantasia.text().strip().upper(),
-                pj='J' if self.radio_juridirica.isChecked() else 'F',
-                # dt_abertura =self.Dt_abertura.text() ,
-                IE =  self.text_IE.text().strip(),
-                IM= self.text_IM.text().strip(),
-                contribuinte = 'S' if self.check_contribuinte.isChecked() else 'N',
-                simples='S' if self.check_optante.isChecked() else 'N',
-                ramo= self.text_ramo.text().strip().upper(),
-                rua =self.text_rua.text().strip(),
-                numero =  self.text_numero.text().strip(),
-                bairro = self.text_bairro.text().strip(),
-                complemento =  self.text_complementar.text().strip(),
-                cep = self.text_cep.text().replace('-','').strip(),
-                cidade =  self.text_cidade.text().strip(),
-                uf = self.text_uf.text().strip(),
-                celular = self.text_celular.text().replace('(','').replace(')','').replace('-','').strip(),
-                whats='S' if self.check_p_whats.isChecked() else 'N',
-                telefone= self.text_telefone.text().replace('(','').replace(')','').replace('-','').strip(),
-                email=self.text_email.text().strip().lower(),
-                obs = self.plain_text.toPlainText().strip()
-            )
+            v =  Database.get_table_fornecedor(type='cnpj', cnpj = (self.text_cnpj.text().replace('.','').replace('-','').strip()))
+            if len(v) == 0:
+                insert_fornecedor = Database.insert_table_fornecedor(
+                    cnpj=self.text_cnpj.text().replace('.','').replace('-','').strip(),
+                    razao = self.text_razao_social.text().strip().upper() ,
+                    nome_fantasia=self.text_nome_fantasia.text().strip().upper(),
+                    ativo='S' if self.check_ativo.isChecked() else 'N',
+                    pj='J' if self.radio_juridirica.isChecked() else 'F',
+                    # dt_abertura =self.Dt_abertura.text() ,
+                    IE =  self.text_IE.text().strip(),
+                    IM= self.text_IM.text().strip(),
+                    contribuinte = 'S' if self.check_contribuinte.isChecked() else 'N',
+                    simples='S' if self.check_optante.isChecked() else 'N',
+                    ramo= self.text_ramo.text().strip().upper(),
+                    rua =self.text_rua.text().strip(),
+                    numero =  self.text_numero.text().strip(),
+                    bairro = self.text_bairro.text().strip(),
+                    complemento =  self.text_complementar.text().strip(),
+                    cep = self.text_cep.text().replace('-','').strip(),
+                    cidade =  self.text_cidade.text().strip(),
+                    uf = self.text_uf.text().strip(),
+                    celular = self.text_celular.text().replace('(','').replace(')','').replace('-','').strip(),
+                    whats='S' if self.check_p_whats.isChecked() else 'N',
+                    telefone= self.text_telefone.text().replace('(','').replace(')','').replace('-','').strip(),
+                    email=self.text_email.text().strip().lower(),
+                    obs = self.plain_text.toPlainText().strip()
+                )
 
-            
+                
 
-            if insert_fornecedor[0] == True:
-                self.verify_field()
-                self.lcd_id.setProperty(u"intValue", insert_fornecedor[1])
-                self.bnt_salvar.setEnabled(False)
-                self.bnt_alterar.setEnabled(True)
-                self.bnt_adicionar.setEnabled(True)
-                infmensagem = InfMensagem(mensagem=f"Fornecedor Adicionada com sucesso\n empresa código {insert_fornecedor[1]}")
-                infmensagem.exec()
+                if insert_fornecedor[0] == True:
+                    self.verify_field()
+                    self.lcd_id.setProperty(u"intValue", insert_fornecedor[1])
+                    self.bnt_salvar.setEnabled(False)
+                    self.bnt_alterar.setEnabled(True)
+                    self.bnt_adicionar.setEnabled(True)
+                    self.bnt_search.setEnabled(True)
+                    self.bnt_excluir.setEnabled(True)
+                    self.modal_seq_info(True)
+                    infmensagem = InfMensagem(mensagem=f"Fornecedor Adicionada com sucesso\n empresa código {insert_fornecedor[1]}")
+                    infmensagem.exec()
+
+                else:
+                    infmensagem = InfMensagem(mensagem=f"Erro ao Gravar empresa\n {insert_fornecedor[1]}")
+                    infmensagem.exec()
 
             else:
-                infmensagem = InfMensagem(mensagem=f"Erro ao Gravar empresa\n {insert_fornecedor[1]}")
-                infmensagem.exec()
+                infmensagem = InfMensagem(mensagem=f"Fornecedor já cadastrado no código: {v[0][0]}").exec()
+
 
         else:
             update_fornecedor = Database.update_table_fornecedor(
@@ -483,6 +764,7 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
                 cnpj=self.text_cnpj.text().replace('.','').replace('-','').strip(),
                 razao = self.text_razao_social.text().strip().upper() ,
                 nome_fantasia=self.text_nome_fantasia.text().strip().upper(),
+                ativo='S' if self.check_ativo.isChecked() else 'N',
                 pj='J' if self.radio_juridirica.isChecked() else 'F',
                 # dt_abertura =self.Dt_abertura.text() ,
                 IE =  self.text_IE.text().strip(),
@@ -512,23 +794,29 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
                 self.bnt_salvar.setEnabled(False)
                 self.bnt_alterar.setEnabled(True)
                 self.bnt_adicionar.setEnabled(True)
-                infmensagem = InfMensagem(mensagem=f"Empresa Adicionada com sucesso\n empresa código {update_fornecedor[1]}")
+                self.bnt_search.setEnabled(True)
+                self.bnt_excluir.setEnabled(True)
+                self.modal_seq_info(True)
+                infmensagem = InfMensagem(mensagem=f"Fornecedor Adicionada com sucesso\n empresa código {update_fornecedor[1]}")
                 infmensagem.exec()
 
             else:
-                infmensagem = InfMensagem(mensagem=f"Erro ao Gravar empresa\n {update_fornecedor[1]}")
+                infmensagem = InfMensagem(mensagem=f"Erro ao Gravar Fornecedor\n {update_fornecedor[1]}")
                 infmensagem.exec()
 
-
-
-    def populate_field(self):
-        info = Database.get_table_fornecedor()
-
+    def populate_field(self, id:int =  None):
+        if id == None:
+            info = Database.get_table_fornecedor()
+        else:
+            print(f"Valor id =  {id}")
+            self.clear_field()
+            info = Database.get_table_fornecedor(type='id',id=id)   
         if len(info) > 0 :
             info = info[0]
             self.lcd_id.setProperty(u"intValue", info[0])
             self.text_cnpj.insert(info[3])
             self.text_razao_social.insert(info[1])
+
             self.text_nome_fantasia.insert(info[2])
             self.text_IE.insert(info[6])
             self.text_IM.insert(info[7])
@@ -570,17 +858,91 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
         self.text_uf.insert(uf.strip())
         self.text_cep.setText(cep.strip().replace('-','').replace('.','').replace('/',''))
         self.text_email.insert(email.strip())
-        self.text_telefone.setText(telefone.strip().replace('-','').replace('.','').replace('(','').replace(')',''))
+        self.text_telefone.setText(telefone.strip().replace('-','').replace('.','').replace('(','').replace(')',''))        
+
+    def callback_bnt_seq_info(self, tipo):
+        value_in_db =  Database.get_table_fornecedor("list_id")
+        value_id = self.lcd_id.value()
+        self.lbl_total.setText(str(len(value_in_db)))
         
 
+        match tipo:
+            case "back":
+                if value_id == 0:
+                    return
+                else:
+                    if value_id == 0:
+                        for i in value_in_db:
+                            self.populate_field(id=i)
+                            return
+                    else:
+                        if len(value_in_db) > 1: 
 
-    def on_cnpj_changed(self,c=False):
-        if c == False:
+                            a = value_in_db.index(value_id)
+                            a -= 1
+                            try:
+                                b = value_in_db[a]
+                                self.populate_field(id=b)
+                            except:
+                                return   
+            
+            case "back_full":
+                if value_id == 0:
+                    return
+                else:
+                    self.populate_field(id=min(value_in_db))
+            
+            case "next":
+                if value_id == 0:
+                    for i in value_in_db:
+                        self.populate_field(id=i)
+                        return
+                else:
+                    if len(value_in_db) > 1: 
+
+                        a = value_in_db.index(value_id)
+                        a += 1
+                        try:
+                            b = value_in_db[a]
+                            self.populate_field(id=b)
+                        except:
+                            return    
+
+
+            case "next_full":
+                if value_id == max(value_in_db):
+                    return
+                else:
+                    self.populate_field(id=max(value_in_db))
+
+
+        pass
+    
+    def callback_bnt_delete(self):
+        value_id = self.lcd_id.value()
+        if value_id != 0:
+            delete = Database.delete_table_fornecedor(int(value_id))
+            if delete:
+                infmensagem = InfMensagem(mensagem=f"Fornecedor: {int(value_id)} excluido com sucesso !").exec()
+                self.clear_field()
+                self.lcd_id.setProperty(u"intValue", 0)
+                self.callback_bnt_seq_info(tipo='next')
+            else:
+                infmensagem = InfMensagem(mensagem=f"Errp ao excluir fornecedor: {value_id} \n Erro: {delete[1]} !").exec()    
+            
+
+        pass
+
+    def on_cnpj_changed(self,c=False,return_bnt = False):
+        if self.text_cnpj.text().strip():
             id = self.lcd_id.value()
             if id == 0:
                 if self.radio_juridirica.isChecked():
                     if len(self.text_cnpj.text().strip().replace('-','').replace('.','').replace('/','')) == 14:
+                        cn = self.text_cnpj.text().strip().replace('-','').replace('.','').replace('/','')
                         consulta = consulta_cnpj(self.text_cnpj.text().strip().replace('-','').replace('.','').replace('/',''))
+                        self.clear_field()
+                        self.text_cnpj.setText(cn)
                         self.populate_field_consulta(
                             nome=consulta[0],
                             fantasia=consulta[1],
@@ -604,8 +966,12 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
                         
                         return
                 else:
-                    infmensagem = InfMensagem(mensagem=f"Para Consulta de Cnpj, teve ser marcado como juridico ").exec()
-                                            
+                    if return_bnt:
+                        infmensagem = InfMensagem(mensagem=f"Para Consulta de Cnpj, teve ser marcado como juridico ").exec()
+        else: 
+            if return_bnt ==  True and self.radio_juridirica.isChecked():
+                infmensagem = InfMensagem(mensagem=f"O Campo de CNPJ Não pode estar vazio.").exec()
+
     
         pass
 
@@ -641,8 +1007,6 @@ class CadastroRamoAtividade(QDialog,Ui_dialogRamoAtividade):
         self.bnt_salvar.setEnabled(True)
         self.bnt_pesquisar.setEnabled(False)          
 
-
-
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self) -> None:
         super(MainWindow,self).__init__()
@@ -653,11 +1017,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionEmpresa.triggered.connect(lambda: CadastroEmpresa().exec())
         self.actionFornecedor.triggered.connect(lambda: CadastroFornecedor().exec())
         self.actionRamo_Atividade.triggered.connect(lambda: CadastroRamoAtividade().exec())
+        self.actionCadUser.triggered.connect(lambda: CadatroUsuario().exec())
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     # window = MainLogin()
     window = AppLogin()
-    window.text_password.insert(str(123))
+    if MODE_DEBUG:
+        window.text_password.insert(str(123))
     window.show()
     sys.exit(app.exec())

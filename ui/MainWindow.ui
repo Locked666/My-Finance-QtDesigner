@@ -266,7 +266,7 @@
      <property name="title">
       <string>Usuários</string>
      </property>
-     <addaction name="actionUsu_rio"/>
+     <addaction name="actionCadUser"/>
      <addaction name="actionGrupo"/>
     </widget>
     <addaction name="menuProdutos_Itens"/>
@@ -513,7 +513,7 @@
     <string>Conta </string>
    </property>
   </action>
-  <action name="actionUsu_rio">
+  <action name="actionCadUser">
    <property name="text">
     <string>Usuário</string>
    </property>

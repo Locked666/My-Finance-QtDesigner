@@ -56,6 +56,7 @@ class Ui_dialogRamoAtividade(object):
 
         self.bnt_salvar = QPushButton(self.frame)
         self.bnt_salvar.setObjectName(u"bnt_salvar")
+        self.bnt_salvar.setEnabled(False)
         self.bnt_salvar.setMinimumSize(QSize(0, 30))
 
         self.horizontalLayout.addWidget(self.bnt_salvar)
@@ -86,6 +87,7 @@ class Ui_dialogRamoAtividade(object):
         self.plain_descricao = QPlainTextEdit(self.widget)
         self.plain_descricao.setObjectName(u"plain_descricao")
         self.plain_descricao.setMaximumSize(QSize(451, 61))
+        self.plain_descricao.setReadOnly(True)
 
         self.verticalLayout_2.addWidget(self.plain_descricao)
 
@@ -103,6 +105,7 @@ class Ui_dialogRamoAtividade(object):
         self.text_codigo = QLineEdit(self.widget1)
         self.text_codigo.setObjectName(u"text_codigo")
         self.text_codigo.setMaximumSize(QSize(113, 20))
+        self.text_codigo.setReadOnly(True)
 
         self.verticalLayout.addWidget(self.text_codigo)
 

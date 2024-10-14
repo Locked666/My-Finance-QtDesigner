@@ -352,7 +352,7 @@ QPushButton:hover#bnt_consulta_cnpj{
         <string>P</string>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>380</x>
@@ -363,7 +363,10 @@ QPushButton:hover#bnt_consulta_cnpj{
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
-         <widget class="QCheckBox" name="checkBox">
+         <widget class="QCheckBox" name="check_ativo">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>Ativo</string>
           </property>
@@ -398,7 +401,7 @@ QPushButton:hover#bnt_consulta_cnpj{
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>21</x>
@@ -448,7 +451,7 @@ QPushButton:hover#bnt_consulta_cnpj{
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>310</x>
@@ -852,7 +855,7 @@ QPushButton:hover#bnt_consulta_cnpj{
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>350</x>
@@ -863,7 +866,7 @@ QPushButton:hover#bnt_consulta_cnpj{
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QPushButton" name="back_full">
+        <widget class="QPushButton" name="bnt_back_full">
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ir para o primeiro...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
@@ -873,7 +876,7 @@ QPushButton:hover#bnt_consulta_cnpj{
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="back">
+        <widget class="QPushButton" name="bnt_back">
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voltar...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
@@ -899,7 +902,7 @@ QPushButton:hover#bnt_consulta_cnpj{
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="next">
+        <widget class="QPushButton" name="bnt_next">
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Próximo...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
@@ -909,12 +912,38 @@ QPushButton:hover#bnt_consulta_cnpj{
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="next_full">
+        <widget class="QPushButton" name="bnt_next_full">
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ir para o fim.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>&gt;&gt;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>139</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Quantidade de cadastros:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lbl_total">
+         <property name="text">
+          <string>0</string>
          </property>
         </widget>
        </item>
