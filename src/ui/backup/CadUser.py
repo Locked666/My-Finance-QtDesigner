@@ -297,6 +297,22 @@ class Ui_CadUser(object):
 
         self.horizontalLayout.addWidget(self.bnt_cancelar)
 
+        self.layoutWidget_3 = QWidget(CadUser)
+        self.layoutWidget_3.setObjectName(u"layoutWidget_3")
+        self.layoutWidget_3.setGeometry(QRect(10, 530, 139, 15))
+        self.horizontalLayout_4 = QHBoxLayout(self.layoutWidget_3)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.label_9 = QLabel(self.layoutWidget_3)
+        self.label_9.setObjectName(u"label_9")
+
+        self.horizontalLayout_4.addWidget(self.label_9)
+
+        self.lbl_total = QLabel(self.layoutWidget_3)
+        self.lbl_total.setObjectName(u"lbl_total")
+
+        self.horizontalLayout_4.addWidget(self.lbl_total)
+
 
         self.retranslateUi(CadUser)
 
@@ -388,5 +404,7 @@ class Ui_CadUser(object):
 #if QT_CONFIG(shortcut)
         self.bnt_cancelar.setShortcut(QCoreApplication.translate("CadUser", u"Alt+C", None))
 #endif // QT_CONFIG(shortcut)
+        self.label_9.setText(QCoreApplication.translate("CadUser", u"Quantidade de cadastros:", None))
+        self.lbl_total.setText(QCoreApplication.translate("CadUser", u"0", None))
     # retranslateUi
 

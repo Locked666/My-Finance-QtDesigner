@@ -5,7 +5,7 @@ from ui_functions import consulta_cnpj
 from func_crypt import decrypt,encrypt
 from database import Database
 from import_display import *
-from ConfigApp import __version__,MODE_DEBUG
+from ConfigApp import __version__,MODE_DEBUG,SALT_CRYPT
 
 class InfMensagem(QDialog,Ui_InfMensagem):
     def __init__(self,mensagem) -> None:
@@ -13,7 +13,6 @@ class InfMensagem(QDialog,Ui_InfMensagem):
         self.setupUi(self)
         self.mensagem= mensagem
         self.lb_inf.setText(QCoreApplication.translate("InfMensagem", self.mensagem, None))
-
 
 class AppLogin(QWidget, Ui_Login):
     def __init__(self) -> None:
@@ -31,16 +30,36 @@ class AppLogin(QWidget, Ui_Login):
 
 
     def _get_user(self,usuario):
-        user = Database.get_table_user(type='user', usuario=user)
-
-
+        user = Database.get_table_user(type='user', usuario=usuario)
+        user_db =user[0][0]
+        password =decrypt(user[0][1],self.key,SALT_CRYPT)
+        ativo = user[0][2]
+        reset = user[0][3]
+        first_acess =user[0][4]
+        locked = user[0][5] 
+        return (user_db,password,ativo,reset,first_acess,locked)
         pass
 
     def open_system(self):
-        if self.text_password.text() == '123':
+        
+        if MODE_DEBUG:
             self.w = MainWindow()
             self.w.show()
-            self.close()    
+            self.close()  
+        else: 
+            re_query = self._get_user(self.text_usuario.text().strip())
+            if re_query[0] == self.text_usuario.text().strip() and re_query[1] == self.text_password.text().strip():
+                if re_query[2] != 'S' or re_query[5] != 'N':
+                    infmensagem = InfMensagem(mensagem="Não é possivel acessar com Usuário, verifique o cadastro").exec()
+                    return   
+                else:
+                    self.w = MainWindow()
+                    self.w.show()
+                    self.close() 
+        # if self.text_password.text() == '123':
+        #     self.w = MainWindow()
+        #     self.w.show()
+        #     self.close()    
 
 class CadatroUsuario(QDialog, Ui_CadUser):
     def __init__(self) -> None:
@@ -135,6 +154,7 @@ class CadatroUsuario(QDialog, Ui_CadUser):
         label_id = self.lcd_id.value()
         if label_id != 0:
             self.verify_field(False,True)
+            self.text_password.setText('')
             self.bnt_alterar.setEnabled(False)
             self.bnt_salvar.setEnabled(True)
             self.bnt_adicionar.setEnabled(False)
@@ -237,13 +257,99 @@ class CadatroUsuario(QDialog, Ui_CadUser):
 
 
     def callback_bnt_save(self):
-        pass
+        if self.text_nome.text().strip() == '':
+            infmensagem = InfMensagem(mensagem="Campo Nome não pode estar vazio").exec()
+            return
+        
+        if self.text_user.text().strip() =='':
+            infmensagem = InfMensagem(mensagem="Campo Usuário não pode estar vazio").exec()
+            return
+        
+        if self.text_password.text().strip() =='':
+            infmensagem = InfMensagem(mensagem="Campo senha não pode estar vazio").exec()            
+            return
 
+        if self.lcd_id.value() == 0:
+            try:
+                insert_user = Database.insert_table_user(
+                    nome=self.text_nome.text().strip(), 
+                    cpf=self.text_cpf.text().strip().replace('.','').replace('-','').replace(' ',''), 
+                    user=self.text_user.text().strip(),
+                    senha=encrypt(self.text_password.text().strip(),Database.get_table_sys_config(),SALT_CRYPT), 
+                    ativo='S' if self.check_ativo.isChecked() else 'N', 
+                    reset_senha='S' if self.check_reset_senha.isChecked() else 'N',
+                    primeiro_acesso='S' if self.check_first_acesso.isChecked() else 'N', 
+                    bloqueado='S' if self.check_bloqueado.isChecked() else 'N', 
+                    end_rua=self.text_rua.text().strip(),
+                    end_numero=self.text_numero.text().strip(),
+                    end_bairro=self.text_bairro.text().strip(),
+                    end_complemento=self.text_complementar.text().strip(),
+                    end_cep=self.text_cep.text().strip(),
+                    end_cidade=self.text_cidade.text().strip(),
+                    end_uf=self.text_uf.text().strip(),
+                    celular=self.text_celular.text().replace('(','').replace(')','').replace('-','').strip(),
+                    p_whats='S' if self.check_whats.isChecked() else 'N',
+                    telefone=self.text_phone.text().replace('(','').replace(')','').replace('-','').strip(),
+                    email=self.text_email.text().strip().lower(),
+                    obs=self.plain_obs.toPlainText().strip()
+                )
+                
+                if insert_user[0] == True:
+                    self.verify_field()
+                    self.lcd_id.setProperty(u"intValue", insert_user[1])
+                    self.bnt_salvar.setEnabled(False)
+                    self.bnt_alterar.setEnabled(True)
+                    self.bnt_adicionar.setEnabled(True)
+                    self.bnt_search.setEnabled(True)
+                    self.bnt_excluir.setEnabled(True)
+                    self.modal_seq_info(True)
+                    infmensagem = InfMensagem(mensagem=f"Usuario Adicionada com sucesso\n Usuario código {insert_user[1]}").exec()
+            except ValueError as e :
+                infmensagem = InfMensagem(mensagem=f"Erro ao Salvar usuário\n Erro: {e}").exec()
+        else:
+            try:
+                update_user = Database.insert_table_user(
+                    id=self.lcd_id.value(),
+                    type='update',
+                    nome=self.text_nome.text().strip(), 
+                    cpf=self.text_cpf.text().strip().replace('.','').replace('-','').replace(' ',''), 
+                    user=self.text_user.text().strip(),
+                    senha=encrypt(self.text_password.text().strip(),Database.get_table_sys_config(),SALT_CRYPT), 
+                    ativo='S' if self.check_ativo.isChecked() else 'N', 
+                    reset_senha='S' if self.check_reset_senha.isChecked() else 'N',
+                    primeiro_acesso='S' if self.check_first_acesso.isChecked() else 'N', 
+                    bloqueado='S' if self.check_bloqueado.isChecked() else 'N', 
+                    end_rua=self.text_rua.text().strip(),
+                    end_numero=self.text_numero.text().strip(),
+                    end_bairro=self.text_bairro.text().strip(),
+                    end_complemento=self.text_complementar.text().strip(),
+                    end_cep=self.text_cep.text().strip(),
+                    end_cidade=self.text_cidade.text().strip(),
+                    end_uf=self.text_uf.text().strip(),
+                    celular=self.text_celular.text().replace('(','').replace(')','').replace('-','').strip(),
+                    p_whats='S' if self.check_whats.isChecked() else 'N',
+                    telefone=self.text_phone.text().replace('(','').replace(')','').replace('-','').strip(),
+                    email=self.text_email.text().strip().lower(),
+                    obs=self.plain_obs.toPlainText().strip()
+                )
+                
+                if update_user[0] == True:
+                    self.verify_field()
+                    self.lcd_id.setProperty(u"intValue", update_user[1])
+                    self.bnt_salvar.setEnabled(False)
+                    self.bnt_alterar.setEnabled(True)
+                    self.bnt_adicionar.setEnabled(True)
+                    self.bnt_search.setEnabled(True)
+                    self.bnt_excluir.setEnabled(True)
+                    self.modal_seq_info(True)
+                    infmensagem = InfMensagem(mensagem=f"Usuario Adicionada com sucesso\n Usuario código {update_user[1]}").exec()
+            except ValueError as e :
+                infmensagem = InfMensagem(mensagem=f"Erro ao Salvar usuário\n Erro: {e}").exec()        
+                    
     def populate_field(self, id:int =  None):
         if id == None:
             info = Database.get_table_user()
         else:
-            print(f"Valor id =  {id}")
             self.clear_field()
             info = Database.get_table_user(type='id',id=id)   
         if len(info) > 0 :
@@ -285,13 +391,13 @@ class CadatroUsuario(QDialog, Ui_CadUser):
             else:     
                 self.check_ativo.setChecked(False)
 
-
 class CadastroEmpresa(QDialog,Ui_CadEmpresa):
     def __init__(self) -> None:
         super().__init__(parent=None)
         self.setWindowTitle(f"Cadastro da Empresa - My Finance {__version__}")
         self.setupUi(self)
-        self.populate_field()
+        if MODE_DEBUG == False:
+            self.populate_field()
 
         self.field_text =  [
             self.text_cnpj,
@@ -332,15 +438,9 @@ class CadastroEmpresa(QDialog,Ui_CadEmpresa):
         for i in self.field_text:
             if i.objectName() != 'plain_text':
                 a = {i.objectName():i.text()}
-                # a = dict(i.objectName(),i.text())
             else:
                 a = {i.objectName():i.toPlainText()}    
-                # a = dict(i.objectName(),i.toPlainText())
             value.append(a)
-        
-        # for item in value:
-        #     for chave, valor in item.items():
-        #         print(f"{chave}: {valor}")
 
         return value    
 
@@ -499,20 +599,6 @@ class CadastroEmpresa(QDialog,Ui_CadEmpresa):
             else:
                 infmensagem = InfMensagem(mensagem=f"Erro ao Gravar empresa\n {update_empresa[1]}")
                 infmensagem.exec()
-
-
-
-        
-        # Pega apenas os valores preenchidos para 'text_ramo'
-        
-        
-        
-        # # Se você quiser pegar valores de várias chaves e filtrá-los, pode usar:
-        # chaves = ['text_cnpj', 'Dt_abertura', 'text_ramo', 'text_nome_fantasia']  # Adicione outras chaves conforme necessário
-        # valores_extraidos = {chave: [d.get(chave) for d in valores if d.get(chave)] for chave in chaves}
-        
-        # print("Valores de 'text_ramo' preenchidos:", ramo_values)
-        # print("Valores extraídos (preenchidos):", valores_extraidos)
 
     def populate_field(self):
         info = Database.get_table_empresa()[0]
@@ -808,7 +894,6 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
         if id == None:
             info = Database.get_table_fornecedor()
         else:
-            print(f"Valor id =  {id}")
             self.clear_field()
             info = Database.get_table_fornecedor(type='id',id=id)   
         if len(info) > 0 :
@@ -1024,7 +1109,5 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     # window = MainLogin()
     window = AppLogin()
-    if MODE_DEBUG:
-        window.text_password.insert(str(123))
     window.show()
     sys.exit(app.exec())

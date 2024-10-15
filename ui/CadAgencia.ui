@@ -32,7 +32,7 @@
     <string notr="true">font: 12pt &quot;Segoe UI&quot;;</string>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="DdPrincipal">
     <attribute name="title">
@@ -112,6 +112,11 @@
        <height>22</height>
       </rect>
      </property>
+     <item>
+      <property name="text">
+       <string>Banco do Brasil</string>
+      </property>
+     </item>
     </widget>
     <widget class="QLineEdit" name="lineEdit_4">
      <property name="geometry">

@@ -49,6 +49,7 @@ class Ui_Dialog(object):
         self.lineEdit_2.setGeometry(QRect(20, 180, 241, 21))
         self.lineEdit_2.setCursorPosition(18)
         self.comboBox = QComboBox(self.DdPrincipal)
+        self.comboBox.addItem("")
         self.comboBox.setObjectName(u"comboBox")
         self.comboBox.setGeometry(QRect(160, 60, 321, 22))
         self.lineEdit_4 = QLineEdit(self.DdPrincipal)
@@ -180,7 +181,7 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Dialog)
@@ -192,6 +193,8 @@ class Ui_Dialog(object):
         self.label_4.setText(QCoreApplication.translate("Dialog", u"Banco :", None))
         self.lineEdit_2.setInputMask(QCoreApplication.translate("Dialog", u"##.###.###/####-##", None))
         self.lineEdit_2.setText(QCoreApplication.translate("Dialog", u"00.000.000/0000-00", None))
+        self.comboBox.setItemText(0, QCoreApplication.translate("Dialog", u"Banco do Brasil", None))
+
         self.checkBox.setText(QCoreApplication.translate("Dialog", u"Ativo", None))
         self.label.setText(QCoreApplication.translate("Dialog", u"Ag\u00eancia", None))
         self.label_3.setText(QCoreApplication.translate("Dialog", u"C\u00f3digo Febraban :", None))

@@ -4,7 +4,7 @@ import configparser
 __version__= '1.0.0.0'
 
 MODE_DEBUG = True
-
+SALT_CRYPT = '06919904179'
 
 ## arquivo ini ###
 

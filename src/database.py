@@ -309,14 +309,14 @@ class Database():
         else:
             return False, "ID deve ser um inteiro ou uma lista"
 
-    def insert_table_user(type:str ,nome:str ,cpf:str,user:str,senha:str,ativo:str,reset_senha:str,primeiro_acesso:str,bloqueado:str,end_rua:str
-                          ,end_numero:str,end_bairro:str,end_complemento:str,end_cep:str,end_cidade:str,end_uf:str,celular:str,p_whats:str,telefone:str,
-                          email:str,obs:str,id:int = None):
+    def insert_table_user(id:int = None,type:str = 'insert',nome:str= None ,cpf:str= None,user:str= None,senha:str= None,ativo:str= None,reset_senha:str= None,primeiro_acesso:str= None,bloqueado:str= None
+                          ,end_rua:str= None,end_numero:str= None,end_bairro:str= None,end_complemento:str= None,end_cep:str= None,end_cidade:str= None,end_uf:str= None,
+                          celular:str= None,p_whats:str= None,telefone:str= None,email:str= None,obs:str= None):
         match type:
             case 'insert':
                 try:
                     new_user = Usuario(
-                        nome,nome, 
+                        nome=nome, 
                         cpf=cpf, 
                         user=user,
                         senha=senha, 
@@ -347,7 +347,40 @@ class Database():
                     session.rollback()
                     return(False,str(e))    
 
+            case 'update':
+                try:
+                    User = session.query(Usuario).filter(Usuario.id == id).first()
 
+                    if User is None:
+                        return (False, "Usuário  não encontrada.") 
+                    
+                    User.nome,nome, 
+                    User.cpf=cpf, 
+                    User.user=user,
+                    User.senha=senha, 
+                    User.ativo=ativo, 
+                    User.reset_senha=reset_senha,
+                    User.primeiro_acesso=primeiro_acesso, 
+                    User.bloqueado=bloqueado, 
+                    User.end_rua=end_rua,
+                    User.end_numero=end_numero,
+                    User.end_bairro=end_bairro,
+                    User.end_complemento=end_complemento,
+                    User.end_cep=end_cep,
+                    User.end_cidade=end_cidade,
+                    User.end_uf=end_uf,
+                    User.celular=celular,
+                    User.p_whats=p_whats,
+                    User.telefone=telefone,
+                    User.email=email,
+                    User.obs=obs
+                    
+                    session.commit()
+                    return (True, User.id)
+            
+                except Exception as e:
+                    session.rollback()
+                    return (False, str(e))  
 
 
 if __name__=='__main__':
