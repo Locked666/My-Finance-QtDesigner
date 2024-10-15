@@ -1,5 +1,5 @@
 import sys
-from PySide6.QtCore import Qt,QCoreApplication
+from PySide6.QtCore import Qt,QCoreApplication,QFile
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget,QDialog,QVBoxLayout,QWidgetAction,QMdiSubWindow
 from ui_functions import consulta_cnpj
 from func_crypt import decrypt,encrypt
@@ -44,7 +44,7 @@ class AppLogin(QWidget, Ui_Login):
         
         if MODE_DEBUG:
             self.w = MainWindow()
-            self.w.show()
+            self.w.showMaximized()
             self.close()  
         else: 
             re_query = self._get_user(self.text_usuario.text().strip())
@@ -54,7 +54,7 @@ class AppLogin(QWidget, Ui_Login):
                     return   
                 else:
                     self.w = MainWindow()
-                    self.w.show()
+                    self.w.showMaximized()
                     self.close() 
         # if self.text_password.text() == '123':
         #     self.w = MainWindow()
@@ -1116,6 +1116,39 @@ class CadastroEntregas(QDialog,Ui_CadEntregas):
         super().__init__(parent=None)
         self.setWindowTitle(f"Cadastro de Entregas - My Finance {__version__}")
         self.setupUi(self)
+        
+        self.bnt_salvar.clicked.connect(self.callback_bnt_save)
+        
+       
+    def clear_field(self):
+        self.text_km_final.clear()
+        self.text_km_inicial.clear()
+        self.text_km_media.clear()
+        self.text_qt_entregas.clear()
+        self.text_vlr_final.clear()
+        
+    def callback_bnt_save(self):
+        if float(self.text_km_inicial.text().strip()) > float(self.text_km_final.text().strip()):
+            infmensagem = InfMensagem(mensagem=f"Valor do km Final, não pode ser menor que o km incial").exec()
+            return
+        
+            
+        
+        new_entregas = Database.insert_table_entregas(
+            data = self.dateEdit.text(),
+            km_inicial = self.text_km_inicial.text().strip(), 
+            km_final = self.text_km_final.text().strip(), 
+            km__lt = self.text_km_media.text().strip(),
+            qt_entregas = self.text_qt_entregas.text().strip(),
+            valor_final =  self.text_vlr_final.text().strip()                
+        )
+        if new_entregas[0]:
+            infmensagem = InfMensagem(mensagem=f"Entrega Adicionada com sucesso\n Entrega código {new_entregas[1]}").exec()
+            self.clear_field()
+        else: 
+            infmensagem = InfMensagem(mensagem=f"Erro ao adicionar Entrega \n erro  {new_entregas[1]}").exec()
+                
+        
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -1124,6 +1157,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setWindowTitle(f"My Finance {__version__}")
         # Inicializa o atributo para armazenar a instância do dashboard e do MDI
+        self.apply_stylesheet()
         self.dashboard_window = None
         self.dashboard_subwindow = None
         
@@ -1172,7 +1206,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Mostra a subjanela
         sub_window.show()
 
-
+    def apply_stylesheet(self, stylesheet_path='D:\Desenvolvimento\python\My-Finance-QtDesigner\src\stylesheets.qss'):
+        file = QFile(stylesheet_path)
+        if file.open(QFile.ReadOnly | QFile.Text):
+            stream = file.readAll().data().decode("utf-8")
+            app.setStyleSheet(stream)
+        file.close()
 
 
 if __name__ == "__main__":

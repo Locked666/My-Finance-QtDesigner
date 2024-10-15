@@ -81,12 +81,15 @@ class RamoAtividade(Base):
     descricao=Column(String)
 
 class Entregas(Base):
-    __tablename__='Entregas'
+    __tablename__='entregas'
     id = Column(Integer, primary_key=True, autoincrement=True)
+    data = Column(String)
     km_inicial=Column(String)
     km_final=Column(String)
     km_lt=Column(String)
     qt_entregas=Column(String)
+    valor_final= Column(String)
+     
         
 
 

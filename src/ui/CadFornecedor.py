@@ -20,6 +20,7 @@ from PySide6.QtWidgets import (QApplication, QCheckBox, QDateEdit, QDialog,
     QLabel, QLayout, QLineEdit, QPlainTextEdit,
     QPushButton, QRadioButton, QSizePolicy, QSpacerItem,
     QTabWidget, QVBoxLayout, QWidget)
+import icons_rc
 
 class Ui_CadFornecedor(object):
     def setupUi(self, CadFornecedor):
@@ -120,6 +121,10 @@ class Ui_CadFornecedor(object):
 "QPushButton:hover#bnt_consulta_cnpj{\n"
 "   background-color:bluw;\n"
 "}:")
+        icon = QIcon()
+        icon.addFile(u":/icons/search.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.bnt_consulta_cnpj.setIcon(icon)
+        self.bnt_consulta_cnpj.setIconSize(QSize(30, 30))
         self.layoutWidget = QWidget(self.DdPrincipais)
         self.layoutWidget.setObjectName(u"layoutWidget")
         self.layoutWidget.setGeometry(QRect(380, 10, 312, 29))
@@ -445,7 +450,7 @@ class Ui_CadFornecedor(object):
         self.text_IM.setInputMask("")
         self.text_IM.setText("")
         self.label_16.setText(QCoreApplication.translate("CadFornecedor", u"Inscri\u00e7\u00e3o Municipal :", None))
-        self.bnt_consulta_cnpj.setText(QCoreApplication.translate("CadFornecedor", u"P", None))
+        self.bnt_consulta_cnpj.setText("")
         self.check_ativo.setText(QCoreApplication.translate("CadFornecedor", u"Ativo", None))
         self.radio_fisica.setText(QCoreApplication.translate("CadFornecedor", u"Pessoa Fis\u00edca", None))
         self.radio_juridirica.setText(QCoreApplication.translate("CadFornecedor", u"Pessoa juridica", None))

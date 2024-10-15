@@ -383,10 +383,24 @@ class Database():
                     return (False, str(e))  
 
 
-    # def insert_tabler_entregas(km_inicial, km_final, km__lt, qt_entregas):
-    #     try: 
-    #         new_entrega = 
+    def insert_table_entregas(data,km_inicial, km_final, km__lt, qt_entregas, valor_final):
+        try: 
+            new_entrega = Entregas(
+                data = data,
+                km_inicial = km_inicial, 
+                km_final = km_final, 
+                km_lt = km__lt,
+                qt_entregas = qt_entregas,
+                valor_final = valor_final               
+            )
+            
+            session.add(new_entrega)            
+            session.commit()
 
+            return(True,new_entrega.id)
+        except ValueError as e:
+            session.rollback()
+            return(False,str(e))  
 if __name__=='__main__':
 
 #  app = Database.get_table_fornecedor(type='id', id=2)

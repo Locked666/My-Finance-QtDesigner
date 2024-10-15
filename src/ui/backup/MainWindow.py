@@ -114,8 +114,8 @@ class Ui_MainWindow(object):
         self.actionMovimenta_o_2.setObjectName(u"actionMovimenta_o_2")
         self.actionRamo_Atividade = QAction(MainWindow)
         self.actionRamo_Atividade.setObjectName(u"actionRamo_Atividade")
-        self.actionLan_ar_Dia = QAction(MainWindow)
-        self.actionLan_ar_Dia.setObjectName(u"actionLan_ar_Dia")
+        self.actionLancarDia = QAction(MainWindow)
+        self.actionLancarDia.setObjectName(u"actionLancarDia")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.horizontalLayout = QHBoxLayout(self.centralwidget)
@@ -430,7 +430,7 @@ class Ui_MainWindow(object):
         self.menuLan_amento_2.addAction(self.actionBaixa_de_Estoque)
         self.menuFinanceiro.addAction(self.actionMovimenta_o_2)
         self.menuOutros.addAction(self.menuEntregas.menuAction())
-        self.menuEntregas.addAction(self.actionLan_ar_Dia)
+        self.menuEntregas.addAction(self.actionLancarDia)
 
         self.retranslateUi(MainWindow)
 
@@ -488,7 +488,7 @@ class Ui_MainWindow(object):
         self.actionCategoria_4.setText(QCoreApplication.translate("MainWindow", u"Categoria", None))
         self.actionMovimenta_o_2.setText(QCoreApplication.translate("MainWindow", u"Movimenta\u00e7\u00e3o", None))
         self.actionRamo_Atividade.setText(QCoreApplication.translate("MainWindow", u"Ramo Atividade", None))
-        self.actionLan_ar_Dia.setText(QCoreApplication.translate("MainWindow", u"Lan\u00e7ar Dia ", None))
+        self.actionLancarDia.setText(QCoreApplication.translate("MainWindow", u"Lan\u00e7ar Dia ", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><img src=\":/icons/image_prin.png\"width=\"200\" height=\"200\"/></p></body></html>", None))
 #if QT_CONFIG(tooltip)
         self.bnt_left_dashboard.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:600; font-style:italic;\">DashBoard...</span></p></body></html>", None))
