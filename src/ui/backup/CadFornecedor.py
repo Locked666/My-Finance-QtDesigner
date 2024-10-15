@@ -25,15 +25,15 @@ class Ui_CadFornecedor(object):
     def setupUi(self, CadFornecedor):
         if not CadFornecedor.objectName():
             CadFornecedor.setObjectName(u"CadFornecedor")
-        CadFornecedor.resize(739, 594)
+        CadFornecedor.resize(726, 632)
         CadFornecedor.setMinimumSize(QSize(726, 0))
-        CadFornecedor.setMaximumSize(QSize(739, 601))
-        self.verticalLayout = QVBoxLayout(CadFornecedor)
-        self.verticalLayout.setObjectName(u"verticalLayout")
+        CadFornecedor.setMaximumSize(QSize(1000, 1000))
+        self.verticalLayout_4 = QVBoxLayout(CadFornecedor)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.tabWidget = QTabWidget(CadFornecedor)
         self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setMinimumSize(QSize(721, 491))
-        self.tabWidget.setMaximumSize(QSize(721, 491))
+        self.tabWidget.setMinimumSize(QSize(708, 514))
+        self.tabWidget.setMaximumSize(QSize(1000, 1000))
         font = QFont()
         font.setFamilies([u"Segoe UI"])
         font.setPointSize(12)
@@ -285,25 +285,47 @@ class Ui_CadFornecedor(object):
         self.label_37.setGeometry(QRect(190, 100, 141, 21))
         self.tabWidget.addTab(self.DdAdicionais, "")
 
-        self.verticalLayout.addWidget(self.tabWidget)
+        self.verticalLayout_4.addWidget(self.tabWidget)
 
         self.frame = QFrame(CadFornecedor)
         self.frame.setObjectName(u"frame")
         self.frame.setFrameShape(QFrame.StyledPanel)
         self.frame.setFrameShadow(QFrame.Raised)
-        self.layoutWidget3 = QWidget(self.frame)
-        self.layoutWidget3.setObjectName(u"layoutWidget3")
-        self.layoutWidget3.setGeometry(QRect(350, 0, 366, 25))
-        self.horizontalLayout_3 = QHBoxLayout(self.layoutWidget3)
+        self.verticalLayout = QVBoxLayout(self.frame)
+        self.verticalLayout.setSpacing(15)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.label_2 = QLabel(self.frame)
+        self.label_2.setObjectName(u"label_2")
+
+        self.horizontalLayout_4.addWidget(self.label_2)
+
+        self.lbl_total = QLabel(self.frame)
+        self.lbl_total.setObjectName(u"lbl_total")
+
+        self.horizontalLayout_4.addWidget(self.lbl_total)
+
+
+        self.horizontalLayout_6.addLayout(self.horizontalLayout_4)
+
+        self.horizontalSpacer_3 = QSpacerItem(178, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_6.addItem(self.horizontalSpacer_3)
+
+        self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.bnt_back_full = QPushButton(self.layoutWidget3)
+        self.bnt_back_full = QPushButton(self.frame)
         self.bnt_back_full.setObjectName(u"bnt_back_full")
+        self.bnt_back_full.setMinimumSize(QSize(75, 23))
 
         self.horizontalLayout_3.addWidget(self.bnt_back_full)
 
-        self.bnt_back = QPushButton(self.layoutWidget3)
+        self.bnt_back = QPushButton(self.frame)
         self.bnt_back.setObjectName(u"bnt_back")
+        self.bnt_back.setMinimumSize(QSize(75, 23))
 
         self.horizontalLayout_3.addWidget(self.bnt_back)
 
@@ -311,41 +333,30 @@ class Ui_CadFornecedor(object):
 
         self.horizontalLayout_3.addItem(self.horizontalSpacer_2)
 
-        self.bnt_next = QPushButton(self.layoutWidget3)
+        self.bnt_next = QPushButton(self.frame)
         self.bnt_next.setObjectName(u"bnt_next")
+        self.bnt_next.setMaximumSize(QSize(75, 23))
 
         self.horizontalLayout_3.addWidget(self.bnt_next)
 
-        self.bnt_next_full = QPushButton(self.layoutWidget3)
+        self.bnt_next_full = QPushButton(self.frame)
         self.bnt_next_full.setObjectName(u"bnt_next_full")
+        self.bnt_next_full.setMaximumSize(QSize(75, 23))
 
         self.horizontalLayout_3.addWidget(self.bnt_next_full)
 
-        self.layoutWidget4 = QWidget(self.frame)
-        self.layoutWidget4.setObjectName(u"layoutWidget4")
-        self.layoutWidget4.setGeometry(QRect(10, 10, 139, 15))
-        self.horizontalLayout_4 = QHBoxLayout(self.layoutWidget4)
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.label_2 = QLabel(self.layoutWidget4)
-        self.label_2.setObjectName(u"label_2")
 
-        self.horizontalLayout_4.addWidget(self.label_2)
-
-        self.lbl_total = QLabel(self.layoutWidget4)
-        self.lbl_total.setObjectName(u"lbl_total")
-
-        self.horizontalLayout_4.addWidget(self.lbl_total)
+        self.horizontalLayout_6.addLayout(self.horizontalLayout_3)
 
 
-        self.verticalLayout.addWidget(self.frame)
+        self.verticalLayout.addLayout(self.horizontalLayout_6)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setSizeConstraint(QLayout.SetDefaultConstraint)
         self.horizontalLayout.setContentsMargins(0, -1, -1, -1)
-        self.bnt_alterar = QPushButton(CadFornecedor)
+        self.bnt_alterar = QPushButton(self.frame)
         self.bnt_alterar.setObjectName(u"bnt_alterar")
         self.bnt_alterar.setMinimumSize(QSize(100, 30))
         self.bnt_alterar.setMaximumSize(QSize(131, 41))
@@ -356,35 +367,35 @@ class Ui_CadFornecedor(object):
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
 
-        self.bnt_adicionar = QPushButton(CadFornecedor)
+        self.bnt_adicionar = QPushButton(self.frame)
         self.bnt_adicionar.setObjectName(u"bnt_adicionar")
         self.bnt_adicionar.setEnabled(True)
-        self.bnt_adicionar.setMinimumSize(QSize(100, 0))
+        self.bnt_adicionar.setMinimumSize(QSize(100, 30))
         self.bnt_adicionar.setMaximumSize(QSize(131, 41))
 
         self.horizontalLayout.addWidget(self.bnt_adicionar)
 
-        self.bnt_salvar = QPushButton(CadFornecedor)
+        self.bnt_salvar = QPushButton(self.frame)
         self.bnt_salvar.setObjectName(u"bnt_salvar")
         self.bnt_salvar.setEnabled(False)
         self.bnt_salvar.setMinimumSize(QSize(100, 0))
-        self.bnt_salvar.setMaximumSize(QSize(131, 41))
+        self.bnt_salvar.setMaximumSize(QSize(100, 36))
 
         self.horizontalLayout.addWidget(self.bnt_salvar)
 
-        self.bnt_search = QPushButton(CadFornecedor)
+        self.bnt_search = QPushButton(self.frame)
         self.bnt_search.setObjectName(u"bnt_search")
         self.bnt_search.setMinimumSize(QSize(100, 0))
-        self.bnt_search.setMaximumSize(QSize(131, 41))
+        self.bnt_search.setMaximumSize(QSize(100, 36))
         self.bnt_search.setCheckable(False)
         self.bnt_search.setChecked(False)
         self.bnt_search.setAutoRepeat(False)
 
         self.horizontalLayout.addWidget(self.bnt_search)
 
-        self.bnt_excluir = QPushButton(CadFornecedor)
+        self.bnt_excluir = QPushButton(self.frame)
         self.bnt_excluir.setObjectName(u"bnt_excluir")
-        self.bnt_excluir.setMinimumSize(QSize(100, 0))
+        self.bnt_excluir.setMinimumSize(QSize(100, 30))
         self.bnt_excluir.setMaximumSize(QSize(131, 41))
         self.bnt_excluir.setCheckable(False)
         self.bnt_excluir.setChecked(False)
@@ -392,9 +403,9 @@ class Ui_CadFornecedor(object):
 
         self.horizontalLayout.addWidget(self.bnt_excluir)
 
-        self.bnt_cancelar = QPushButton(CadFornecedor)
+        self.bnt_cancelar = QPushButton(self.frame)
         self.bnt_cancelar.setObjectName(u"bnt_cancelar")
-        self.bnt_cancelar.setMinimumSize(QSize(100, 0))
+        self.bnt_cancelar.setMinimumSize(QSize(100, 30))
         self.bnt_cancelar.setMaximumSize(QSize(131, 41))
         self.bnt_cancelar.setCheckable(False)
         self.bnt_cancelar.setChecked(False)
@@ -404,6 +415,9 @@ class Ui_CadFornecedor(object):
 
 
         self.verticalLayout.addLayout(self.horizontalLayout)
+
+
+        self.verticalLayout_4.addWidget(self.frame)
 
 
         self.retranslateUi(CadFornecedor)
@@ -459,6 +473,8 @@ class Ui_CadFornecedor(object):
         self.label_36.setText(QCoreApplication.translate("CadFornecedor", u"Telefone :", None))
         self.label_37.setText(QCoreApplication.translate("CadFornecedor", u"Cidade:", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.DdAdicionais), QCoreApplication.translate("CadFornecedor", u"Dados Adicionais", None))
+        self.label_2.setText(QCoreApplication.translate("CadFornecedor", u"Quantidade de cadastros:", None))
+        self.lbl_total.setText(QCoreApplication.translate("CadFornecedor", u"0", None))
 #if QT_CONFIG(tooltip)
         self.bnt_back_full.setToolTip(QCoreApplication.translate("CadFornecedor", u"<html><head/><body><p>Ir para o primeiro...</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -475,8 +491,6 @@ class Ui_CadFornecedor(object):
         self.bnt_next_full.setToolTip(QCoreApplication.translate("CadFornecedor", u"<html><head/><body><p><span style=\" font-weight:600;\">Ir para o fim.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.bnt_next_full.setText(QCoreApplication.translate("CadFornecedor", u">>", None))
-        self.label_2.setText(QCoreApplication.translate("CadFornecedor", u"Quantidade de cadastros:", None))
-        self.lbl_total.setText(QCoreApplication.translate("CadFornecedor", u"0", None))
         self.bnt_alterar.setText(QCoreApplication.translate("CadFornecedor", u"&Alterar", None))
         self.bnt_adicionar.setText(QCoreApplication.translate("CadFornecedor", u"&Incluir", None))
 #if QT_CONFIG(shortcut)

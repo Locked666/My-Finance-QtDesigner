@@ -5,3 +5,5 @@ from ui.CadFornecedor import Ui_CadFornecedor
 from ui.dialogMensagem import Ui_InfMensagem
 from ui.CadRamoAtividade import Ui_dialogRamoAtividade
 from ui.CadUser import  Ui_CadUser
+from ui.FrmGraficFinc import Ui_frm_dashboard
+from ui.CadEntregas import Ui_CadEntregas

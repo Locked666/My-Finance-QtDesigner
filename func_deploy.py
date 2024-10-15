@@ -8,8 +8,26 @@ PATH = Path(__file__).parent
 PATH_UI_QTDESIGNER = os.path.join(PATH, 'ui')
 PATH_UI_DEPLOY = os.path.join(PATH, 'src','ui')
 PATH_PY_BACKUP = os.path.join(PATH, 'src','ui','backup')
+PATH_QRC_QTDESIGNER = os.path.join(PATH, 'src','resources')
+FILE_QRC = ['icons.qrc','resources.qrc']
+
 
 NOT_EXECUTE =[] # ['MainLogin.ui']
+
+def execute_qrc():
+    for i in FILE_QRC:
+        qrc_patch = os.path.join(PATH_QRC_QTDESIGNER, i)
+        qrc_py = os.path.splitext(i)[0] +'_rc'+'.py'
+        command = f'pyside6-rcc "{qrc_patch}" -o "{os.path.join(PATH_UI_DEPLOY,qrc_py)}"'
+
+        try:
+            # Executar o comando
+            subprocess.run(command, check=True, shell=True)
+            print(f'Converção qrc  sucesso.')
+        except subprocess.CalledProcessError as e:
+            print(f'Erro de  converção qrc: {e}')
+
+
 
 def backup_py(file:str):
     py_backup_file = os.path.join(PATH_PY_BACKUP,file)
@@ -60,9 +78,11 @@ def main():
         try:
             # Executar o comando
             subprocess.run(command, check=True, shell=True)
+            
             print(f'Converção {ui} Para {py_filename} sucesso.')
         except subprocess.CalledProcessError as e:
             print(f'Erro de  converção {ui}: {e}')
 
 if __name__ == "__main__":
     main()
+    execute_qrc()

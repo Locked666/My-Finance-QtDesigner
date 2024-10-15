@@ -1,6 +1,6 @@
 import sys
 from PySide6.QtCore import Qt,QCoreApplication
-from PySide6.QtWidgets import QApplication, QMainWindow, QWidget,QDialog,QVBoxLayout,QWidgetAction
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget,QDialog,QVBoxLayout,QWidgetAction,QMdiSubWindow
 from ui_functions import consulta_cnpj
 from func_crypt import decrypt,encrypt
 from database import Database
@@ -61,7 +61,7 @@ class AppLogin(QWidget, Ui_Login):
         #     self.w.show()
         #     self.close()    
 
-class CadatroUsuario(QDialog, Ui_CadUser):
+class CadatroUsuario(QWidget, Ui_CadUser):
     def __init__(self) -> None:
         super().__init__(parent=None)
         self.setWindowTitle(f"Cadastro de Usuário - My Finance {__version__}")
@@ -633,7 +633,7 @@ class CadastroEmpresa(QDialog,Ui_CadEmpresa):
         else:       
             self.radio_fisica.setChecked(True)
         
-class CadastroFornecedor(QDialog,Ui_CadFornecedor):
+class CadastroFornecedor(QWidget,Ui_CadFornecedor):
     def __init__(self) -> None:
         super().__init__(parent=None)
         self.setWindowTitle(f"Cadastro de Fornecedor - My Finance {__version__}")
@@ -1060,7 +1060,7 @@ class CadastroFornecedor(QDialog,Ui_CadFornecedor):
     
         pass
 
-class CadastroRamoAtividade(QDialog,Ui_dialogRamoAtividade):
+class CadastroRamoAtividade(QWidget,Ui_dialogRamoAtividade):
     def __init__(self) -> None:
         super().__init__(parent=None)
         self.setWindowTitle(f"Cadastro de Ramo de Atividade- My Finance {__version__}")
@@ -1092,22 +1092,92 @@ class CadastroRamoAtividade(QDialog,Ui_dialogRamoAtividade):
         self.bnt_salvar.setEnabled(True)
         self.bnt_pesquisar.setEnabled(False)          
 
+# class MainWindow(QMainWindow, Ui_MainWindow):
+#     def __init__(self) -> None:
+#         super(MainWindow,self).__init__()
+#         self.setupUi(self)
+#         self.setWindowTitle(f"My Finance {__version__}")
+#         self.rm = CadastroRamoAtividade()
+     
+#         self.actionEmpresa.triggered.connect(lambda: CadastroEmpresa().exec())
+#         self.actionFornecedor.triggered.connect(lambda: CadastroFornecedor().exec())
+#         self.actionRamo_Atividade.triggered.connect(lambda: self.mdi_center.addSubWindow(self.rm))
+#         # self.actionRamo_Atividade.triggered.connect(lambda: CadastroRamoAtividade().exec())
+#         self.actionCadUser.triggered.connect(lambda: CadatroUsuario().exec())
+
+class FrmDashboard(QWidget,Ui_frm_dashboard):
+    def __init__(self) -> None:
+        super().__init__(parent=None)
+        self.setupUi(self)
+        # self.setWindowTitle(f"My Finance {__version__}")
+
+class CadastroEntregas(QDialog,Ui_CadEntregas):
+    def __init__(self) -> None:
+        super().__init__(parent=None)
+        self.setWindowTitle(f"Cadastro de Entregas - My Finance {__version__}")
+        self.setupUi(self)
+
+
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self) -> None:
-        super(MainWindow,self).__init__()
+        super(MainWindow, self).__init__()
         self.setupUi(self)
         self.setWindowTitle(f"My Finance {__version__}")
-
+        # Inicializa o atributo para armazenar a instância do dashboard e do MDI
+        self.dashboard_window = None
+        self.dashboard_subwindow = None
         
+
+        # Constrói a instância do widget a ser adicionado ao MDI
         self.actionEmpresa.triggered.connect(lambda: CadastroEmpresa().exec())
-        self.actionFornecedor.triggered.connect(lambda: CadastroFornecedor().exec())
-        self.actionRamo_Atividade.triggered.connect(lambda: CadastroRamoAtividade().exec())
-        self.actionCadUser.triggered.connect(lambda: CadatroUsuario().exec())
+        self.actionFornecedor.triggered.connect(lambda: self.open_mdi_center(CadastroFornecedor(),"Cadastro de Fornecedor"))
+        self.actionRamo_Atividade.triggered.connect(lambda : self.open_mdi_center(CadastroRamoAtividade(),"Cadastro de Ramo de atividade"))
+        self.actionCadUser.triggered.connect(lambda:self.open_mdi_center(CadatroUsuario(),"Cadastro de Usuário") )
+        self.bnt_left_dashboard.clicked.connect(self.open_dashboard )
+        self.actionLancarDia.triggered.connect(lambda: CadastroEntregas().exec())
+
+    def open_dashboard(self):
+        # Se já existe uma instância do dashboard, fecha-a
+        if self.dashboard_subwindow:
+            self.dashboard_subwindow.close()
+        
+        # Cria uma nova instância do FrmDashboard
+        self.dashboard_window = FrmDashboard()
+        self.dashboard_subwindow = QMdiSubWindow()
+        self.dashboard_subwindow.setWidget(self.dashboard_window)
+        self.dashboard_subwindow.setWindowTitle(f"Dashboard")
+        self.mdi_center.addSubWindow(self.dashboard_subwindow)
+        
+        # Mostra a subjanela maximizada
+        self.dashboard_subwindow.showMaximized()
+        self.dashboard_subwindow.setAttribute(Qt.WA_DeleteOnClose)  # Garante que a instância seja removida ao fechar
+
+        # Reseta a referência ao fechar
+        self.dashboard_subwindow.destroyed.connect(lambda: self.reset_dashboard_references())
+
+    def reset_dashboard_references(self):
+        self.dashboard_window = None
+        self.dashboard_subwindow = None
+
+
+    def open_mdi_center(self,widget,title = ''):
+        # Cria uma nova instância do widget
+        mdi_widget = widget
+        # Cria uma subjanela MDI
+        sub_window = QMdiSubWindow()
+        sub_window.setWidget(mdi_widget)
+        sub_window.setWindowTitle(f"{title} - My Finance {__version__} ")
+        # Adiciona a subjanela ao MDI
+        self.mdi_center.addSubWindow(sub_window)
+        # Mostra a subjanela
+        sub_window.show()
+
+
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    # window = MainLogin()
+    #window = MainWindow()
     window = AppLogin()
     window.show()
     sys.exit(app.exec())

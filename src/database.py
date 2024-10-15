@@ -1,4 +1,4 @@
-from model import Empresa,Fornecedor,SysConfig,Usuario, CONN, Base,engine,session
+from model import Empresa,Fornecedor,SysConfig,Usuario,Entregas, CONN, Base,engine,session
 from datetime import datetime
 
 
@@ -382,6 +382,10 @@ class Database():
                     session.rollback()
                     return (False, str(e))  
 
+
+    # def insert_tabler_entregas(km_inicial, km_final, km__lt, qt_entregas):
+    #     try: 
+    #         new_entrega = 
 
 if __name__=='__main__':
 
