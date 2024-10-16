@@ -19,7 +19,8 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
 from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QFrame, QHBoxLayout,
     QLabel, QMainWindow, QMdiArea, QMenu,
     QMenuBar, QPushButton, QSizePolicy, QSpacerItem,
-    QTabWidget, QVBoxLayout, QWidget)
+    QStatusBar, QTabWidget, QToolBar, QVBoxLayout,
+    QWidget)
 import icons_rc
 
 class Ui_MainWindow(object):
@@ -116,6 +117,10 @@ class Ui_MainWindow(object):
         self.actionRamo_Atividade.setObjectName(u"actionRamo_Atividade")
         self.actionLancarDia = QAction(MainWindow)
         self.actionLancarDia.setObjectName(u"actionLancarDia")
+        self.actionBloquear = QAction(MainWindow)
+        self.actionBloquear.setObjectName(u"actionBloquear")
+        self.actionSair = QAction(MainWindow)
+        self.actionSair.setObjectName(u"actionSair")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.horizontalLayout = QHBoxLayout(self.centralwidget)
@@ -372,6 +377,16 @@ class Ui_MainWindow(object):
         self.menuEntregas = QMenu(self.menuOutros)
         self.menuEntregas.setObjectName(u"menuEntregas")
         MainWindow.setMenuBar(self.menubar)
+        self.statusBar = QStatusBar(MainWindow)
+        self.statusBar.setObjectName(u"statusBar")
+        MainWindow.setStatusBar(self.statusBar)
+        self.toolBar = QToolBar(MainWindow)
+        self.toolBar.setObjectName(u"toolBar")
+        self.toolBar.setMovable(True)
+        self.toolBar.setOrientation(Qt.Horizontal)
+        self.toolBar.setToolButtonStyle(Qt.ToolButtonIconOnly)
+        self.toolBar.setFloatable(True)
+        MainWindow.addToolBar(Qt.ToolBarArea.TopToolBarArea, self.toolBar)
 
         self.menubar.addAction(self.menuSistema.menuAction())
         self.menubar.addAction(self.menuCadastro.menuAction())
@@ -384,6 +399,9 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuOutros.menuAction())
         self.menubar.addAction(self.menuConfiguracoes.menuAction())
         self.menuSistema.addAction(self.actionEmpresa)
+        self.menuSistema.addSeparator()
+        self.menuSistema.addAction(self.actionBloquear)
+        self.menuSistema.addAction(self.actionSair)
         self.menuCadastro.addAction(self.menuProdutos_Itens.menuAction())
         self.menuCadastro.addAction(self.actionFornecedor)
         self.menuCadastro.addAction(self.menuUsu_rios.menuAction())
@@ -489,6 +507,8 @@ class Ui_MainWindow(object):
         self.actionMovimenta_o_2.setText(QCoreApplication.translate("MainWindow", u"Movimenta\u00e7\u00e3o", None))
         self.actionRamo_Atividade.setText(QCoreApplication.translate("MainWindow", u"Ramo Atividade", None))
         self.actionLancarDia.setText(QCoreApplication.translate("MainWindow", u"Lan\u00e7ar Dia ", None))
+        self.actionBloquear.setText(QCoreApplication.translate("MainWindow", u"Bloquear", None))
+        self.actionSair.setText(QCoreApplication.translate("MainWindow", u"Sair", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><img src=\":/icons/image_prin.png\"width=\"200\" height=\"200\"/></p></body></html>", None))
 #if QT_CONFIG(tooltip)
         self.bnt_left_dashboard.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:600; font-style:italic;\">DashBoard...</span></p></body></html>", None))
@@ -536,5 +556,6 @@ class Ui_MainWindow(object):
         self.menuFinanceiro.setTitle(QCoreApplication.translate("MainWindow", u"Financeiro", None))
         self.menuOutros.setTitle(QCoreApplication.translate("MainWindow", u"Outros", None))
         self.menuEntregas.setTitle(QCoreApplication.translate("MainWindow", u"Entregas", None))
+        self.toolBar.setWindowTitle(QCoreApplication.translate("MainWindow", u"toolBar", None))
     # retranslateUi
 

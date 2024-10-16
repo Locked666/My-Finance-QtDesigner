@@ -1,5 +1,9 @@
 <RCC>
   <qresource prefix="icons">
+    <file>adicionar.png</file>
+    <file>pencil.png</file>
+    <file>save.png</file>
+    <file>excluir.png</file>
     <file>search.png</file>
     <file>account.svg</file>
     <file>bell.svg</file>

@@ -614,6 +614,9 @@ border-top: 1px black ;</string>
      <string>Sistema</string>
     </property>
     <addaction name="actionEmpresa"/>
+    <addaction name="separator"/>
+    <addaction name="actionBloquear"/>
+    <addaction name="actionSair"/>
    </widget>
    <widget class="QMenu" name="menuCadastro">
     <property name="title">
@@ -772,6 +775,30 @@ border-top: 1px black ;</string>
    <addaction name="menuRelatorios"/>
    <addaction name="menuOutros"/>
    <addaction name="menuConfiguracoes"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="movable">
+    <bool>true</bool>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonIconOnly</enum>
+   </property>
+   <property name="floatable">
+    <bool>true</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
   </widget>
   <action name="actionReceitas">
    <property name="text">
@@ -980,6 +1007,16 @@ border-top: 1px black ;</string>
   <action name="actionLancarDia">
    <property name="text">
     <string>Lançar Dia </string>
+   </property>
+  </action>
+  <action name="actionBloquear">
+   <property name="text">
+    <string>Bloquear</string>
+   </property>
+  </action>
+  <action name="actionSair">
+   <property name="text">
+    <string>Sair</string>
    </property>
   </action>
  </widget>

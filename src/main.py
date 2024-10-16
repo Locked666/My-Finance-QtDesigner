@@ -1,6 +1,6 @@
 import sys
-from PySide6.QtCore import Qt,QCoreApplication,QFile
-from PySide6.QtWidgets import QApplication, QMainWindow, QWidget,QDialog,QVBoxLayout,QWidgetAction,QMdiSubWindow
+from PySide6.QtCore import Qt,QCoreApplication,QFile,Slot,SLOT,Signal
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget,QDialog,QVBoxLayout,QWidgetAction,QMdiSubWindow,QMessageBox
 from ui_functions import consulta_cnpj
 from func_crypt import decrypt,encrypt
 from database import Database
@@ -20,9 +20,6 @@ class AppLogin(QWidget, Ui_Login):
         self.setupUi(self)
         self.setWindowTitle(f"Login - My Finance {__version__}")
         self.key = Database.get_table_sys_config()
-
-
-
 
         self.label_version.setText(QCoreApplication.translate("AppLogin", __version__, None))
 
@@ -45,17 +42,24 @@ class AppLogin(QWidget, Ui_Login):
         if MODE_DEBUG:
             self.w = MainWindow()
             self.w.showMaximized()
-            self.close()  
+            self.close()
         else: 
-            re_query = self._get_user(self.text_usuario.text().strip())
-            if re_query[0] == self.text_usuario.text().strip() and re_query[1] == self.text_password.text().strip():
-                if re_query[2] != 'S' or re_query[5] != 'N':
-                    infmensagem = InfMensagem(mensagem="Não é possivel acessar com Usuário, verifique o cadastro").exec()
-                    return   
-                else:
-                    self.w = MainWindow()
-                    self.w.showMaximized()
-                    self.close() 
+            try:
+                re_query = self._get_user(self.text_usuario.text().strip())
+                if re_query[0] == self.text_usuario.text().strip() and re_query[1] == self.text_password.text().strip():
+                    if re_query[2] != 'S' or re_query[5] != 'N':
+                        infmensagem = InfMensagem(mensagem="Não é possivel acessar com Usuário, verifique o cadastro").exec()
+                        return   
+                    else:
+                        self.w = MainWindow()
+                        self.w.showMaximized()
+                        self.close() 
+                        pass
+                else: 
+                    infmensagem = InfMensagem(mensagem="Usuário Ou senha incorreto").exec()   
+            except: 
+                   infmensagem = InfMensagem(mensagem="Usuário Ou senha incorreto").exec()  
+                    
         # if self.text_password.text() == '123':
         #     self.w = MainWindow()
         #     self.w.show()
@@ -1092,19 +1096,6 @@ class CadastroRamoAtividade(QWidget,Ui_dialogRamoAtividade):
         self.bnt_salvar.setEnabled(True)
         self.bnt_pesquisar.setEnabled(False)          
 
-# class MainWindow(QMainWindow, Ui_MainWindow):
-#     def __init__(self) -> None:
-#         super(MainWindow,self).__init__()
-#         self.setupUi(self)
-#         self.setWindowTitle(f"My Finance {__version__}")
-#         self.rm = CadastroRamoAtividade()
-     
-#         self.actionEmpresa.triggered.connect(lambda: CadastroEmpresa().exec())
-#         self.actionFornecedor.triggered.connect(lambda: CadastroFornecedor().exec())
-#         self.actionRamo_Atividade.triggered.connect(lambda: self.mdi_center.addSubWindow(self.rm))
-#         # self.actionRamo_Atividade.triggered.connect(lambda: CadastroRamoAtividade().exec())
-#         self.actionCadUser.triggered.connect(lambda: CadatroUsuario().exec())
-
 class FrmDashboard(QWidget,Ui_frm_dashboard):
     def __init__(self) -> None:
         super().__init__(parent=None)
@@ -1126,7 +1117,8 @@ class CadastroEntregas(QDialog,Ui_CadEntregas):
         self.text_km_media.clear()
         self.text_qt_entregas.clear()
         self.text_vlr_final.clear()
-        
+
+    @Slot()        
     def callback_bnt_save(self):
         if float(self.text_km_inicial.text().strip()) > float(self.text_km_final.text().strip()):
             infmensagem = InfMensagem(mensagem=f"Valor do km Final, não pode ser menor que o km incial").exec()
@@ -1147,10 +1139,75 @@ class CadastroEntregas(QDialog,Ui_CadEntregas):
             self.clear_field()
         else: 
             infmensagem = InfMensagem(mensagem=f"Erro ao adicionar Entrega \n erro  {new_entregas[1]}").exec()
-                
+
+class LockedSystem(QDialog,Ui_Login):
+    def __init__(self,field) -> None:
+        super().__init__(parent=None)
+        self.field=field
+        self.setupUi(self)
+        self.setWindowTitle(f"Login - My Finance {__version__}")
+        self.key = Database.get_table_sys_config()
+
+        self.label_version.setText(QCoreApplication.translate("AppLogin", __version__, None))
+
+        self.bnt_entrar.clicked.connect(self.open_system)
+               
+
+    def closeEvent(self, event):
+        reply = QMessageBox.question(self, 'Confirmar Saída',
+                                     'Você realmente deseja sair do sistema?',
+                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            event.accept()  # Aceita o fechamento da janela
+            app.closeAllWindows()
+
+        else:
+            event.ignore()  # Ignora o fechamento da janela
+
+    def _get_user(self,usuario):
+        user = Database.get_table_user(type='user', usuario=usuario)
+        user_db =user[0][0]
+        password =decrypt(user[0][1],self.key,SALT_CRYPT)
+        ativo = user[0][2]
+        reset = user[0][3]
+        first_acess =user[0][4]
+        locked = user[0][5] 
+        return (user_db,password,ativo,reset,first_acess,locked)
         
 
+    def open_system(self):
+        
+        if MODE_DEBUG:
+            
+            self.field.setDisabled(False)
+            self.destroy()
+            # self.w = MainWindow()
+            # self.w.show()
+            # self.close()  
+        else:
+            try:
+                re_query = self._get_user(self.text_usuario.text().strip())
+                if re_query[0] == self.text_usuario.text().strip() and re_query[1] == self.text_password.text().strip():
+                    if re_query[2] != 'S' or re_query[5] != 'N':
+                        infmensagem = InfMensagem(mensagem="Não é possivel acessar com Usuário, verifique o cadastro").exec()
+                        return   
+                    else:
+                        self.field.setDisabled(False)
+                        self.destroy()
+                        pass
+                else: 
+                    infmensagem = InfMensagem(mensagem="Usuário Ou senha incorreto").exec()   
+            except: 
+                   infmensagem = InfMensagem(mensagem="Usuário Ou senha incorreto").exec()     
+            # if self.text_password.text() == '123':
+        #     self.w = MainWindow()
+        #     self.w.show()
+        #     self.close()    
+   
 
+
+   
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self) -> None:
         super(MainWindow, self).__init__()
@@ -1169,7 +1226,31 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionCadUser.triggered.connect(lambda:self.open_mdi_center(CadatroUsuario(),"Cadastro de Usuário") )
         self.bnt_left_dashboard.clicked.connect(self.open_dashboard )
         self.actionLancarDia.triggered.connect(lambda: CadastroEntregas().exec())
+        self.actionBloquear.triggered.connect(self.callback_locked_system)
+        self.actionSair.triggered.connect(self.close)
 
+    @Slot()
+    def closeEvent(self, event,t=None):
+
+        reply = QMessageBox.question(self, 'Confirmar Saída',
+                                     'Você realmente deseja sair do sistema?',
+                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            event.accept()  # Aceita o fechamento da janela
+            app.closeAllWindows()
+
+        else:
+            event.ignore()  # Ignora o fechamento da janela
+
+    @Slot()
+    def callback_locked_system(self):
+        l = LockedSystem(field=self)
+        l.exec()
+        self.setDisabled(True)
+        pass
+
+    @Slot()  
     def open_dashboard(self):
         # Se já existe uma instância do dashboard, fecha-a
         if self.dashboard_subwindow:
@@ -1188,12 +1269,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # Reseta a referência ao fechar
         self.dashboard_subwindow.destroyed.connect(lambda: self.reset_dashboard_references())
-
+    @Slot()  
     def reset_dashboard_references(self):
         self.dashboard_window = None
         self.dashboard_subwindow = None
 
-
+    @Slot()  
     def open_mdi_center(self,widget,title = ''):
         # Cria uma nova instância do widget
         mdi_widget = widget
@@ -1214,9 +1295,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         file.close()
 
 
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    #window = MainWindow()
+    # window = MainWindow()
     window = AppLogin()
+  
     window.show()
     sys.exit(app.exec())
