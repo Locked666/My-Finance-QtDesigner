@@ -22,12 +22,14 @@ def encrypt(password, key, salt):
 
 # Função para decriptar a senha
 def decrypt(encrypted_password, key, salt):
-    fernet = Fernet(key)
-    decrypted_password = fernet.decrypt(encrypted_password).decode()
-    # Remove o valor de sal
-    original_password = decrypted_password.replace(salt, '', 1)
-    return original_password
-
+    try:
+        fernet = Fernet(key)
+        decrypted_password = fernet.decrypt(encrypted_password).decode()
+        # Remove o valor de sal
+        original_password = decrypted_password.replace(salt, '', 1)
+        return original_password
+    except ValueError as e: 
+        raise (f'Erro ao ao executar a função decrypt\n {e}' )
 # Exemplo de uso
 if __name__ == "__main__":
     # Gera uma chave (você deve armazenar essa chave de forma segura)
@@ -38,7 +40,7 @@ if __name__ == "__main__":
    
     # Define a senha e um valor de sal
     password = "minha_senha_segura"
-    salt = "06919904179"  # Exemplo de salt
+    salt = ""  # Exemplo de salt
     # Encripta a senha
     encrypted = encrypt(password, key, salt)
     print("Senha encriptada:", encrypted)

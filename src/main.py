@@ -1,11 +1,83 @@
 import sys
+import os
+from PySide6 import QtCore
 from PySide6.QtCore import Qt,QCoreApplication,QFile,Slot,SLOT,Signal
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget,QDialog,QVBoxLayout,QWidgetAction,QMdiSubWindow,QMessageBox
 from ui_functions import consulta_cnpj
 from func_crypt import decrypt,encrypt
+import time
 from database import Database
 from import_display import *
-from ConfigApp import __version__,MODE_DEBUG,SALT_CRYPT
+from ConfigApp import __version__, complement_ini, MODE_DEBUG, USERNAME_INI, PASSWORD_INI, PATH_DATABASE, PATH_CONFIG_INI
+
+
+global SALT_CRYPT
+
+SALT_CRYPT = Database.get_table_about()
+
+
+class Worker(QtCore.QThread):
+    progress = QtCore.Signal(int)
+    finished = QtCore.Signal(str)  # Sinal para indicar conclusão
+    label = QtCore.Signal(str)  # Sinal para indicar conclusão
+
+    def run(self):
+        # Lista dos arquivos a serem verificados
+        files_to_check = [
+            {'nome': 'Database','tipo':'arquivo', 'caminho': PATH_DATABASE, 'funcao': ''},
+            {'nome': 'Arquivo de Configuração','tipo':'arquivo', 'caminho':PATH_CONFIG_INI, 'funcao':''}
+            
+        ]
+        
+        total_steps = len(files_to_check)
+
+        for step, file_path in enumerate(files_to_check):
+            time.sleep(1)  # Simula o tempo de verificação
+            self.label.emit(file_path.get('nome','verificando...'))
+
+            if file_path.get('tipo','verificando') == 'arquivo':
+                if  os.path.exists(file_path.get('caminho','verificando...')):
+                    pass
+                else: 
+                    if file_path.get('funcao','') != '':
+                        f = file_path.get('funcao','')
+                        f()
+
+            percent = int(((step + 1) / total_steps) * 100)
+
+            self.progress.emit(percent)
+
+        self.finished.emit("Verificação concluída.")
+
+class BootingSystem(QMainWindow,Ui_booting_system):
+    def __init__(self) -> None:
+        super(BootingSystem, self).__init__()
+        # self.setWindowTitle(f"Cadastro de Usuário - My Finance {__version__}")
+        self.setupUi(self)
+        # Configura a janela para ser sem bordas
+        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        # Atributo para fundo translúcido
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.label_credits.setText(f"<strong>Version</strong>:{__version__}")
+
+        # Cria e inicia o worker
+        self.worker = Worker()
+        self.worker.progress.connect(self.update_progress)
+        self.worker.finished.connect(self.on_finished)  # Conecta ao sinal de conclusão
+        self.worker.label.connect(self.update_label)
+        self.worker.start()
+
+    def update_label(self,value):
+        self.label_loading_execu.setText(str(value))
+
+    def update_progress(self, value):
+        self.progressBar.setValue(value)
+
+    def on_finished(self, message):
+        print(message)  # Exibe a mensagem de conclusão
+        self.close()
+        applogin = AppLogin()
+        applogin.exec()  # Fecha a janela após a conclusão (opcional)
 
 class InfMensagem(QDialog,Ui_InfMensagem):
     def __init__(self,mensagem) -> None:
@@ -14,12 +86,24 @@ class InfMensagem(QDialog,Ui_InfMensagem):
         self.mensagem= mensagem
         self.lb_inf.setText(QCoreApplication.translate("InfMensagem", self.mensagem, None))
 
-class AppLogin(QWidget, Ui_Login):
+class AppLogin(QDialog, Ui_Login):
     def __init__(self) -> None:
         super(AppLogin,self).__init__()
         self.setupUi(self)
         self.setWindowTitle(f"Login - My Finance {__version__}")
         self.key = Database.get_table_sys_config()
+        # self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        # # Atributo para fundo translúcido
+        # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+
+        self.checkBox.setChecked(False)
+
+        if USERNAME_INI != '':
+            self.checkBox.setChecked(True)
+            self.text_usuario.setText(USERNAME_INI)
+            password = decrypt(PASSWORD_INI.strip(),self.key,SALT_CRYPT)
+            self.text_password.setText(str(password))
+            
 
         self.label_version.setText(QCoreApplication.translate("AppLogin", __version__, None))
 
@@ -28,14 +112,22 @@ class AppLogin(QWidget, Ui_Login):
 
     def _get_user(self,usuario):
         user = Database.get_table_user(type='user', usuario=usuario)
-        user_db =user[0][0]
-        password =decrypt(user[0][1],self.key,SALT_CRYPT)
-        ativo = user[0][2]
-        reset = user[0][3]
-        first_acess =user[0][4]
-        locked = user[0][5] 
-        return (user_db,password,ativo,reset,first_acess,locked)
-        pass
+
+        try:
+            if len(user) > 0 :
+                user_db =user[0][0]
+                password =decrypt(user[0][1],self.key,SALT_CRYPT)
+                ativo = user[0][2]
+                reset = user[0][3]
+                first_acess =user[0][4]
+                locked = user[0][5] 
+                return (user_db,password,ativo,reset,first_acess,locked)
+            else:
+                return['erro']
+                # infmensagem = InfMensagem(mensagem=f"Usuário Ou senha incorreto\n").exec() 
+
+        except ValueError as e:
+            infmensagem = InfMensagem(mensagem=f"Usuário Ou senha incorreto\n {e}").exec() 
 
     def open_system(self):
         
@@ -43,6 +135,7 @@ class AppLogin(QWidget, Ui_Login):
             self.w = MainWindow()
             self.w.showMaximized()
             self.close()
+
         else: 
             try:
                 re_query = self._get_user(self.text_usuario.text().strip())
@@ -51,20 +144,23 @@ class AppLogin(QWidget, Ui_Login):
                         infmensagem = InfMensagem(mensagem="Não é possivel acessar com Usuário, verifique o cadastro").exec()
                         return   
                     else:
+                        if self.checkBox.isChecked():
+                            complement_ini('Settings','username',self.text_usuario.text())
+                            p = encrypt(self.text_password.text().strip(),self.key,SALT_CRYPT).decode()
+                            complement_ini('Settings','password',p.strip())
+                        else: 
+                            complement_ini('Settings','username','')
+                            complement_ini('Settings','password','')
+
                         self.w = MainWindow()
                         self.w.showMaximized()
                         self.close() 
                         pass
                 else: 
                     infmensagem = InfMensagem(mensagem="Usuário Ou senha incorreto").exec()   
-            except: 
-                   infmensagem = InfMensagem(mensagem="Usuário Ou senha incorreto").exec()  
+            except ValueError as e: 
+                   infmensagem = InfMensagem(mensagem=f"Usuário Ou senha incorreto  execpt\n {e}").exec()  
                     
-        # if self.text_password.text() == '123':
-        #     self.w = MainWindow()
-        #     self.w.show()
-        #     self.close()    
-
 class CadatroUsuario(QWidget, Ui_CadUser):
     def __init__(self) -> None:
         super().__init__(parent=None)
@@ -1147,6 +1243,7 @@ class LockedSystem(QDialog,Ui_Login):
         self.setupUi(self)
         self.setWindowTitle(f"Login - My Finance {__version__}")
         self.key = Database.get_table_sys_config()
+        self.checkBox.setVisible(False)
 
         self.label_version.setText(QCoreApplication.translate("AppLogin", __version__, None))
 
@@ -1179,7 +1276,6 @@ class LockedSystem(QDialog,Ui_Login):
     def open_system(self):
         
         if MODE_DEBUG:
-            
             self.field.setDisabled(False)
             self.destroy()
             # self.w = MainWindow()
@@ -1204,10 +1300,7 @@ class LockedSystem(QDialog,Ui_Login):
         #     self.w = MainWindow()
         #     self.w.show()
         #     self.close()    
-   
 
-
-   
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self) -> None:
         super(MainWindow, self).__init__()
@@ -1287,7 +1380,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Mostra a subjanela
         sub_window.show()
 
-    def apply_stylesheet(self, stylesheet_path='D:\Desenvolvimento\python\My-Finance-QtDesigner\src\stylesheets.qss'):
+    def apply_stylesheet(self, stylesheet_path=fr'D:\Desenvolvimento\python\My-Finance-QtDesigner\src\stylesheets.qss'):
         file = QFile(stylesheet_path)
         if file.open(QFile.ReadOnly | QFile.Text):
             stream = file.readAll().data().decode("utf-8")
@@ -1299,7 +1392,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     # window = MainWindow()
-    window = AppLogin()
+    if MODE_DEBUG == False:
+        window = BootingSystem()
+    else:
+        window = MainWindow()
   
     window.show()
     sys.exit(app.exec())

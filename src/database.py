@@ -1,4 +1,4 @@
-from model import Empresa,Fornecedor,SysConfig,Usuario,Entregas, CONN, Base,engine,session
+from model import Empresa,Fornecedor,SysConfig,Usuario,Entregas,About, CONN, Base,engine,session
 from datetime import datetime
 
 
@@ -382,7 +382,20 @@ class Database():
                     session.rollback()
                     return (False, str(e))  
 
-
+    def get_table_about(filter:bool = False, type_filter :str = ''):
+        lista =' '
+        if filter == True:
+            match type_filter:
+                case 'id':
+                    pass
+                case _: 
+                    pass
+        else:
+            query = session.query(About).all()
+            for i in query:
+                lista=i.cnpj
+            return lista
+    
     def insert_table_entregas(data,km_inicial, km_final, km__lt, qt_entregas, valor_final):
         try: 
             new_entrega = Entregas(
@@ -401,8 +414,10 @@ class Database():
         except ValueError as e:
             session.rollback()
             return(False,str(e))  
+
+
 if __name__=='__main__':
 
 #  app = Database.get_table_fornecedor(type='id', id=2)
-    app = Database.delete_table_fornecedor(1)
+    app = Database.get_table_about()
     print(app)

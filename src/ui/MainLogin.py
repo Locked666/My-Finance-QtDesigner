@@ -133,7 +133,7 @@ class Ui_Login(object):
         self.checkBox.setObjectName(u"checkBox")
         self.checkBox.setStyleSheet(u"color: rgb(255, 255, 255);\n"
 "font: 12pt \"Segoe UI\";")
-        self.checkBox.setChecked(True)
+        self.checkBox.setChecked(False)
 
         self.verticalLayout_6.addWidget(self.checkBox)
 

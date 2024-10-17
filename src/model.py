@@ -90,9 +90,22 @@ class Entregas(Base):
     qt_entregas=Column(String)
     valor_final= Column(String)
      
-        
-
-
+class About(Base):
+    __tablename__='about'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    razao = Column(String, default = 'Julio Sales') 
+    nome_fantasia = Column(String, default = 'Sales Informática')
+    cnpj = Column(String, default = '06919904179')
+    end_rua = Column(String)
+    end_numero = Column(Integer)
+    end_bairro = Column(String)
+    end_complemento = Column(String)
+    end_cep = Column(String)
+    end_cidade = Column(String)
+    end_uf = Column(String)
+    telefone = Column(String)
+    email = Column(String)
+    log_inclusao = Column(DateTime, default=datetime.now()) 
 
 class Usuario(Base):
     __tablename__='usuario'
@@ -121,12 +134,16 @@ class Usuario(Base):
 
 if not os.path.exists(PATH_DATABASE):
     Base.metadata.create_all(bind=engine) 
-    n = SysConfig()
-    session.add(n)            
+    sys = SysConfig()
+    session.add(sys)            
+    session.commit()
+
+    about = About()
+    session.add(about)
     session.commit()
 
 
 
 if __name__=='__main__':
-    Base.metadata.create_all(bind=engine) 
+    Base.metadata.create_all(bind=engine)
     pass

@@ -19,7 +19,8 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
 from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QFrame, QHBoxLayout,
     QLabel, QMainWindow, QMdiArea, QMenu,
     QMenuBar, QPushButton, QSizePolicy, QSpacerItem,
-    QTabWidget, QVBoxLayout, QWidget)
+    QStatusBar, QTabWidget, QToolBar, QVBoxLayout,
+    QWidget)
 import icons_rc
 
 class Ui_MainWindow(object):
@@ -376,6 +377,16 @@ class Ui_MainWindow(object):
         self.menuEntregas = QMenu(self.menuOutros)
         self.menuEntregas.setObjectName(u"menuEntregas")
         MainWindow.setMenuBar(self.menubar)
+        self.statusBar = QStatusBar(MainWindow)
+        self.statusBar.setObjectName(u"statusBar")
+        MainWindow.setStatusBar(self.statusBar)
+        self.toolBar = QToolBar(MainWindow)
+        self.toolBar.setObjectName(u"toolBar")
+        self.toolBar.setMovable(True)
+        self.toolBar.setOrientation(Qt.Horizontal)
+        self.toolBar.setToolButtonStyle(Qt.ToolButtonIconOnly)
+        self.toolBar.setFloatable(True)
+        MainWindow.addToolBar(Qt.ToolBarArea.TopToolBarArea, self.toolBar)
 
         self.menubar.addAction(self.menuSistema.menuAction())
         self.menubar.addAction(self.menuCadastro.menuAction())
@@ -545,5 +556,6 @@ class Ui_MainWindow(object):
         self.menuFinanceiro.setTitle(QCoreApplication.translate("MainWindow", u"Financeiro", None))
         self.menuOutros.setTitle(QCoreApplication.translate("MainWindow", u"Outros", None))
         self.menuEntregas.setTitle(QCoreApplication.translate("MainWindow", u"Entregas", None))
+        self.toolBar.setWindowTitle(QCoreApplication.translate("MainWindow", u"toolBar", None))
     # retranslateUi
 
