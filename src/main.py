@@ -20,12 +20,22 @@ class Worker(QtCore.QThread):
     progress = QtCore.Signal(int)
     finished = QtCore.Signal(str)  # Sinal para indicar conclusão
     label = QtCore.Signal(str)  # Sinal para indicar conclusão
+    open_cadastro = QtCore.Signal()  # Sinal para abrir o cadastro
+    wait_for_cadastro_empresa = QtCore.Signal()  # Sinal para pausar
+    for_cadastro_empresa = QtCore.Signal(bool)  # Sinal para pausar
+    erro_signal = QtCore.Signal(bool)
+    
 
     def run(self):
+        self.cont_true = []
         # Lista dos arquivos a serem verificados
         files_to_check = [
-            {'nome': 'Database','tipo':'arquivo', 'caminho': PATH_DATABASE, 'funcao': ''},
-            {'nome': 'Arquivo de Configuração','tipo':'arquivo', 'caminho':PATH_CONFIG_INI, 'funcao':''}
+            {'nome': 'Database','tipo':'arquivo', 'caminho': PATH_DATABASE, 'funcao': self.__database_error},
+            {'nome': 'Arquivo de Configuração','tipo':'arquivo', 'caminho':PATH_CONFIG_INI, 'funcao':''},
+
+
+            {'nome': 'Tabela Empresa','tipo':'informacao_database', 'table_database':'Empresa', 'funcao':self.__tbl_empresa_error},
+            {'nome': 'Tabela usuário','tipo':'informacao_database', 'table_database':'Empresa', 'funcao':self.__tbl_usuario_error}
             
         ]
         
@@ -41,14 +51,63 @@ class Worker(QtCore.QThread):
                 else: 
                     if file_path.get('funcao','') != '':
                         f = file_path.get('funcao','')
-                        f()
+                        e = f()
+                        self.cont_true.append(e)
+            
+            elif file_path.get('tipo','verificando') == 'informacao_database':
+                f = file_path.get('funcao','')
+                e = f()
+                self.cont_true.append(e)
+
+            else: 
+                continue
+
 
             percent = int(((step + 1) / total_steps) * 100)
 
             self.progress.emit(percent)
+        self.__finishied(self.cont_true)
 
-        self.finished.emit("Verificação concluída.")
 
+    def __database_error(self):
+        Database.non_base()
+        return True
+
+    def __tbl_empresa_error(self):
+        qt = len(Database.get_table_empresa())
+        if qt == 0:
+            self.wait_for_cadastro_empresa.emit()  # Pausa até que o cadastro seja fechado
+            self.open_cadastro.emit()  # Emite o sinal para abrir o cadastro
+            return False    
+    
+    def __tbl_usuario_error(self):
+        qt = len(Database.get_table_user())
+        if qt == 0:
+            a = Database.insert_table_user(
+                type='insert',
+                nome = 'admin',
+                user='admin',
+                senha = str('gAAAAABnDcUQO6RIaF-e1oKsvlmbypd-b_zgDIAB3hNY2Bnk8yOGbNK0Nk-h_zxH2TVVrSNCX_eUdreg7N5No5_3O5AArocVEQ=='),
+                ativo= 'S',
+                reset_senha = 'N',
+                primeiro_acesso= 'N',
+                bloqueado= 'N'
+            )
+        return True    
+
+
+    def pause(self):
+        self.wait_for_cadastro_empresa.connect(self._wait)  # Conecta o sinal de pausa
+
+    def _wait(self):
+        self.wait()  # Pausa a execução até que o cadastro seja fechado
+
+    def __finishied(self,lista):
+        if False not in lista:
+            self.finished.emit("Verificação concluída.")
+        else: 
+            self.finished.emit("erro")
+                
 class BootingSystem(QMainWindow,Ui_booting_system):
     def __init__(self) -> None:
         super(BootingSystem, self).__init__()
@@ -65,6 +124,9 @@ class BootingSystem(QMainWindow,Ui_booting_system):
         self.worker.progress.connect(self.update_progress)
         self.worker.finished.connect(self.on_finished)  # Conecta ao sinal de conclusão
         self.worker.label.connect(self.update_label)
+        self.worker.open_cadastro.connect(self.open_cadastro_empresa)
+        self.worker.wait_for_cadastro_empresa.connect(self.worker.pause)
+        self.worker.for_cadastro_empresa.connect(self.worker.pause)
         self.worker.start()
 
     def update_label(self,value):
@@ -74,11 +136,19 @@ class BootingSystem(QMainWindow,Ui_booting_system):
         self.progressBar.setValue(value)
 
     def on_finished(self, message):
-        print(message)  # Exibe a mensagem de conclusão
-        self.close()
-        applogin = AppLogin()
-        applogin.exec()  # Fecha a janela após a conclusão (opcional)
+        if message != 'erro':
+            self.close()
+            applogin = AppLogin()
+            applogin.exec()  # Fecha a janela após a conclusão (opcional)
+        else:
+            self.close()    
+            InfMensagem("Foi verificado que existe algumas informações faltantes, entre em contato com o suporte\n para verificar.").exec()
 
+    def open_cadastro_empresa(self):
+        cadastro = CadastroEmpresa()
+        cadastro.exec()  # Abre o cadastro na thread principal
+         # Emite o sinal quando o cadastro é fechado
+    
 class InfMensagem(QDialog,Ui_InfMensagem):
     def __init__(self,mensagem) -> None:
         super().__init__(parent=None)
@@ -701,37 +771,46 @@ class CadastroEmpresa(QDialog,Ui_CadEmpresa):
                 infmensagem.exec()
 
     def populate_field(self):
-        info = Database.get_table_empresa()[0]
-        self.lcd_id.setProperty(u"intValue", info[0])
-        self.text_cnpj.insert(info[3])
-        self.text_razao_social.insert(info[1])
-        self.text_nome_fantasia.insert(info[2])
-        self.text_IE.insert(info[6])
-        self.text_IM.insert(info[7])
-        self.text_ramo.insert(info[10])
-        self.text_rua.insert(info[11])
-        self.text_numero.insert(str(info[12]))
-        self.text_bairro.insert(info[13])
-        self.text_complementar.insert(info[14])
-        self.text_cep.insert(info[15])
-        self.text_cidade.insert(info[16])
-        self.text_uf.insert(info[17])
-        # self.text_celular.insert(info[18])
-        self.text_telefone.setText(info[20])
-        self.text_email.insert(info[21])
-        self.plain_text.insertPlainText(info[22])
-        self.text_celular.setText(info[18])
+        
+        if len(Database.get_table_empresa()) ==0: 
+            return
 
-        if info[8] == 'S':
-            self.check_contribuinte.setChecked(True)
-        if info[9] == 'S' :
-            self.check_optante.setChecked(True)
-        if info[19] == 'S':    
-            self.check_p_whats.setChecked(True)
-        if info[4] == 'J': 
-            self.radio_juridirica.setChecked(True)
-        else:       
-            self.radio_fisica.setChecked(True)
+        try:
+            info = Database.get_table_empresa()[0]
+            self.lcd_id.setProperty(u"intValue", info[0])
+            self.text_cnpj.insert(info[3])
+            self.text_razao_social.insert(info[1])
+            self.text_nome_fantasia.insert(info[2])
+            self.text_IE.insert(info[6])
+            self.text_IM.insert(info[7])
+            self.text_ramo.insert(info[10])
+            self.text_rua.insert(info[11])
+            self.text_numero.insert(str(info[12]))
+            self.text_bairro.insert(info[13])
+            self.text_complementar.insert(info[14])
+            self.text_cep.insert(info[15])
+            self.text_cidade.insert(info[16])
+            self.text_uf.insert(info[17])
+            # self.text_celular.insert(info[18])
+            self.text_telefone.setText(info[20])
+            self.text_email.insert(info[21])
+            self.plain_text.insertPlainText(info[22])
+            self.text_celular.setText(info[18])
+
+            if info[8] == 'S':
+                self.check_contribuinte.setChecked(True)
+            if info[9] == 'S' :
+                self.check_optante.setChecked(True)
+            if info[19] == 'S':    
+                self.check_p_whats.setChecked(True)
+            if info[4] == 'J': 
+                self.radio_juridirica.setChecked(True)
+            else:       
+                self.radio_fisica.setChecked(True)
+        except ValueError as e: 
+            reply = QMessageBox.question(self, 'Erro populate Empresa',
+                                     f'Ocorreu um erro ao realizar a função populate\n {e}',
+                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         
 class CadastroFornecedor(QWidget,Ui_CadFornecedor):
     def __init__(self) -> None:
@@ -1301,6 +1380,13 @@ class LockedSystem(QDialog,Ui_Login):
         #     self.w.show()
         #     self.close()    
 
+
+class CadastroProdutos(QDialog,Ui_CadProduto):
+    def __init__(self) -> None:
+        super().__init__(parent=None)
+        self.setWindowTitle(f"Cadastro de Produtos - My Finance {__version__}")
+        self.setupUi(self)
+
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self) -> None:
         super(MainWindow, self).__init__()
@@ -1317,10 +1403,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionFornecedor.triggered.connect(lambda: self.open_mdi_center(CadastroFornecedor(),"Cadastro de Fornecedor"))
         self.actionRamo_Atividade.triggered.connect(lambda : self.open_mdi_center(CadastroRamoAtividade(),"Cadastro de Ramo de atividade"))
         self.actionCadUser.triggered.connect(lambda:self.open_mdi_center(CadatroUsuario(),"Cadastro de Usuário") )
-        self.bnt_left_dashboard.clicked.connect(self.open_dashboard )
+        self.actionProdutos_itens.triggered.connect(lambda:self.open_mdi_center(CadastroProdutos(),"Cadastro de Produtos") )
         self.actionLancarDia.triggered.connect(lambda: CadastroEntregas().exec())
         self.actionBloquear.triggered.connect(self.callback_locked_system)
         self.actionSair.triggered.connect(self.close)
+
+        ## Bnt Left menu
+        self.bnt_left_dashboard.clicked.connect(self.open_dashboard )
 
     @Slot()
     def closeEvent(self, event,t=None):

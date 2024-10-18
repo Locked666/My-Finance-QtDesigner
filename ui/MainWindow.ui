@@ -9,12 +9,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>952</width>
-    <height>645</height>
+    <width>1232</width>
+    <height>681</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="whatsThis">
+   <string>teste</string>
   </property>
   <property name="toolButtonStyle">
    <enum>Qt::ToolButtonIconOnly</enum>
@@ -26,7 +29,7 @@
    <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_3">
     <property name="spacing">
      <number>0</number>
     </property>
@@ -43,43 +46,16 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="QFrame" name="frame">
-      <property name="minimumSize">
-       <size>
-        <width>181</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>155</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <family>Segoe UI</family>
-        <pointsize>13</pointsize>
-        <weight>13</weight>
-        <italic>false</italic>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">font: 110 13pt &quot;Segoe UI&quot;;
-background-color: rgb(225, 225, 225);
-text-align: left;
-</string>
-      </property>
+     <widget class="QFrame" name="frame_3">
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
       </property>
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QHBoxLayout" name="horizontalLayout">
        <property name="spacing">
-        <number>9</number>
+        <number>0</number>
        </property>
        <property name="leftMargin">
         <number>0</number>
@@ -91,31 +67,46 @@ text-align: left;
         <number>0</number>
        </property>
        <property name="bottomMargin">
-        <number>6</number>
+        <number>0</number>
        </property>
        <item>
-        <widget class="QFrame" name="frame_2">
+        <widget class="QFrame" name="frame">
          <property name="minimumSize">
           <size>
-           <width>0</width>
-           <height>164</height>
+           <width>181</width>
+           <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>16777215</width>
-           <height>131</height>
+           <width>155</width>
+           <height>16777215</height>
           </size>
          </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>13</pointsize>
+           <weight>13</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 110 13pt &quot;Segoe UI&quot;;
+background-color: rgb(225, 225, 225);
+text-align: left;
+</string>
+         </property>
          <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
+          <enum>QFrame::StyledPanel</enum>
          </property>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
+         <layout class="QVBoxLayout" name="verticalLayout">
           <property name="spacing">
-           <number>0</number>
+           <number>9</number>
           </property>
           <property name="leftMargin">
            <number>0</number>
@@ -124,17 +115,457 @@ text-align: left;
            <number>0</number>
           </property>
           <property name="rightMargin">
-           <number>15</number>
+           <number>0</number>
           </property>
           <property name="bottomMargin">
-           <number>10</number>
+           <number>6</number>
           </property>
           <item>
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/icons/image_prin.png&quot;width=&quot;200&quot; height=&quot;200&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <widget class="QFrame" name="frame_2">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>164</height>
+             </size>
             </property>
-            <property name="wordWrap">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>131</height>
+             </size>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>15</number>
+             </property>
+             <property name="bottomMargin">
+              <number>10</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/icons/image_prin.png&quot;width=&quot;200&quot; height=&quot;200&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bnt_left_dashboard">
+            <property name="minimumSize">
+             <size>
+              <width>121</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1000</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;DashBoard...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">padding-left: 10px;</string>
+            </property>
+            <property name="text">
+             <string>DashBoard</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../src/resources/icons.qrc">
+              <normaloff>:/icons/dashboard_dark.png</normaloff>:/icons/dashboard_dark.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bnt_left_despesa">
+            <property name="minimumSize">
+             <size>
+              <width>121</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1000</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="acceptDrops">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string notr="true">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; font-style:italic;&quot;&gt;Despesa...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">padding-left: 10px;</string>
+            </property>
+            <property name="text">
+             <string>Despesa</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../src/resources/icons.qrc">
+              <normaloff>:/icons/despesa_dark.png</normaloff>:/icons/despesa_dark.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+            <property name="autoRepeat">
+             <bool>false</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>false</bool>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bnt_left_receitas">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>121</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1000</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="contextMenuPolicy">
+             <enum>Qt::DefaultContextMenu</enum>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; font-style:italic;&quot;&gt;Receita...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">padding-left: 10px;</string>
+            </property>
+            <property name="text">
+             <string>Receitas</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../src/resources/icons.qrc">
+              <normaloff>:/icons/receita_dark.png</normaloff>:/icons/receita_dark.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bnt_left_investimento">
+            <property name="minimumSize">
+             <size>
+              <width>121</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1000</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; font-style:italic;&quot;&gt;Investimento...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">padding-left: 10px;</string>
+            </property>
+            <property name="text">
+             <string>Investimento</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../src/resources/icons.qrc">
+              <normaloff>:/icons/investimento_dark.png</normaloff>:/icons/investimento_dark.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bnt_left_carteira">
+            <property name="minimumSize">
+             <size>
+              <width>121</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1000</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; font-style:italic;&quot;&gt;Carteira...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">padding-left: 10px;</string>
+            </property>
+            <property name="text">
+             <string>Carteira</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../src/resources/icons.qrc">
+              <normaloff>:/icons/carteira_dark.png</normaloff>:/icons/carteira_dark.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bnt_left_inventario">
+            <property name="minimumSize">
+             <size>
+              <width>121</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1000</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; font-style:italic;&quot;&gt;Inventário...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">padding-left: 10px;</string>
+            </property>
+            <property name="text">
+             <string>Inventário</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../src/resources/icons.qrc">
+              <normaloff>:/icons/inventario_dark.png</normaloff>:/icons/inventario_dark.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>130</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="Line" name="line">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bnt_left_config">
+            <property name="minimumSize">
+             <size>
+              <width>121</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1000</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; font-style:italic;&quot;&gt;Configurações...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">padding-left: 10px;
+border-top: 1px black ;</string>
+            </property>
+            <property name="text">
+             <string>Configurações</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../src/resources/icons.qrc">
+              <normaloff>:/icons/config_dark.png</normaloff>:/icons/config_dark.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
              <bool>true</bool>
             </property>
            </widget>
@@ -143,403 +574,54 @@ text-align: left;
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="bnt_left_dashboard">
-         <property name="minimumSize">
-          <size>
-           <width>121</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>1000</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;DashBoard...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
+        <widget class="QMdiArea" name="mdi_center">
          <property name="styleSheet">
-          <string notr="true">padding-left: 10px;</string>
+          <string notr="true">background-color: rgb(240, 240, 240);</string>
          </property>
-         <property name="text">
-          <string>DashBoard</string>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
          </property>
-         <property name="icon">
-          <iconset resource="../src/resources/icons.qrc">
-           <normaloff>:/icons/dashboard_dark.png</normaloff>:/icons/dashboard_dark.png</iconset>
+         <property name="frameShadow">
+          <enum>QFrame::Plain</enum>
          </property>
-         <property name="iconSize">
-          <size>
-           <width>30</width>
-           <height>30</height>
-          </size>
+         <property name="lineWidth">
+          <number>0</number>
          </property>
-         <property name="checkable">
-          <bool>false</bool>
+         <property name="verticalScrollBarPolicy">
+          <enum>Qt::ScrollBarAsNeeded</enum>
          </property>
-         <property name="default">
-          <bool>false</bool>
+         <property name="horizontalScrollBarPolicy">
+          <enum>Qt::ScrollBarAsNeeded</enum>
          </property>
-         <property name="flat">
+         <property name="sizeAdjustPolicy">
+          <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+         </property>
+         <property name="background">
+          <brush brushstyle="NoBrush">
+           <color alpha="0">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="activationOrder">
+          <enum>QMdiArea::ActivationHistoryOrder</enum>
+         </property>
+         <property name="viewMode">
+          <enum>QMdiArea::SubWindowView</enum>
+         </property>
+         <property name="documentMode">
           <bool>true</bool>
          </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="bnt_left_despesa">
-         <property name="minimumSize">
-          <size>
-           <width>121</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>1000</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="acceptDrops">
+         <property name="tabsClosable">
           <bool>false</bool>
          </property>
-         <property name="toolTip">
-          <string notr="true">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; font-style:italic;&quot;&gt;Despesa...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="autoFillBackground">
+         <property name="tabsMovable">
           <bool>false</bool>
          </property>
-         <property name="styleSheet">
-          <string notr="true">padding-left: 10px;</string>
-         </property>
-         <property name="text">
-          <string>Despesa</string>
-         </property>
-         <property name="icon">
-          <iconset resource="../src/resources/icons.qrc">
-           <normaloff>:/icons/despesa_dark.png</normaloff>:/icons/despesa_dark.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>35</width>
-           <height>35</height>
-          </size>
-         </property>
-         <property name="checkable">
-          <bool>false</bool>
-         </property>
-         <property name="autoRepeat">
-          <bool>false</bool>
-         </property>
-         <property name="autoExclusive">
-          <bool>false</bool>
-         </property>
-         <property name="default">
-          <bool>false</bool>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="bnt_left_receitas">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>121</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>1000</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="mouseTracking">
-          <bool>false</bool>
-         </property>
-         <property name="contextMenuPolicy">
-          <enum>Qt::DefaultContextMenu</enum>
-         </property>
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; font-style:italic;&quot;&gt;Receita...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">padding-left: 10px;</string>
-         </property>
-         <property name="text">
-          <string>Receitas</string>
-         </property>
-         <property name="icon">
-          <iconset resource="../src/resources/icons.qrc">
-           <normaloff>:/icons/receita_dark.png</normaloff>:/icons/receita_dark.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>35</width>
-           <height>35</height>
-          </size>
-         </property>
-         <property name="checkable">
-          <bool>false</bool>
-         </property>
-         <property name="default">
-          <bool>false</bool>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="bnt_left_investimento">
-         <property name="minimumSize">
-          <size>
-           <width>121</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>1000</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; font-style:italic;&quot;&gt;Investimento...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">padding-left: 10px;</string>
-         </property>
-         <property name="text">
-          <string>Investimento</string>
-         </property>
-         <property name="icon">
-          <iconset resource="../src/resources/icons.qrc">
-           <normaloff>:/icons/investimento_dark.png</normaloff>:/icons/investimento_dark.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>35</width>
-           <height>35</height>
-          </size>
-         </property>
-         <property name="checkable">
-          <bool>false</bool>
-         </property>
-         <property name="default">
-          <bool>false</bool>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="bnt_left_carteira">
-         <property name="minimumSize">
-          <size>
-           <width>121</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>1000</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; font-style:italic;&quot;&gt;Carteira...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">padding-left: 10px;</string>
-         </property>
-         <property name="text">
-          <string>Carteira</string>
-         </property>
-         <property name="icon">
-          <iconset resource="../src/resources/icons.qrc">
-           <normaloff>:/icons/carteira_dark.png</normaloff>:/icons/carteira_dark.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>35</width>
-           <height>35</height>
-          </size>
-         </property>
-         <property name="checkable">
-          <bool>false</bool>
-         </property>
-         <property name="default">
-          <bool>false</bool>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="bnt_left_inventario">
-         <property name="minimumSize">
-          <size>
-           <width>121</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>1000</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; font-style:italic;&quot;&gt;Inventário...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">padding-left: 10px;</string>
-         </property>
-         <property name="text">
-          <string>Inventário</string>
-         </property>
-         <property name="icon">
-          <iconset resource="../src/resources/icons.qrc">
-           <normaloff>:/icons/inventario_dark.png</normaloff>:/icons/inventario_dark.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>35</width>
-           <height>35</height>
-          </size>
-         </property>
-         <property name="checkable">
-          <bool>false</bool>
-         </property>
-         <property name="default">
-          <bool>false</bool>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>130</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="Line" name="line">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="bnt_left_config">
-         <property name="minimumSize">
-          <size>
-           <width>121</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>1000</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; font-style:italic;&quot;&gt;Configurações...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">padding-left: 10px;
-border-top: 1px black ;</string>
-         </property>
-         <property name="text">
-          <string>Configurações</string>
-         </property>
-         <property name="icon">
-          <iconset resource="../src/resources/icons.qrc">
-           <normaloff>:/icons/config_dark.png</normaloff>:/icons/config_dark.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>30</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="checkable">
-          <bool>false</bool>
-         </property>
-         <property name="default">
-          <bool>false</bool>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
+         <property name="tabPosition">
+          <enum>QTabWidget::South</enum>
          </property>
         </widget>
        </item>
@@ -547,55 +629,73 @@ border-top: 1px black ;</string>
      </widget>
     </item>
     <item>
-     <widget class="QMdiArea" name="mdi_center">
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(240, 240, 240);</string>
+     <widget class="QFrame" name="frame_5">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>41</height>
+       </size>
       </property>
       <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
+       <enum>QFrame::Panel</enum>
       </property>
       <property name="frameShadow">
-       <enum>QFrame::Plain</enum>
+       <enum>QFrame::Raised</enum>
       </property>
-      <property name="lineWidth">
-       <number>0</number>
-      </property>
-      <property name="verticalScrollBarPolicy">
-       <enum>Qt::ScrollBarAsNeeded</enum>
-      </property>
-      <property name="horizontalScrollBarPolicy">
-       <enum>Qt::ScrollBarAsNeeded</enum>
-      </property>
-      <property name="sizeAdjustPolicy">
-       <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
-      </property>
-      <property name="background">
-       <brush brushstyle="NoBrush">
-        <color alpha="0">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
-        </color>
-       </brush>
-      </property>
-      <property name="activationOrder">
-       <enum>QMdiArea::ActivationHistoryOrder</enum>
-      </property>
-      <property name="viewMode">
-       <enum>QMdiArea::SubWindowView</enum>
-      </property>
-      <property name="documentMode">
-       <bool>true</bool>
-      </property>
-      <property name="tabsClosable">
-       <bool>false</bool>
-      </property>
-      <property name="tabsMovable">
-       <bool>false</bool>
-      </property>
-      <property name="tabPosition">
-       <enum>QTabWidget::South</enum>
-      </property>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>2</y>
+         <width>147</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Usuário :</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_user_conect">
+            <property name="text">
+             <string>....</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Empresa :</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_empresa_conect">
+            <property name="text">
+             <string>....</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -605,7 +705,7 @@ border-top: 1px black ;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>952</width>
+     <width>1232</width>
      <height>21</height>
     </rect>
    </property>
@@ -681,21 +781,6 @@ border-top: 1px black ;</string>
     <addaction name="separator"/>
     <addaction name="menuAuxiliares"/>
    </widget>
-   <widget class="QMenu" name="menuDespesa">
-    <property name="title">
-     <string>Despesas</string>
-    </property>
-    <widget class="QMenu" name="menuLan_amento">
-     <property name="title">
-      <string>Lançamento</string>
-     </property>
-     <addaction name="actionDespesa_Fixas_2"/>
-     <addaction name="actionDespesa_Corrente"/>
-    </widget>
-    <addaction name="menuLan_amento"/>
-    <addaction name="separator"/>
-    <addaction name="actionRelat_rios"/>
-   </widget>
    <widget class="QMenu" name="menuConfiguracoes">
     <property name="title">
      <string>Configurações</string>
@@ -705,30 +790,6 @@ border-top: 1px black ;</string>
     <property name="title">
      <string>Relatórios</string>
     </property>
-   </widget>
-   <widget class="QMenu" name="menuReceitas">
-    <property name="title">
-     <string>Receitas</string>
-    </property>
-    <widget class="QMenu" name="menuLan_amentos">
-     <property name="title">
-      <string>Lançamentos</string>
-     </property>
-     <addaction name="actionReceitas_Fixas"/>
-     <addaction name="actionReceitas_Correntes"/>
-    </widget>
-    <addaction name="menuLan_amentos"/>
-    <addaction name="separator"/>
-    <addaction name="actionRelat_rios_2"/>
-   </widget>
-   <widget class="QMenu" name="menuInvestimento">
-    <property name="title">
-     <string>Investimento</string>
-    </property>
-    <addaction name="actionLan_amento_2"/>
-    <addaction name="actionMovimenta_es_2"/>
-    <addaction name="separator"/>
-    <addaction name="actionRelat_rios_3"/>
    </widget>
    <widget class="QMenu" name="menuEstoque">
     <property name="title">
@@ -751,7 +812,35 @@ border-top: 1px black ;</string>
     <property name="title">
      <string>Financeiro</string>
     </property>
+    <widget class="QMenu" name="menuDespesas">
+     <property name="title">
+      <string>Despesas</string>
+     </property>
+     <addaction name="actionLan_amento"/>
+     <addaction name="separator"/>
+     <addaction name="actionRelat_rios_5"/>
+    </widget>
+    <widget class="QMenu" name="menuReceitas_2">
+     <property name="title">
+      <string>Receitas</string>
+     </property>
+     <addaction name="actionLan_amento_4"/>
+     <addaction name="separator"/>
+     <addaction name="actionRelat_rios_6"/>
+    </widget>
+    <widget class="QMenu" name="menuInvestimento_2">
+     <property name="title">
+      <string>Investimento</string>
+     </property>
+     <addaction name="actionLan_amento_5"/>
+     <addaction name="actionMovimenta_o_3"/>
+     <addaction name="separator"/>
+     <addaction name="actionRelat_rios_7"/>
+    </widget>
     <addaction name="actionMovimenta_o_2"/>
+    <addaction name="menuDespesas"/>
+    <addaction name="menuReceitas_2"/>
+    <addaction name="menuInvestimento_2"/>
    </widget>
    <widget class="QMenu" name="menuOutros">
     <property name="title">
@@ -765,40 +854,26 @@ border-top: 1px black ;</string>
     </widget>
     <addaction name="menuEntregas"/>
    </widget>
+   <widget class="QMenu" name="menuCompras">
+    <property name="title">
+     <string>Compras</string>
+    </property>
+    <widget class="QMenu" name="menuRequisi_o">
+     <property name="title">
+      <string>Requisição</string>
+     </property>
+     <addaction name="actionLan_amento_6"/>
+    </widget>
+    <addaction name="menuRequisi_o"/>
+   </widget>
    <addaction name="menuSistema"/>
    <addaction name="menuCadastro"/>
-   <addaction name="menuDespesa"/>
-   <addaction name="menuReceitas"/>
+   <addaction name="menuCompras"/>
    <addaction name="menuFinanceiro"/>
-   <addaction name="menuInvestimento"/>
    <addaction name="menuEstoque"/>
    <addaction name="menuRelatorios"/>
    <addaction name="menuOutros"/>
    <addaction name="menuConfiguracoes"/>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
-  <widget class="QToolBar" name="toolBar">
-   <property name="windowTitle">
-    <string>toolBar</string>
-   </property>
-   <property name="movable">
-    <bool>true</bool>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonIconOnly</enum>
-   </property>
-   <property name="floatable">
-    <bool>true</bool>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
   </widget>
   <action name="actionReceitas">
    <property name="text">
@@ -1017,6 +1092,51 @@ border-top: 1px black ;</string>
   <action name="actionSair">
    <property name="text">
     <string>Sair</string>
+   </property>
+  </action>
+  <action name="actionLan_amento">
+   <property name="text">
+    <string>Lançamento</string>
+   </property>
+  </action>
+  <action name="actionRelat_rios_5">
+   <property name="text">
+    <string>Relatórios</string>
+   </property>
+  </action>
+  <action name="actionRelat_rios_6">
+   <property name="text">
+    <string>Relatórios</string>
+   </property>
+  </action>
+  <action name="actionReceitas_Fixas_2">
+   <property name="text">
+    <string>Receitas Fixas</string>
+   </property>
+  </action>
+  <action name="actionLan_amento_4">
+   <property name="text">
+    <string>Lançamento</string>
+   </property>
+  </action>
+  <action name="actionLan_amento_5">
+   <property name="text">
+    <string>Lançamento</string>
+   </property>
+  </action>
+  <action name="actionMovimenta_o_3">
+   <property name="text">
+    <string>Movimentação</string>
+   </property>
+  </action>
+  <action name="actionRelat_rios_7">
+   <property name="text">
+    <string>Relatórios</string>
+   </property>
+  </action>
+  <action name="actionLan_amento_6">
+   <property name="text">
+    <string>Lançamento</string>
    </property>
   </action>
  </widget>

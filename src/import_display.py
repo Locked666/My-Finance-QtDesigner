@@ -8,3 +8,4 @@ from ui.CadUser import  Ui_CadUser
 from ui.FrmGraficFinc import Ui_frm_dashboard
 from ui.CadEntregas import Ui_CadEntregas
 from ui.BootingSystem import Ui_booting_system
+from ui.CadProdutos import Ui_CadProduto

@@ -13,7 +13,7 @@ __version__= '1.0.0.0'
 
 PATH_CONFIG_INI = 'config.ini'
 
-MODE_DEBUG = True
+MODE_DEBUG = False
 
 
 

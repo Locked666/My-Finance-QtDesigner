@@ -1,11 +1,25 @@
 from model import Empresa,Fornecedor,SysConfig,Usuario,Entregas,About, CONN, Base,engine,session
 from datetime import datetime
 
-
+Base.metadata.create_all(bind=engine)
 
 class Database():
     def __init__(self) -> None:
         super().__init__()
+        
+
+    def non_base():
+            Base.metadata.create_all(bind=engine) 
+            sys = SysConfig()
+            session.add(sys)            
+            session.commit()
+
+            about = About()
+            session.add(about)
+            session.commit()
+
+    def config_database():
+        return Base,CONN ,engine,session
 
     def insert_table_empresa(cnpj:str,razao:str ,nome_fantasia:str=None,pj:str='j',
                              dt_abertura = datetime.now(),IE:str='',IM:str ='',contribuinte:str = 'N',simples:str = 'N',ramo:str='',rua:str='',numero:int=0,
@@ -255,7 +269,7 @@ class Database():
         for i in query:
             return i.chart_p    
 
-    def get_table_user(type:None, id:int =  None,usuario: str = None ):
+    def get_table_user(type=None, id:int =  None,usuario: str = None ):
         lista = []
 
         match type:
@@ -270,6 +284,7 @@ class Database():
                 for i in query: 
                     lista.append([i.user,i.senha,i.ativo,i.reset_senha,i.primeiro_acesso,i.bloqueado])
                 return lista
+             
 
             case "list_id":
                 query =  session.query(Usuario).all()
