@@ -163,7 +163,7 @@ class Ui_MainWindow(object):
         font.setItalic(False)
         self.frame.setFont(font)
         self.frame.setStyleSheet(u"font: 110 13pt \"Segoe UI\";\n"
-"background-color: rgb(225, 225, 225);\n"
+" /*background-color: rgb(225, 225, 225);*/\n"
 "text-align: left;\n"
 "")
         self.frame.setFrameShape(QFrame.StyledPanel)
@@ -336,7 +336,7 @@ class Ui_MainWindow(object):
 
         self.mdi_center = QMdiArea(self.frame_3)
         self.mdi_center.setObjectName(u"mdi_center")
-        self.mdi_center.setStyleSheet(u"background-color: rgb(240, 240, 240);")
+        self.mdi_center.setStyleSheet(u"")
         self.mdi_center.setFrameShape(QFrame.NoFrame)
         self.mdi_center.setFrameShadow(QFrame.Plain)
         self.mdi_center.setLineWidth(0)

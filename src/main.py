@@ -1386,6 +1386,15 @@ class CadastroProdutos(QDialog,Ui_CadProduto):
         super().__init__(parent=None)
         self.setWindowTitle(f"Cadastro de Produtos - My Finance {__version__}")
         self.setupUi(self)
+        self.disable_tab_widgets()
+        self.bnt_alterar.clicked.connect(lambda: self.disable_tab_widgets(False))
+    def disable_tab_widgets(self,status:bool = True):
+        # Itera por todas as abas e desativa seus widgets
+        for i in range(self.tabWidget.count()):
+            tab = self.tabWidget.widget(i)  # Obtém o widget da aba
+            for widget in tab.findChildren(QWidget):  # Encontra todos os widgets dentro da aba
+                widget.setDisabled(status)  # Desativa os widgets
+                
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self) -> None:
@@ -1399,7 +1408,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
 
         # Constrói a instância do widget a ser adicionado ao MDI
-        self.actionEmpresa.triggered.connect(lambda: CadastroEmpresa().exec())
+        self.actionEmpresa.triggered.connect(lambda:self.open_mdi_center(CadastroEmpresa(),"Cadastro da Empresa"))
         self.actionFornecedor.triggered.connect(lambda: self.open_mdi_center(CadastroFornecedor(),"Cadastro de Fornecedor"))
         self.actionRamo_Atividade.triggered.connect(lambda : self.open_mdi_center(CadastroRamoAtividade(),"Cadastro de Ramo de atividade"))
         self.actionCadUser.triggered.connect(lambda:self.open_mdi_center(CadatroUsuario(),"Cadastro de Usuário") )
@@ -1470,11 +1479,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         sub_window.show()
 
     def apply_stylesheet(self, stylesheet_path=fr'D:\Desenvolvimento\python\My-Finance-QtDesigner\src\stylesheets.qss'):
-        file = QFile(stylesheet_path)
-        if file.open(QFile.ReadOnly | QFile.Text):
-            stream = file.readAll().data().decode("utf-8")
-            app.setStyleSheet(stream)
-        file.close()
+        qss_file = QFile(stylesheet_path)
+        if qss_file.open(QFile.ReadOnly | QFile.Text):
+            stream = qss_file.readAll().data().decode()
+            # Aplica o estilo globalmente na aplicação
+            self.setStyleSheet(stream)
 
 
 

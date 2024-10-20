@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'CadProduto.ui'
+## Form generated from reading UI file 'CadProdutos.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.7.3
 ##
@@ -962,7 +962,7 @@ class Ui_CadProduto(object):
         self.frame_4.setObjectName(u"frame_4")
         self.frame_4.setMinimumSize(QSize(0, 50))
         self.frame_4.setMaximumSize(QSize(16777215, 50))
-        self.frame_4.setFrameShape(QFrame.Box)
+        self.frame_4.setFrameShape(QFrame.NoFrame)
         self.frame_4.setFrameShadow(QFrame.Plain)
         self.widget5 = QWidget(self.frame_4)
         self.widget5.setObjectName(u"widget5")

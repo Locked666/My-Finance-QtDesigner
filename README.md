@@ -65,3 +65,26 @@ My_Finance_QTDesigner/
 ```bash
     python func_deploy.py
 ```
+
+## Ultimas Atualizações: 
+
+* Adicionado Tela com progressBar que verifica itens necessários para funcionamento do sistema
+![Progresso de inicialização](./assests/imagens_readme/Inicio_progress.png)
+
+* Adicionado opção de salvar usuário na entrada, se deixar marcado ele salva/substituir se desmarcar ele exclui os dados salvos
+![Salvar Usuário na entrada](./assests/imagens_readme/tela_login.png)
+
+* Adicionado Menu Lateral com as imagens e dashboard configurado.
+![Tela Inicial](./assests/imagens_readme/tela_inicial.png)
+
+* Adicionado a opção de multi telas no sistema.
+![Opção de Multi Telas](./assests/imagens_readme/multi_tela.png)
+
+* Outras Funções adicionadas 
+
+- Consulta de CNPJ; 
+- next e back de cadastro pelos butões de nav
+
+
+
+

@@ -1,0 +1,103 @@
+/* dark_theme_custom.qss */
+
+/* Cores Personalizadas */
+.color1 {
+    background-color: #111625;
+}
+
+.color2 {
+    background-color: #341931;
+}
+
+.color3 {
+    background-color: #571b3c;
+}
+
+.color4 {
+    background-color: #7a1e48;
+}
+
+.color5 {
+    background-color: #9d2053;
+}
+
+/* Estilos para QWidget */
+QWidget {
+    background-color: #111625; /* color1 */
+    color: #ffffff;
+    font-family: Arial;
+}
+
+/* Estilos para QPushButton */
+QPushButton {
+    background-color: #341931; /* color2 */
+    color: #ffffff;
+    /* border: 2px solid #7a1e48; color4 */
+    padding: 5px 10px;
+}
+
+QPushButton:hover {
+    /* background-color: #571b3c; color3 */
+}
+
+QPushButton:pressed {
+    /* background-color: #7a1e48; color4 */
+}
+
+/* Estilos para QLineEdit */
+QLineEdit {
+    background-color: #341931; /* color2 */
+    color: #ffffff;
+    /* border: 1px solid #7a1e48; color4 */
+    padding: 3px;
+}
+
+/* Estilos para QComboBox */
+QComboBox {
+    background-color: #341931; /* color2 */
+    color: #ffffff;
+    /* border: 1px solid #7a1e48; color4 */
+    padding: 3px;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #571b3c; /* color3 */
+    /* border: 1px solid #9d2053; color5 */
+    color: #ffffff;
+}
+
+/* Estilos para QMenu */
+QMenu {
+    background-color: #341931; /* color2 */
+    color: #ffffff;
+}
+
+QMenu::item:selected {
+    background-color: #7a1e48; /* color4 */
+}
+
+/* Estilos para QStatusBar */
+QStatusBar {
+    background-color: #341931; /* color2 */
+    color: #ffffff;
+    border-top: 1px solid #7a1e48; color4
+}
+
+/* Estilos para QFrame */
+QFrame {
+    background-color: #111625; /* color1 */
+    /* border: 2px solid #9d2053; color5 */
+}
+
+/* Estilos para QMdiArea */
+
+QMdiArea {
+    background-color: #111625; /* color1 */
+    border: none; /* Remove borda */
+}
+/* Estilos para QLabel */
+QLabel {
+    background-color: transparent; /* Pode usar transparente ou definir uma cor */
+    color: #ffffff;
+    font-size: 14px;
+}

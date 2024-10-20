@@ -94,7 +94,7 @@
          </property>
          <property name="styleSheet">
           <string notr="true">font: 110 13pt &quot;Segoe UI&quot;;
-background-color: rgb(225, 225, 225);
+ /*background-color: rgb(225, 225, 225);*/
 text-align: left;
 </string>
          </property>
@@ -576,7 +576,7 @@ border-top: 1px black ;</string>
        <item>
         <widget class="QMdiArea" name="mdi_center">
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(240, 240, 240);</string>
+          <string notr="true"/>
          </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
