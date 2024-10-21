@@ -13,6 +13,10 @@ def consulta_cnpj(cnpj):
     return resp['nome'], resp['fantasia'],resp['abertura'],resp['natureza_juridica'],resp['logradouro'], resp['numero'], resp['complemento'], resp['bairro'], resp['municipio'], resp['uf'], resp['cep'],  resp['email'],resp['telefone']
 
 
+
+
+
+
 if __name__=='__main__':
     c = consulta_cnpj(41794502000119)
     print(c)

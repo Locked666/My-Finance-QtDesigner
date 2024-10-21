@@ -1388,6 +1388,9 @@ class CadastroProdutos(QDialog,Ui_CadProduto):
         self.setupUi(self)
         self.disable_tab_widgets()
         self.bnt_alterar.clicked.connect(lambda: self.disable_tab_widgets(False))
+        self.bnt_cancelar.clicked.connect(lambda: self.disable_tab_widgets(True))
+        self.bnt_adicionar.clicked.connect(self.callback_bnt_save)
+
     def disable_tab_widgets(self,status:bool = True):
         # Itera por todas as abas e desativa seus widgets
         for i in range(self.tabWidget.count()):
@@ -1395,6 +1398,37 @@ class CadastroProdutos(QDialog,Ui_CadProduto):
             for widget in tab.findChildren(QWidget):  # Encontra todos os widgets dentro da aba
                 widget.setDisabled(status)  # Desativa os widgets
                 
+
+    def associe_field_and_table(self,field):
+        pass
+
+    def callback_bnt_save(self):
+        lista_info_dic = ['QLineEdit','QComboBox','QCheckBox','QLCDNumber']
+        
+
+        for i in range(self.tabWidget.count()):
+            tab = self.tabWidget.widget(i)  # Obtém o widget da aba
+            for widget in tab.findChildren(QWidget):  # Encontra todos os widgets dentro da aba
+                widget_type = type(widget).__name__  # Captura o tipo do widget
+                widget_name = widget.objectName()  # Captura o nome do widget
+                if widget_type in lista_info_dic:
+                    a = {
+                                    'tipo':f"{widget_type}",
+                                    'nome_widget': f"{widget_name}",
+                                }
+                    
+                # if widget_type != 'QScrollBar':
+                #     if widget_type != 'QHeaderView':
+                #         if 'qt_scrollarea' not in widget_name:
+                #             if 'QAbstractButton' not in widget_type:
+                                # a = {
+                                #     'tipo':f"{widget_type}",
+                                #     'nome_widget': f"{widget_name}",
+                                # }
+
+                    print(a)
+
+
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self) -> None:

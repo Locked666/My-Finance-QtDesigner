@@ -206,7 +206,7 @@ text-align: left;
             </property>
             <property name="icon">
              <iconset resource="../src/resources/icons.qrc">
-              <normaloff>:/icons/dashboard_dark.png</normaloff>:/icons/dashboard_dark.png</iconset>
+              <normaloff>:/icons/dashboard_light.png</normaloff>:/icons/dashboard_light.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -259,7 +259,7 @@ text-align: left;
             </property>
             <property name="icon">
              <iconset resource="../src/resources/icons.qrc">
-              <normaloff>:/icons/despesa_dark.png</normaloff>:/icons/despesa_dark.png</iconset>
+              <normaloff>:/icons/despesa_light.png</normaloff>:/icons/despesa_light.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -330,7 +330,7 @@ text-align: left;
             </property>
             <property name="icon">
              <iconset resource="../src/resources/icons.qrc">
-              <normaloff>:/icons/receita_dark.png</normaloff>:/icons/receita_dark.png</iconset>
+              <normaloff>:/icons/receita_light.png</normaloff>:/icons/receita_light.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -380,7 +380,7 @@ text-align: left;
             </property>
             <property name="icon">
              <iconset resource="../src/resources/icons.qrc">
-              <normaloff>:/icons/investimento_dark.png</normaloff>:/icons/investimento_dark.png</iconset>
+              <normaloff>:/icons/investimento_light.png</normaloff>:/icons/investimento_light.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -430,7 +430,7 @@ text-align: left;
             </property>
             <property name="icon">
              <iconset resource="../src/resources/icons.qrc">
-              <normaloff>:/icons/carteira_dark.png</normaloff>:/icons/carteira_dark.png</iconset>
+              <normaloff>:/icons/carteira_light.png</normaloff>:/icons/carteira_light.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -480,7 +480,7 @@ text-align: left;
             </property>
             <property name="icon">
              <iconset resource="../src/resources/icons.qrc">
-              <normaloff>:/icons/inventario_dark.png</normaloff>:/icons/inventario_dark.png</iconset>
+              <normaloff>:/icons/inventario_light.png</normaloff>:/icons/inventario_light.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -551,7 +551,7 @@ border-top: 1px black ;</string>
             </property>
             <property name="icon">
              <iconset resource="../src/resources/icons.qrc">
-              <normaloff>:/icons/config_dark.png</normaloff>:/icons/config_dark.png</iconset>
+              <normaloff>:/icons/config_light.png</normaloff>:/icons/config_light.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -612,7 +612,7 @@ border-top: 1px black ;</string>
           <enum>QMdiArea::SubWindowView</enum>
          </property>
          <property name="documentMode">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <property name="tabsClosable">
           <bool>false</bool>

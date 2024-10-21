@@ -23,33 +23,69 @@
 
 /* Estilos para QWidget */
 QWidget {
-    background-color: #111625; /* color1 */
+    background-color: rgb(13, 9, 36); /* color1 */
     color: #ffffff;
     font-family: Arial;
+
+}
+QTabWidget {
+    background-color: rgb(13, 9, 36); /* color1 */
+    color: #ffffff;
+    font-family: Arial;
+    
+}
+
+QTabWidget::pane {
+    border: 1px solid lightgray;
+    top:-1px; 
+    background: rgb(245, 245, 245);; 
+  } 
+  
+  QTabBar::tab {
+    background-color: rgb(13, 9, 36);
+    border: 1px solid rgb(228, 225, 225); 
+    color: #ffffff;
+    font-family: Arial;
+    padding: 8px;
+  } 
+  
+  QTabBar::tab:selected { 
+    background-color: rgb(18, 5, 88);
+    margin-bottom: -1px; 
+  }
+
+
+QHeaderView {
+    background-color:rgb(13, 9, 36)
+}
+QHeaderView::section {
+    background-color:rgb(13, 9, 36)
 }
 
 /* Estilos para QPushButton */
 QPushButton {
-    background-color: #341931; /* color2 */
+    background-color: rgb(13, 9, 36); /* color2 */
     color: #ffffff;
     /* border: 2px solid #7a1e48; color4 */
     padding: 5px 10px;
+
 }
 
 QPushButton:hover {
-    /* background-color: #571b3c; color3 */
+    background-color: #3c0e70;
 }
 
-QPushButton:pressed {
-    /* background-color: #7a1e48; color4 */
-}
+/* QPushButton: {
+    background-color: rgb(13, 9, 36); 
+} */
 
 /* Estilos para QLineEdit */
 QLineEdit {
-    background-color: #341931; /* color2 */
+    background-color: rgb(86, 80, 110); /* color2 */
     color: #ffffff;
-    /* border: 1px solid #7a1e48; color4 */
+    border: 0.5px solid rgb(64, 63, 83) ;
     padding: 3px;
+
 }
 
 /* Estilos para QComboBox */
@@ -78,9 +114,9 @@ QMenu::item:selected {
 
 /* Estilos para QStatusBar */
 QStatusBar {
-    background-color: #341931; /* color2 */
+    background-color: rgb(13, 9, 36); /* color2 */
     color: #ffffff;
-    border-top: 1px solid #7a1e48; color4
+    border-top: 1px solid #7a1e48; 
 }
 
 /* Estilos para QFrame */
@@ -92,7 +128,8 @@ QFrame {
 /* Estilos para QMdiArea */
 
 QMdiArea {
-    background-color: #111625; /* color1 */
+    background-color: rgb(13, 9, 36);
+    /* background-color: #111625; color1 */
     border: none; /* Remove borda */
 }
 /* Estilos para QLabel */

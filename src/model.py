@@ -132,6 +132,42 @@ class Usuario(Base):
     obs = Column(String)
     log_inclusao = Column(DateTime, default=datetime.now()) 
 
+
+class Produtos(Base):
+    __tablename__='produtos'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    descricao = Column(String)
+    nome_reduzido = Column(String)
+    tipo_produto = Column(Integer,default=0, comment='0 - Mercadoria para revenda, 1 - Consumo, 2 - MP, 3 - bem movel')
+    ativo = Column(String, default='S', comment='S - Sim, N - Não ')
+    unidade = Column(String)
+    codigo_fab = Column(String)
+    qt_unid = Column(String)
+    medida = Column(String)
+    grupo = Column(Integer)
+    sub_grupo = Column(Integer)
+    categoria = Column(Integer)
+    marca =  Column(Integer)
+    grupo_preco = Column(Integer)
+    controlado = Column(String,default='N', comment='S - Sim, N - Não ')
+    imp_ticket = Column(String,default='N', comment='S - Sim, N - Não ')
+    risco = Column(String,default='N', comment='S - Sim, N - Não ')
+
+class ProdutoPreco(Base):
+    __tablename__='produto_preco'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    empresa = Column(Integer, ForeignKey('empresa.id'), nullable=False, comment='Id da tabela empresa')
+    produto = Column(Integer, ForeignKey('produtos.id'),nullable=False, comment='Id da tabela de produtos')
+    custo_indireto = Column(Float, default=0.0)
+    custo_direto = Column(Float, default=0.0)
+    custo_impostos = Column(Float, default=0.0)
+    custo_diff = Column(Float, default=0.0)
+    margem_direta = Column(Float, default=0.0)
+    markup = Column(Float, default=0.0)
+    preco = Column(Float, default=0.0)
+    preco_sugerido = Column(Float, default=0.0)
+
+
 if not os.path.exists(PATH_DATABASE):
     Base.metadata.create_all(bind=engine) 
     sys = SysConfig()

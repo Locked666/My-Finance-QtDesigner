@@ -13,7 +13,7 @@ __version__= '1.0.0.0'
 
 PATH_CONFIG_INI = 'config.ini'
 
-MODE_DEBUG = False
+MODE_DEBUG = True
 
 
 
@@ -61,4 +61,5 @@ USERNAME_INI = config['Settings']['username']
 PASSWORD_INI = config['Settings']['password']
 
 if __name__=='__main__':
-    complement_ini('Settings', 'username', 'oiiii')
+    # complement_ini('Settings', 'username', 'oiiii')
+    pass
