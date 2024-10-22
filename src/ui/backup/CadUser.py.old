@@ -15,20 +15,27 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractSpinBox, QApplication, QCheckBox, QDateEdit,
-    QDialog, QGroupBox, QHBoxLayout, QLCDNumber,
-    QLabel, QLayout, QLineEdit, QPlainTextEdit,
-    QPushButton, QSizePolicy, QSpacerItem, QTabWidget,
-    QWidget)
+from PySide6.QtWidgets import (QAbstractScrollArea, QAbstractSpinBox, QApplication, QCheckBox,
+    QComboBox, QDateEdit, QDialog, QFrame,
+    QGroupBox, QHBoxLayout, QLCDNumber, QLabel,
+    QLayout, QLineEdit, QPlainTextEdit, QPushButton,
+    QScrollArea, QSizePolicy, QSpacerItem, QTabWidget,
+    QVBoxLayout, QWidget)
+import icons_rc
 
 class Ui_CadUser(object):
     def setupUi(self, CadUser):
         if not CadUser.objectName():
             CadUser.setObjectName(u"CadUser")
-        CadUser.resize(762, 611)
+        CadUser.resize(762, 660)
+        CadUser.setMinimumSize(QSize(762, 660))
+        self.verticalLayout_2 = QVBoxLayout(CadUser)
+        self.verticalLayout_2.setSpacing(0)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.verticalLayout_2.setContentsMargins(0, -1, -1, 0)
         self.tabWidget = QTabWidget(CadUser)
         self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setGeometry(QRect(0, 0, 761, 521))
+        self.tabWidget.setMinimumSize(QSize(744, 539))
         font = QFont()
         font.setFamilies([u"Segoe UI"])
         font.setPointSize(12)
@@ -48,12 +55,15 @@ class Ui_CadUser(object):
         self.text_nome = QLineEdit(self.DdPrincipais)
         self.text_nome.setObjectName(u"text_nome")
         self.text_nome.setGeometry(QRect(20, 70, 591, 21))
+        self.text_nome.setCursorMoveStyle(Qt.VisualMoveStyle)
+        self.text_nome.setClearButtonEnabled(True)
         self.label_2 = QLabel(self.DdPrincipais)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setGeometry(QRect(20, 100, 131, 16))
         self.text_email = QLineEdit(self.DdPrincipais)
         self.text_email.setObjectName(u"text_email")
         self.text_email.setGeometry(QRect(20, 120, 591, 21))
+        self.text_email.setInputMethodHints(Qt.ImhEmailCharactersOnly|Qt.ImhLowercaseOnly)
         self.label_3 = QLabel(self.DdPrincipais)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setGeometry(QRect(20, 150, 131, 16))
@@ -80,6 +90,7 @@ class Ui_CadUser(object):
         self.text_password = QLineEdit(self.groupBox)
         self.text_password.setObjectName(u"text_password")
         self.text_password.setGeometry(QRect(10, 100, 251, 21))
+        self.text_password.setMaximumSize(QSize(251, 21))
         self.text_password.setEchoMode(QLineEdit.PasswordEchoOnEdit)
         self.text_password.setDragEnabled(False)
         self.text_password.setReadOnly(False)
@@ -89,9 +100,17 @@ class Ui_CadUser(object):
         self.text_user = QLineEdit(self.groupBox)
         self.text_user.setObjectName(u"text_user")
         self.text_user.setGeometry(QRect(10, 50, 251, 21))
+        self.text_user.setMinimumSize(QSize(251, 21))
         self.label_6 = QLabel(self.groupBox)
         self.label_6.setObjectName(u"label_6")
         self.label_6.setGeometry(QRect(10, 80, 131, 16))
+        self.comboBox = QComboBox(self.groupBox)
+        self.comboBox.addItem("")
+        self.comboBox.setObjectName(u"comboBox")
+        self.comboBox.setGeometry(QRect(10, 150, 251, 22))
+        self.label_10 = QLabel(self.groupBox)
+        self.label_10.setObjectName(u"label_10")
+        self.label_10.setGeometry(QRect(10, 130, 221, 16))
         self.groupBox_2 = QGroupBox(self.DdPrincipais)
         self.groupBox_2.setObjectName(u"groupBox_2")
         self.groupBox_2.setGeometry(QRect(360, 210, 331, 281))
@@ -121,10 +140,13 @@ class Ui_CadUser(object):
         self.text_cpf.setObjectName(u"text_cpf")
         self.text_cpf.setGeometry(QRect(380, 170, 231, 21))
         self.text_cpf.setCursorPosition(14)
+        self.text_cpf.setDragEnabled(False)
         self.text_cpf.setCursorMoveStyle(Qt.VisualMoveStyle)
         self.check_ativo = QCheckBox(self.DdPrincipais)
         self.check_ativo.setObjectName(u"check_ativo")
         self.check_ativo.setGeometry(QRect(520, 10, 70, 17))
+        self.check_ativo.setChecked(True)
+        self.check_ativo.setTristate(False)
         self.tabWidget.addTab(self.DdPrincipais, "")
         self.DdAdicionais = QWidget()
         self.DdAdicionais.setObjectName(u"DdAdicionais")
@@ -192,7 +214,7 @@ class Ui_CadUser(object):
         self.check_whats.setChecked(False)
         self.groupBox_3 = QGroupBox(self.DdAdicionais)
         self.groupBox_3.setObjectName(u"groupBox_3")
-        self.groupBox_3.setGeometry(QRect(380, 160, 261, 251))
+        self.groupBox_3.setGeometry(QRect(380, 160, 261, 221))
         self.check_add_cliente = QCheckBox(self.groupBox_3)
         self.check_add_cliente.setObjectName(u"check_add_cliente")
         self.check_add_cliente.setGeometry(QRect(20, 30, 201, 17))
@@ -202,20 +224,70 @@ class Ui_CadUser(object):
         self.tabWidget.addTab(self.DdAdicionais, "")
         self.Permission = QWidget()
         self.Permission.setObjectName(u"Permission")
+        self.groupbox_acesso_empresa = QGroupBox(self.Permission)
+        self.groupbox_acesso_empresa.setObjectName(u"groupbox_acesso_empresa")
+        self.groupbox_acesso_empresa.setGeometry(QRect(10, 10, 251, 300))
+        self.groupbox_acesso_empresa.setMinimumSize(QSize(251, 300))
+        self.groupbox_acesso_empresa.setMaximumSize(QSize(251, 300))
+        self.groupbox_acesso_empresa.setFlat(False)
+        self.groupbox_acesso_empresa.setCheckable(False)
+        self.scrollarea_acesso_empresa = QScrollArea(self.groupbox_acesso_empresa)
+        self.scrollarea_acesso_empresa.setObjectName(u"scrollarea_acesso_empresa")
+        self.scrollarea_acesso_empresa.setGeometry(QRect(1, 22, 249, 261))
+        self.scrollarea_acesso_empresa.setFrameShape(QFrame.NoFrame)
+        self.scrollarea_acesso_empresa.setFrameShadow(QFrame.Plain)
+        self.scrollarea_acesso_empresa.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        self.scrollarea_acesso_empresa.setSizeAdjustPolicy(QAbstractScrollArea.AdjustIgnored)
+        self.scrollarea_acesso_empresa.setWidgetResizable(True)
+        self.scrollAreaWidget_empresa = QWidget()
+        self.scrollAreaWidget_empresa.setObjectName(u"scrollAreaWidget_empresa")
+        self.scrollAreaWidget_empresa.setGeometry(QRect(0, 0, 232, 261))
+        self.scrollarea_acesso_empresa.setWidget(self.scrollAreaWidget_empresa)
         self.tabWidget.addTab(self.Permission, "")
-        self.layoutWidget = QWidget(CadUser)
-        self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(370, 530, 366, 25))
-        self.horizontalLayout_3 = QHBoxLayout(self.layoutWidget)
+
+        self.verticalLayout_2.addWidget(self.tabWidget)
+
+        self.frame = QFrame(CadUser)
+        self.frame.setObjectName(u"frame")
+        self.frame.setMaximumSize(QSize(1000, 94))
+        self.frame.setFrameShape(QFrame.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout = QVBoxLayout(self.frame)
+        self.verticalLayout.setSpacing(15)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(9, -1, -1, 10)
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.label_9 = QLabel(self.frame)
+        self.label_9.setObjectName(u"label_9")
+
+        self.horizontalLayout_4.addWidget(self.label_9)
+
+        self.lbl_total = QLabel(self.frame)
+        self.lbl_total.setObjectName(u"lbl_total")
+
+        self.horizontalLayout_4.addWidget(self.lbl_total)
+
+
+        self.horizontalLayout_6.addLayout(self.horizontalLayout_4)
+
+        self.horizontalSpacer_3 = QSpacerItem(178, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_6.addItem(self.horizontalSpacer_3)
+
+        self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.bnt_back_full = QPushButton(self.layoutWidget)
+        self.bnt_back_full = QPushButton(self.frame)
         self.bnt_back_full.setObjectName(u"bnt_back_full")
+        self.bnt_back_full.setMinimumSize(QSize(75, 23))
 
         self.horizontalLayout_3.addWidget(self.bnt_back_full)
 
-        self.bnt_back = QPushButton(self.layoutWidget)
+        self.bnt_back = QPushButton(self.frame)
         self.bnt_back.setObjectName(u"bnt_back")
+        self.bnt_back.setMinimumSize(QSize(75, 23))
 
         self.horizontalLayout_3.addWidget(self.bnt_back)
 
@@ -223,28 +295,37 @@ class Ui_CadUser(object):
 
         self.horizontalLayout_3.addItem(self.horizontalSpacer_2)
 
-        self.bnt_next = QPushButton(self.layoutWidget)
+        self.bnt_next = QPushButton(self.frame)
         self.bnt_next.setObjectName(u"bnt_next")
+        self.bnt_next.setMaximumSize(QSize(75, 23))
 
         self.horizontalLayout_3.addWidget(self.bnt_next)
 
-        self.bnt_next_full = QPushButton(self.layoutWidget)
+        self.bnt_next_full = QPushButton(self.frame)
         self.bnt_next_full.setObjectName(u"bnt_next_full")
+        self.bnt_next_full.setMaximumSize(QSize(75, 23))
 
         self.horizontalLayout_3.addWidget(self.bnt_next_full)
 
-        self.layoutWidget_2 = QWidget(CadUser)
-        self.layoutWidget_2.setObjectName(u"layoutWidget_2")
-        self.layoutWidget_2.setGeometry(QRect(15, 570, 721, 32))
-        self.horizontalLayout = QHBoxLayout(self.layoutWidget_2)
+
+        self.horizontalLayout_6.addLayout(self.horizontalLayout_3)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_6)
+
+        self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setSizeConstraint(QLayout.SetDefaultConstraint)
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.bnt_alterar = QPushButton(self.layoutWidget_2)
+        self.horizontalLayout.setContentsMargins(0, -1, -1, -1)
+        self.bnt_alterar = QPushButton(self.frame)
         self.bnt_alterar.setObjectName(u"bnt_alterar")
         self.bnt_alterar.setMinimumSize(QSize(100, 30))
         self.bnt_alterar.setMaximumSize(QSize(131, 41))
+        icon = QIcon()
+        icon.addFile(u":/icons/pencil.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.bnt_alterar.setIcon(icon)
+        self.bnt_alterar.setIconSize(QSize(25, 25))
 
         self.horizontalLayout.addWidget(self.bnt_alterar)
 
@@ -252,67 +333,77 @@ class Ui_CadUser(object):
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
 
-        self.bnt_adicionar = QPushButton(self.layoutWidget_2)
+        self.bnt_adicionar = QPushButton(self.frame)
         self.bnt_adicionar.setObjectName(u"bnt_adicionar")
         self.bnt_adicionar.setEnabled(True)
-        self.bnt_adicionar.setMinimumSize(QSize(100, 0))
+        self.bnt_adicionar.setMinimumSize(QSize(100, 30))
         self.bnt_adicionar.setMaximumSize(QSize(131, 41))
+        icon1 = QIcon()
+        icon1.addFile(u":/icons/adicionar.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.bnt_adicionar.setIcon(icon1)
+        self.bnt_adicionar.setIconSize(QSize(25, 25))
 
         self.horizontalLayout.addWidget(self.bnt_adicionar)
 
-        self.bnt_salvar = QPushButton(self.layoutWidget_2)
+        self.bnt_salvar = QPushButton(self.frame)
         self.bnt_salvar.setObjectName(u"bnt_salvar")
         self.bnt_salvar.setEnabled(False)
         self.bnt_salvar.setMinimumSize(QSize(100, 0))
-        self.bnt_salvar.setMaximumSize(QSize(131, 41))
+        self.bnt_salvar.setMaximumSize(QSize(100, 36))
+        icon2 = QIcon()
+        icon2.addFile(u":/icons/save.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.bnt_salvar.setIcon(icon2)
+        self.bnt_salvar.setIconSize(QSize(20, 20))
 
         self.horizontalLayout.addWidget(self.bnt_salvar)
 
-        self.bnt_search = QPushButton(self.layoutWidget_2)
+        self.bnt_search = QPushButton(self.frame)
         self.bnt_search.setObjectName(u"bnt_search")
-        self.bnt_search.setMinimumSize(QSize(100, 0))
-        self.bnt_search.setMaximumSize(QSize(131, 41))
+        self.bnt_search.setMinimumSize(QSize(100, 30))
+        self.bnt_search.setMaximumSize(QSize(100, 36))
+        icon3 = QIcon()
+        icon3.addFile(u":/icons/search.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.bnt_search.setIcon(icon3)
+        self.bnt_search.setIconSize(QSize(17, 17))
         self.bnt_search.setCheckable(False)
         self.bnt_search.setChecked(False)
         self.bnt_search.setAutoRepeat(False)
 
         self.horizontalLayout.addWidget(self.bnt_search)
 
-        self.bnt_excluir = QPushButton(self.layoutWidget_2)
+        self.bnt_excluir = QPushButton(self.frame)
         self.bnt_excluir.setObjectName(u"bnt_excluir")
-        self.bnt_excluir.setMinimumSize(QSize(100, 0))
+        self.bnt_excluir.setMinimumSize(QSize(100, 30))
         self.bnt_excluir.setMaximumSize(QSize(131, 41))
+        icon4 = QIcon()
+        icon4.addFile(u":/icons/excluir.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.bnt_excluir.setIcon(icon4)
+        self.bnt_excluir.setIconSize(QSize(25, 25))
         self.bnt_excluir.setCheckable(False)
         self.bnt_excluir.setChecked(False)
         self.bnt_excluir.setAutoRepeat(False)
 
         self.horizontalLayout.addWidget(self.bnt_excluir)
 
-        self.bnt_cancelar = QPushButton(self.layoutWidget_2)
+        self.bnt_cancelar = QPushButton(self.frame)
         self.bnt_cancelar.setObjectName(u"bnt_cancelar")
-        self.bnt_cancelar.setMinimumSize(QSize(100, 0))
+        self.bnt_cancelar.setMinimumSize(QSize(100, 30))
         self.bnt_cancelar.setMaximumSize(QSize(131, 41))
+        icon5 = QIcon()
+        icon5.addFile(u":/icons/error.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.bnt_cancelar.setIcon(icon5)
+        self.bnt_cancelar.setIconSize(QSize(25, 25))
         self.bnt_cancelar.setCheckable(False)
         self.bnt_cancelar.setChecked(False)
         self.bnt_cancelar.setAutoRepeat(False)
 
         self.horizontalLayout.addWidget(self.bnt_cancelar)
 
-        self.layoutWidget_3 = QWidget(CadUser)
-        self.layoutWidget_3.setObjectName(u"layoutWidget_3")
-        self.layoutWidget_3.setGeometry(QRect(10, 530, 139, 15))
-        self.horizontalLayout_4 = QHBoxLayout(self.layoutWidget_3)
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.label_9 = QLabel(self.layoutWidget_3)
-        self.label_9.setObjectName(u"label_9")
 
-        self.horizontalLayout_4.addWidget(self.label_9)
+        self.verticalLayout.addLayout(self.horizontalLayout)
 
-        self.lbl_total = QLabel(self.layoutWidget_3)
-        self.lbl_total.setObjectName(u"lbl_total")
 
-        self.horizontalLayout_4.addWidget(self.lbl_total)
+        self.verticalLayout_2.addWidget(self.frame)
 
 
         self.retranslateUi(CadUser)
@@ -329,9 +420,10 @@ class Ui_CadUser(object):
         self.text_nome.setInputMask("")
         self.label_2.setText(QCoreApplication.translate("CadUser", u"E-mail :", None))
         self.text_email.setInputMask("")
+        self.text_email.setPlaceholderText(QCoreApplication.translate("CadUser", u"user@mail.com", None))
         self.label_3.setText(QCoreApplication.translate("CadUser", u"Telefone :", None))
         self.text_phone.setInputMask(QCoreApplication.translate("CadUser", u"(##) #####-####", None))
-        self.text_phone.setText(QCoreApplication.translate("CadUser", u"() ------", None))
+        self.text_phone.setText(QCoreApplication.translate("CadUser", u"() -", None))
         self.label_4.setText(QCoreApplication.translate("CadUser", u"Data de Nascimento:", None))
         self.groupBox.setTitle(QCoreApplication.translate("CadUser", u"Configura\u00e7\u00f5es de usu\u00e1rio", None))
         self.text_password.setInputMask("")
@@ -340,6 +432,9 @@ class Ui_CadUser(object):
         self.text_user.setInputMask("")
         self.text_user.setText("")
         self.label_6.setText(QCoreApplication.translate("CadUser", u"Senha :", None))
+        self.comboBox.setItemText(0, QCoreApplication.translate("CadUser", u"Administrador", None))
+
+        self.label_10.setText(QCoreApplication.translate("CadUser", u"Grupo de Usu\u00e1rio :", None))
         self.groupBox_2.setTitle(QCoreApplication.translate("CadUser", u"Op\u00e7\u00f5es de Usu\u00e1rio :", None))
         self.check_reset_senha.setText(QCoreApplication.translate("CadUser", u"Resetar Senha", None))
         self.check_first_acesso.setText(QCoreApplication.translate("CadUser", u"Primeiro Acesso", None))
@@ -347,7 +442,7 @@ class Ui_CadUser(object):
         self.label_7.setText(QCoreApplication.translate("CadUser", u"Observa\u00e7\u00f5es:", None))
         self.label_8.setText(QCoreApplication.translate("CadUser", u"CPF :", None))
         self.text_cpf.setInputMask(QCoreApplication.translate("CadUser", u"###.###.###-##", None))
-        self.text_cpf.setText(QCoreApplication.translate("CadUser", u"000.000.000-00", None))
+        self.text_cpf.setText(QCoreApplication.translate("CadUser", u"..-", None))
         self.check_ativo.setText(QCoreApplication.translate("CadUser", u"Ativo", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.DdPrincipais), QCoreApplication.translate("CadUser", u"Dados Principais", None))
         self.text_celular.setInputMask(QCoreApplication.translate("CadUser", u"(##) #####-####", None))
@@ -367,7 +462,10 @@ class Ui_CadUser(object):
         self.check_add_cliente.setText(QCoreApplication.translate("CadUser", u"Adicionar como Cliente", None))
         self.check_add_fornecedor.setText(QCoreApplication.translate("CadUser", u"Adicionar como fornecedor", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.DdAdicionais), QCoreApplication.translate("CadUser", u"Dados Adicionais", None))
+        self.groupbox_acesso_empresa.setTitle(QCoreApplication.translate("CadUser", u"Acesso a empresa.", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Permission), QCoreApplication.translate("CadUser", u"Permiss\u00f5es", None))
+        self.label_9.setText(QCoreApplication.translate("CadUser", u"Quantidade de cadastros:", None))
+        self.lbl_total.setText(QCoreApplication.translate("CadUser", u"0", None))
 #if QT_CONFIG(tooltip)
         self.bnt_back_full.setToolTip(QCoreApplication.translate("CadUser", u"<html><head/><body><p>Ir para o primeiro...</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -405,7 +503,5 @@ class Ui_CadUser(object):
 #if QT_CONFIG(shortcut)
         self.bnt_cancelar.setShortcut(QCoreApplication.translate("CadUser", u"Alt+C", None))
 #endif // QT_CONFIG(shortcut)
-        self.label_9.setText(QCoreApplication.translate("CadUser", u"Quantidade de cadastros:", None))
-        self.lbl_total.setText(QCoreApplication.translate("CadUser", u"0", None))
     # retranslateUi
 

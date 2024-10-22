@@ -1,7 +1,13 @@
 from model import Empresa,Fornecedor,SysConfig,Usuario,Entregas,About, CONN, Base,engine,session
+
 from datetime import datetime
+import logging
+
 
 Base.metadata.create_all(bind=engine)
+
+# logging.basicConfig()
+# logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 
 class Database():
     def __init__(self) -> None:
@@ -324,14 +330,15 @@ class Database():
         else:
             return False, "ID deve ser um inteiro ou uma lista"
 
-    def insert_table_user(id:int = None,type:str = 'insert',nome:str= None ,cpf:str= None,user:str= None,senha:str= None,ativo:str= None,reset_senha:str= None,primeiro_acesso:str= None,bloqueado:str= None
-                          ,end_rua:str= None,end_numero:str= None,end_bairro:str= None,end_complemento:str= None,end_cep:str= None,end_cidade:str= None,end_uf:str= None,
-                          celular:str= None,p_whats:str= None,telefone:str= None,email:str= None,obs:str= None):
+    def insert_table_user(id:int = None,type:str = 'insert',nome:str= None,empresa:int = 1 ,cpf:str= '',user:str= None,senha:str= None,ativo:str= 'N',reset_senha:str= 'N',primeiro_acesso:str= 'N',bloqueado:str= 'S'
+                          ,end_rua:str= '',end_numero:int=0,end_bairro:str= '',end_complemento:str= '',end_cep:str= '',end_cidade:str= '',end_uf:str= '',
+                          celular:str= '',p_whats:str= 'N',telefone:str= '',email:str= '',obs:str= ''):
         match type:
             case 'insert':
                 try:
                     new_user = Usuario(
                         nome=nome, 
+                        empresa = 1,
                         cpf=cpf, 
                         user=user,
                         senha=senha, 
@@ -359,6 +366,7 @@ class Database():
 
                     return(True,new_user.id)
                 except ValueError as e:
+                    print(e)
                     session.rollback()
                     return(False,str(e))    
 
@@ -369,31 +377,33 @@ class Database():
                     if User is None:
                         return (False, "Usuário  não encontrada.") 
                     
-                    User.nome,nome, 
-                    User.cpf=cpf, 
-                    User.user=user,
-                    User.senha=senha, 
-                    User.ativo=ativo, 
-                    User.reset_senha=reset_senha,
-                    User.primeiro_acesso=primeiro_acesso, 
-                    User.bloqueado=bloqueado, 
-                    User.end_rua=end_rua,
-                    User.end_numero=end_numero,
-                    User.end_bairro=end_bairro,
-                    User.end_complemento=end_complemento,
-                    User.end_cep=end_cep,
-                    User.end_cidade=end_cidade,
-                    User.end_uf=end_uf,
-                    User.celular=celular,
-                    User.p_whats=p_whats,
-                    User.telefone=telefone,
-                    User.email=email,
+                    User.nome=nome
+                    User.empresa = empresa
+                    User.cpf=cpf
+                    User.user=user
+                    User.senha=senha
+                    User.ativo=ativo
+                    User.reset_senha=reset_senha
+                    User.primeiro_acesso=primeiro_acesso
+                    User.bloqueado=bloqueado
+                    User.end_rua=end_rua
+                    User.end_numero=end_numero
+                    User.end_bairro=end_bairro
+                    User.end_complemento=end_complemento
+                    User.end_cep=end_cep
+                    User.end_cidade=end_cidade
+                    User.end_uf=end_uf
+                    User.celular=celular
+                    User.p_whats=p_whats
+                    User.telefone=telefone
+                    User.email=email
                     User.obs=obs
                     
                     session.commit()
                     return (True, User.id)
             
                 except Exception as e:
+                    print(e)
                     session.rollback()
                     return (False, str(e))  
 
@@ -434,5 +444,12 @@ class Database():
 if __name__=='__main__':
 
 #  app = Database.get_table_fornecedor(type='id', id=2)
-    app = Database.get_table_about()
-    print(app)
+    app =  Database.insert_table_user(
+        id=2,
+        type='update',
+        empresa=1, 
+        nome='testando o testado testei',
+        user='teste',
+        obs = 'sei la',
+        senha='teste'
+    )

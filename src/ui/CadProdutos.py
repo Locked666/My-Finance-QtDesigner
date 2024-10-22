@@ -310,6 +310,8 @@ class Ui_CadProduto(object):
         self.label_17.setObjectName(u"label_17")
         sizePolicy1.setHeightForWidth(self.label_17.sizePolicy().hasHeightForWidth())
         self.label_17.setSizePolicy(sizePolicy1)
+        self.label_17.setMinimumSize(QSize(91, 31))
+        self.label_17.setMaximumSize(QSize(91, 31))
         font1 = QFont()
         font1.setPointSize(10)
         self.label_17.setFont(font1)
@@ -1044,12 +1046,14 @@ class Ui_CadProduto(object):
         self.bnt_back_full = QPushButton(self.frame)
         self.bnt_back_full.setObjectName(u"bnt_back_full")
         self.bnt_back_full.setMinimumSize(QSize(75, 23))
+        self.bnt_back_full.setMaximumSize(QSize(75, 23))
 
         self.horizontalLayout_3.addWidget(self.bnt_back_full)
 
         self.bnt_back = QPushButton(self.frame)
         self.bnt_back.setObjectName(u"bnt_back")
         self.bnt_back.setMinimumSize(QSize(75, 23))
+        self.bnt_back.setMaximumSize(QSize(75, 23))
 
         self.horizontalLayout_3.addWidget(self.bnt_back)
 
@@ -1059,12 +1063,14 @@ class Ui_CadProduto(object):
 
         self.bnt_next = QPushButton(self.frame)
         self.bnt_next.setObjectName(u"bnt_next")
+        self.bnt_next.setMinimumSize(QSize(75, 23))
         self.bnt_next.setMaximumSize(QSize(75, 23))
 
         self.horizontalLayout_3.addWidget(self.bnt_next)
 
         self.bnt_next_full = QPushButton(self.frame)
         self.bnt_next_full.setObjectName(u"bnt_next_full")
+        self.bnt_next_full.setMinimumSize(QSize(75, 23))
         self.bnt_next_full.setMaximumSize(QSize(75, 23))
 
         self.horizontalLayout_3.addWidget(self.bnt_next_full)
@@ -1119,8 +1125,8 @@ class Ui_CadProduto(object):
 
         self.bnt_search = QPushButton(self.frame)
         self.bnt_search.setObjectName(u"bnt_search")
-        self.bnt_search.setMinimumSize(QSize(100, 36))
-        self.bnt_search.setMaximumSize(QSize(100, 36))
+        self.bnt_search.setMinimumSize(QSize(100, 30))
+        self.bnt_search.setMaximumSize(QSize(100, 30))
         self.bnt_search.setIcon(icon2)
         self.bnt_search.setIconSize(QSize(17, 17))
         self.bnt_search.setCheckable(False)
@@ -1191,7 +1197,7 @@ class Ui_CadProduto(object):
         self.bnt_search_subgrupo.setToolTip(QCoreApplication.translate("CadProduto", u"<html><head/><body><p><span style=\" color:#0055ff;\">Pesquisar.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.bnt_search_subgrupo.setText("")
-        self.label_13.setText(QCoreApplication.translate("CadProduto", u"*Categoria :", None))
+        self.label_13.setText(QCoreApplication.translate("CadProduto", u"Categoria :", None))
 #if QT_CONFIG(tooltip)
         self.bnt_search_categoria.setToolTip(QCoreApplication.translate("CadProduto", u"<html><head/><body><p><span style=\" color:#0055ff;\">Pesquisar.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)

@@ -10,7 +10,6 @@ class DisplayAssociateTable():
         dic_associete_produtos = [
             
             {'tipo': 'QLCDNumber', 'nome_widget': 'lcd_id','valor_entrada':'','tabela': 'produtos','campo': 'id','requerido' : False},
-
             {'tipo': 'QComboBox', 'nome_widget': 'combobox_tipo_prod','valor_entrada':'','tabela': 'produtos','campo': 'tipo_produto','requerido' : False},
 
             {'tipo': 'QComboBox', 'nome_widget': 'combobox_status_prod','valor_entrada':'','tabela': 'produtos','campo': 'ativo','requerido' : False},
@@ -34,16 +33,15 @@ class DisplayAssociateTable():
             {'tipo': 'QLineEdit', 'nome_widget': 'text_medida','valor_entrada':'','tabela': 'produtos','campo': 'medida','requerido' : False},
             {'tipo': 'QLineEdit', 'nome_widget': 'text_descricao','valor_entrada':'','tabela': 'produtos','campo': 'descricao','requerido':True},
             {'tipo': 'QLineEdit', 'nome_widget': 'text_margem_direta','valor_entrada':'','tabela': 'produto_preco','campo': 'margem_direta','requerido' : False},
-            {'tipo': 'QLineEdit', 'nome_widget': 'text_markup','valor_entrada':'','tabela': '','campo': '','requerido' : False},
-            {'tipo': 'QLineEdit', 'nome_widget': 'text_preco','valor_entrada':'','tabela': '','campo': '','requerido' : False},
-            {'tipo': 'QLineEdit', 'nome_widget': 'text_preco_sugerido','valor_entrada':'','tabela': '','campo': '','requerido' : False},
-            {'tipo': 'QLineEdit', 'nome_widget': 'text_custo_direto','valor_entrada':'','tabela': '','campo': '','requerido' : False},
-            {'tipo': 'QLineEdit', 'nome_widget': 'text_custo_indireto','valor_entrada':'','tabela': '','campo': '','requerido' : False},
-            {'tipo': 'QLineEdit', 'nome_widget': 'text_custo_impostos','valor_entrada':'','tabela': '','campo': '','requerido' : False},
-            {'tipo': 'QLineEdit', 'nome_widget': 'text_custo_diff','valor_entrada':'','tabela': '','campo': '','requerido' : False},
+            {'tipo': 'QLineEdit', 'nome_widget': 'text_markup','valor_entrada':'','tabela': 'produto_preco','campo': 'markup','requerido' : False},
+            {'tipo': 'QLineEdit', 'nome_widget': 'text_preco','valor_entrada':'','tabela': 'produto_preco','campo': 'preco','requerido' : False},
+            {'tipo': 'QLineEdit', 'nome_widget': 'text_preco_sugerido','valor_entrada':'','tabela': 'produto_preco','campo': 'preco_sugerido','requerido' : False},
+            {'tipo': 'QLineEdit', 'nome_widget': 'text_custo_direto','valor_entrada':'','tabela': 'produto_preco','campo': 'custo_direto','requerido' : False},
+            {'tipo': 'QLineEdit', 'nome_widget': 'text_custo_indireto','valor_entrada':'','tabela': 'produto_preco','campo': 'custo_indireto','requerido' : False},
+            {'tipo': 'QLineEdit', 'nome_widget': 'text_custo_impostos','valor_entrada':'','tabela': 'produto_preco','campo': 'custo_impostos','requerido' : False},
+            {'tipo': 'QLineEdit', 'nome_widget': 'text_custo_diff','valor_entrada':'','tabela': 'produto_preco','campo': 'custo_diff','requerido' : False},
             {'tipo': 'QLineEdit', 'nome_widget': 'text_nome_red','valor_entrada':'','tabela': 'produtos','campo': 'nome_reduzido','requerido':True},
-            
-            
+                      
         ]
         return dic_associete_produtos
 

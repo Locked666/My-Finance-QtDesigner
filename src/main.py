@@ -1,8 +1,8 @@
 import sys
 import os
 from PySide6 import QtCore
-from PySide6.QtCore import Qt,QCoreApplication,QFile,Slot,SLOT,Signal
-from PySide6.QtWidgets import QApplication, QMainWindow, QWidget,QDialog,QVBoxLayout,QWidgetAction,QMdiSubWindow,QMessageBox
+from PySide6.QtCore import Qt,QCoreApplication,QFile,Slot,SLOT,Signal,QRect
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget,QDialog,QVBoxLayout,QWidgetAction,QMdiSubWindow,QMessageBox,QCheckBox
 from ui_functions import consulta_cnpj
 from func_crypt import decrypt,encrypt
 import time
@@ -215,14 +215,14 @@ class AppLogin(QDialog, Ui_Login):
                         return   
                     else:
                         if self.checkBox.isChecked():
-                            complement_ini('Settings','username',self.text_usuario.text())
+                            complement_ini('Settings','username',self.text_usuario.text().strip())
                             p = encrypt(self.text_password.text().strip(),self.key,SALT_CRYPT).decode()
                             complement_ini('Settings','password',p.strip())
                         else: 
                             complement_ini('Settings','username','')
                             complement_ini('Settings','password','')
 
-                        self.w = MainWindow()
+                        self.w = MainWindow(user=self.text_usuario.text().strip())
                         self.w.showMaximized()
                         self.close() 
                         pass
@@ -236,6 +236,8 @@ class CadatroUsuario(QWidget, Ui_CadUser):
         super().__init__(parent=None)
         self.setWindowTitle(f"Cadastro de Usuário - My Finance {__version__}")
         self.setupUi(self)
+        self.generate_checkbox_empresa()
+        
 
         self.bnt_alterar.clicked.connect( self.callback_bnt_alterar)
         self.bnt_cancelar.clicked.connect(self.callback_bnt_cancela)
@@ -246,8 +248,6 @@ class CadatroUsuario(QWidget, Ui_CadUser):
         self.bnt_next_full.clicked.connect(lambda: self.callback_bnt_seq_info(tipo="next_full"))
         self.bnt_back_full.clicked.connect(lambda: self.callback_bnt_seq_info(tipo="back_full"))
         self.bnt_back.clicked.connect(lambda: self.callback_bnt_seq_info(tipo="back"))
-        
-        
         self.field_text = [
             self.text_nome,
             self.text_email,
@@ -279,7 +279,30 @@ class CadatroUsuario(QWidget, Ui_CadUser):
 
         ]
 
-        self.verify_field()
+        
+
+        for wi in self.scrollAreaWidget_empresa.findChildren(QCheckBox):
+            self.field_check.append(wi) 
+
+        self.verify_field()    
+    
+    def populate_empresa(self):
+        lista = []
+        empresas =  Database.get_table_empresa()
+        for i in empresas: 
+            lista.append(f"{i[0]} - {i[1]}")
+        return lista 
+
+    def generate_checkbox_empresa(self):
+        empresa = self.populate_empresa()
+        for i in empresa:
+            name = f"checkbox_{i}"
+            self.checkBox = QCheckBox(self.scrollAreaWidget_empresa)
+            self.checkBox.setObjectName(name)
+            self.checkBox.setText(i)
+            # self.checkBox.setGeometry(QRect(10, 0, 161, 25))
+        pass    
+        
     def verify_field(self, read_text:bool = True, enabled_check:bool = False):
 
         for i in self.field_text:
@@ -425,8 +448,17 @@ class CadatroUsuario(QWidget, Ui_CadUser):
 
         pass
 
+    def get_empresa_select(self):
+        lista = [] 
+        for wi in self.scrollAreaWidget_empresa.findChildren(QCheckBox):
+            if wi.isChecked():
+                print(wi)
+
+        pass
+    
 
     def callback_bnt_save(self):
+        a = self.get_empresa_select()
         if self.text_nome.text().strip() == '':
             infmensagem = InfMensagem(mensagem="Campo Nome não pode estar vazio").exec()
             return
@@ -438,11 +470,13 @@ class CadatroUsuario(QWidget, Ui_CadUser):
         if self.text_password.text().strip() =='':
             infmensagem = InfMensagem(mensagem="Campo senha não pode estar vazio").exec()            
             return
+        
 
         if self.lcd_id.value() == 0:
             try:
                 insert_user = Database.insert_table_user(
                     nome=self.text_nome.text().strip(), 
+                    empresa =1 ,
                     cpf=self.text_cpf.text().strip().replace('.','').replace('-','').replace(' ',''), 
                     user=self.text_user.text().strip(),
                     senha=encrypt(self.text_password.text().strip(),Database.get_table_sys_config(),SALT_CRYPT), 
@@ -454,7 +488,7 @@ class CadatroUsuario(QWidget, Ui_CadUser):
                     end_numero=self.text_numero.text().strip(),
                     end_bairro=self.text_bairro.text().strip(),
                     end_complemento=self.text_complementar.text().strip(),
-                    end_cep=self.text_cep.text().strip(),
+                    end_cep=self.text_cep.text().strip().replace('(','').replace(')','').replace('-','').strip(),
                     end_cidade=self.text_cidade.text().strip(),
                     end_uf=self.text_uf.text().strip(),
                     celular=self.text_celular.text().replace('(','').replace(')','').replace('-','').strip(),
@@ -481,19 +515,20 @@ class CadatroUsuario(QWidget, Ui_CadUser):
                 update_user = Database.insert_table_user(
                     id=self.lcd_id.value(),
                     type='update',
-                    nome=self.text_nome.text().strip(), 
+                    nome=self.text_nome.text().strip(),
+                    empresa = 1 ,
                     cpf=self.text_cpf.text().strip().replace('.','').replace('-','').replace(' ',''), 
-                    user=self.text_user.text().strip(),
+                    # user=self.text_user.text().strip(),
                     senha=encrypt(self.text_password.text().strip(),Database.get_table_sys_config(),SALT_CRYPT), 
                     ativo='S' if self.check_ativo.isChecked() else 'N', 
                     reset_senha='S' if self.check_reset_senha.isChecked() else 'N',
                     primeiro_acesso='S' if self.check_first_acesso.isChecked() else 'N', 
                     bloqueado='S' if self.check_bloqueado.isChecked() else 'N', 
                     end_rua=self.text_rua.text().strip(),
-                    end_numero=self.text_numero.text().strip(),
+                    end_numero= 0 if self.text_numero.text().strip() == '' else int(self.text_numero.text().strip()), #self.text_numero.text().strip(),
                     end_bairro=self.text_bairro.text().strip(),
                     end_complemento=self.text_complementar.text().strip(),
-                    end_cep=self.text_cep.text().strip(),
+                    end_cep=self.text_cep.text().strip().replace('(','').replace(')','').replace('-','').strip(),
                     end_cidade=self.text_cidade.text().strip(),
                     end_uf=self.text_uf.text().strip(),
                     celular=self.text_celular.text().replace('(','').replace(')','').replace('-','').strip(),
@@ -529,34 +564,34 @@ class CadatroUsuario(QWidget, Ui_CadUser):
             self.text_cpf.setText(info[2])
             self.text_user.setText(info[3])
             self.text_password.insert('*****')
-            self.text_rua.setText(info[8])
-            self.text_numero.setText(info[9])
-            self.text_bairro.setText(info[10])
-            self.text_complementar.setText(info[11])
-            self.text_cep.setText(info[12])
-            self.text_cidade.setText(info[13])
-            self.text_uf.setText(info[14])
-            self.text_celular.setText(info[15])
-            self.text_phone.setText(info[17])
-            self.text_email.setText(info[18])
-            self.plain_obs.insertPlainText(info[19])
+            self.text_rua.setText(info[9])
+            self.text_numero.setText(info[10])
+            self.text_bairro.setText(info[11])
+            self.text_complementar.setText(info[12])
+            self.text_cep.setText(info[13])
+            self.text_cidade.setText(info[14])
+            self.text_uf.setText(info[15])
+            self.text_celular.setText(info[16])
+            self.text_phone.setText(info[18])
+            self.text_email.setText(info[19])
+            self.plain_obs.insertPlainText(info[20])
 
-            if info[6] == 'S':
+            if info[8] == 'S':
                 self.check_bloqueado.setChecked(True)
             else:     
                 self.check_bloqueado.setChecked(False)
 
-            if info[5] == 'S':
+            if info[7] == 'S':
                 self.check_first_acesso.setChecked(True)
             else:     
                 self.check_first_acesso.setChecked(False)
 
-            if info[4] == 'S':
+            if info[6] == 'S':
                 self.check_reset_senha.setChecked(True)
             else:     
                 self.check_reset_senha.setChecked(False)
 
-            if info[3] == 'S':
+            if info[5] == 'S':
                 self.check_ativo.setChecked(True)
             else:     
                 self.check_ativo.setChecked(False)
@@ -1431,10 +1466,12 @@ class CadastroProdutos(QDialog,Ui_CadProduto):
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
-    def __init__(self) -> None:
+    def __init__(self,user) -> None:
         super(MainWindow, self).__init__()
         self.setupUi(self)
         self.setWindowTitle(f"My Finance {__version__}")
+        self.user_logado = user
+        self.lbl_user_conect.setText(self.user_logado)
         # Inicializa o atributo para armazenar a instância do dashboard e do MDI
         self.apply_stylesheet()
         self.dashboard_window = None
@@ -1527,7 +1564,7 @@ if __name__ == "__main__":
     if MODE_DEBUG == False:
         window = BootingSystem()
     else:
-        window = MainWindow()
+        window = MainWindow(user='Admin')
   
     window.show()
     sys.exit(app.exec())

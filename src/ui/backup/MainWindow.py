@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.setWindowModality(Qt.NonModal)
-        MainWindow.resize(1232, 681)
+        MainWindow.resize(1232, 716)
         MainWindow.setToolButtonStyle(Qt.ToolButtonIconOnly)
         MainWindow.setTabShape(QTabWidget.Rounded)
         MainWindow.setUnifiedTitleAndToolBarOnMac(False)
@@ -169,9 +169,9 @@ class Ui_MainWindow(object):
         self.frame.setFrameShape(QFrame.StyledPanel)
         self.frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout = QVBoxLayout(self.frame)
-        self.verticalLayout.setSpacing(9)
+        self.verticalLayout.setSpacing(6)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(0, 0, 0, 6)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.frame_2 = QFrame(self.frame)
         self.frame_2.setObjectName(u"frame_2")
         self.frame_2.setMinimumSize(QSize(0, 164))
@@ -181,7 +181,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_2 = QVBoxLayout(self.frame_2)
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.verticalLayout_2.setContentsMargins(0, 0, 15, 10)
+        self.verticalLayout_2.setContentsMargins(0, 0, 15, 0)
         self.label = QLabel(self.frame_2)
         self.label.setObjectName(u"label")
         self.label.setWordWrap(True)
@@ -199,7 +199,8 @@ class Ui_MainWindow(object):
         self.bnt_left_dashboard.setFocusPolicy(Qt.NoFocus)
         self.bnt_left_dashboard.setLayoutDirection(Qt.LeftToRight)
         self.bnt_left_dashboard.setAutoFillBackground(False)
-        self.bnt_left_dashboard.setStyleSheet(u"padding-left: 10px;")
+        self.bnt_left_dashboard.setStyleSheet(u"padding-left: 10px;\n"
+"padding-top: 10px;")
         icon1 = QIcon()
         icon1.addFile(u":/icons/dashboard_light.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.bnt_left_dashboard.setIcon(icon1)
@@ -348,7 +349,7 @@ class Ui_MainWindow(object):
         self.mdi_center.setBackground(brush)
         self.mdi_center.setActivationOrder(QMdiArea.ActivationHistoryOrder)
         self.mdi_center.setViewMode(QMdiArea.SubWindowView)
-        self.mdi_center.setDocumentMode(True)
+        self.mdi_center.setDocumentMode(False)
         self.mdi_center.setTabsClosable(False)
         self.mdi_center.setTabsMovable(False)
         self.mdi_center.setTabPosition(QTabWidget.South)
@@ -364,21 +365,23 @@ class Ui_MainWindow(object):
         self.frame_5.setMaximumSize(QSize(16777215, 41))
         self.frame_5.setFrameShape(QFrame.Panel)
         self.frame_5.setFrameShadow(QFrame.Raised)
-        self.layoutWidget = QWidget(self.frame_5)
-        self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(2, 2, 147, 17))
-        self.horizontalLayout_4 = QHBoxLayout(self.layoutWidget)
+        self.horizontalLayout_4 = QHBoxLayout(self.frame_5)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_4.setContentsMargins(10, 0, 0, 0)
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.label_2 = QLabel(self.layoutWidget)
+        self.label_2 = QLabel(self.frame_5)
         self.label_2.setObjectName(u"label_2")
 
         self.horizontalLayout_2.addWidget(self.label_2)
 
-        self.lbl_user_conect = QLabel(self.layoutWidget)
+        self.lbl_user_conect = QLabel(self.frame_5)
         self.lbl_user_conect.setObjectName(u"lbl_user_conect")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.lbl_user_conect.sizePolicy().hasHeightForWidth())
+        self.lbl_user_conect.setSizePolicy(sizePolicy1)
 
         self.horizontalLayout_2.addWidget(self.lbl_user_conect)
 
@@ -387,18 +390,24 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.label_3 = QLabel(self.layoutWidget)
+        self.label_3 = QLabel(self.frame_5)
         self.label_3.setObjectName(u"label_3")
 
         self.horizontalLayout_3.addWidget(self.label_3)
 
-        self.lbl_empresa_conect = QLabel(self.layoutWidget)
+        self.lbl_empresa_conect = QLabel(self.frame_5)
         self.lbl_empresa_conect.setObjectName(u"lbl_empresa_conect")
+        sizePolicy1.setHeightForWidth(self.lbl_empresa_conect.sizePolicy().hasHeightForWidth())
+        self.lbl_empresa_conect.setSizePolicy(sizePolicy1)
 
         self.horizontalLayout_3.addWidget(self.lbl_empresa_conect)
 
 
         self.horizontalLayout_4.addLayout(self.horizontalLayout_3)
+
+        self.horizontalSpacer = QSpacerItem(838, 15, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_4.addItem(self.horizontalSpacer)
 
 
         self.verticalLayout_3.addWidget(self.frame_5)

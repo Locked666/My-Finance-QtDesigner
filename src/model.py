@@ -110,10 +110,11 @@ class About(Base):
 class Usuario(Base):
     __tablename__='usuario'
     id = Column(Integer, primary_key=True, autoincrement=True)
+    empresa = Column(Integer, ForeignKey('empresa.id'), default=1)
     nome = Column(String)
     cpf = Column(String)
-    user = Column(String)
-    senha = Column(String,)
+    user = Column(String,unique=True)
+    senha = Column(String)
     ativo = Column(String,default='S',comment='S sim e N não')
     reset_senha = Column(String,default='S',comment='S sim e N não')
     primeiro_acesso = Column(String,default='S',comment='S sim e N não')

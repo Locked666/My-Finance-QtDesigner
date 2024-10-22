@@ -1,3 +1,4 @@
+from ui_display_field import DisplayAssociateTable
 from ui.MainLogin import Ui_Login
 from ui.MainWindow import Ui_MainWindow
 from ui.CadEmpresa import Ui_CadEmpresa

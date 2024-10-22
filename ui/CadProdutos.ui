@@ -223,7 +223,7 @@
          </size>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="elideMode">
          <enum>Qt::ElideNone</enum>
@@ -640,6 +640,18 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>91</width>
+                 <height>31</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>91</width>
+                 <height>31</height>
+                </size>
                </property>
                <property name="font">
                 <font>
@@ -2044,6 +2056,12 @@
               <height>23</height>
              </size>
             </property>
+            <property name="maximumSize">
+             <size>
+              <width>75</width>
+              <height>23</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ir para o primeiro...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -2055,6 +2073,12 @@
           <item>
            <widget class="QPushButton" name="bnt_back">
             <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>23</height>
+             </size>
+            </property>
+            <property name="maximumSize">
              <size>
               <width>75</width>
               <height>23</height>
@@ -2086,6 +2110,12 @@
           </item>
           <item>
            <widget class="QPushButton" name="bnt_next">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>23</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
               <width>75</width>
@@ -2102,6 +2132,12 @@
           </item>
           <item>
            <widget class="QPushButton" name="bnt_next_full">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>23</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
               <width>75</width>
@@ -2248,13 +2284,13 @@
           <property name="minimumSize">
            <size>
             <width>100</width>
-            <height>36</height>
+            <height>30</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
             <width>100</width>
-            <height>36</height>
+            <height>30</height>
            </size>
           </property>
           <property name="text">
