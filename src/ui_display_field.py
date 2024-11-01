@@ -48,5 +48,5 @@ class DisplayAssociateTable():
 if __name__=='__main__'    :
     e = DisplayAssociateTable.cadastro_produtos_field()
     for i in e: 
-        if i.get('tabela','') == '':
-            print(i)
+        if i.get('tabela','') == 'produto_preco':
+            print(i['nome_widget'])
